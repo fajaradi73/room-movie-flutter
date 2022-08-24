@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:room_movie/util/PermissionScreen.dart';
 
 import 'home/HomeScreen.dart';
 
@@ -20,7 +21,7 @@ class _SplashScreenPageState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
             () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen())));
+            MaterialPageRoute(builder: (context) => const PermissionHandlerScreen())));
   }
 
   @override

@@ -1,0 +1,26 @@
+<h1><strong>Terima kasih kepada</strong></h1>
+<ul>
+    <li><a href="https://themoviedb.org" style="text-decoration:none;color: green;">TheMovieDB</a> untuk API.</li>
+    <li><a href="https://flaticon.com" style="text-decoration:none;color: green;">Flaticon</a> untuk Icon.</li>
+</ul>
+<h1><strong>Library yang digunakan</strong></h1>
+<ul>
+    <li>Flutter</li>
+</ul>
+<p><strong>Copyright &copy; Fajar 2022</strong></p>
+
+<script>
+function myFunction(x) {
+  if (x.matches) { // If media query matches
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "white";
+  } else {
+   document.body.style.backgroundColor = "white";
+   document.body.style.color = "black";
+  }
+}
+
+var x = window.matchMedia("(prefers-color-scheme: dark)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction) // Attach listener function on state changes
+</script>

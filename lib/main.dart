@@ -55,4 +55,12 @@ class _MyAppState extends State<MyApp> {
       StorageManager.saveData('themeMode', themeMode.name);
     });
   }
+
+  getTheme() {
+    if (_themeMode == ThemeMode.light) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
