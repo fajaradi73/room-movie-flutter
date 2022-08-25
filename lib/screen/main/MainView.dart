@@ -1,6 +1,6 @@
 /*
  * room_movie
- *     HomeView.dart
+ *     MainView.dart
  *     Created by Fajar Adi Prasetyo on 24/8/2022
  *     email 	    : fajaradiprast@gmail.com
  *     github 	: https://github.com/fajaradi73

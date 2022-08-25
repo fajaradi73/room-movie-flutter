@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  getTheme() {
+  isNightMode() {
     if (_themeMode == ThemeMode.light) {
       return false;
     } else {

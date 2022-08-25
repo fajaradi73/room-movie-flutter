@@ -12,7 +12,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../screen/home/HomeScreen.dart';
+import '../screen/main/MainScreen.dart';
 
 class PermissionHandlerScreen extends StatefulWidget {
   const PermissionHandlerScreen({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
   moveToHome() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const MainScreen()),
     );
   }
 

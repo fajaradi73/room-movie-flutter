@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:room_movie/util/PermissionScreen.dart';
 
-import 'home/HomeScreen.dart';
+import 'main/MainScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

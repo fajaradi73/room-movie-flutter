@@ -11,12 +11,13 @@
 
 // ignore_for_file: file_names
 
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class WebViewScreen extends StatefulWidget {
   var title = "";
@@ -30,82 +31,72 @@ class WebViewScreen extends StatefulWidget {
 
 class _WebViewScreenState extends State<WebViewScreen> {
   var loadingPercentage = 0;
-  late WebViewController controller;
+  InAppWebViewController? webViewController;
+  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+      crossPlatform: InAppWebViewOptions(
+          useShouldOverrideUrlLoading: true,
+          mediaPlaybackRequiresUserGesture: false,
+          preferredContentMode: UserPreferredContentMode.DESKTOP),
+      android: AndroidInAppWebViewOptions(
+          useHybridComposition: true,
+          textZoom: 100 * 2 // it makes 2 times bigger
+          ),
+      ios: IOSInAppWebViewOptions(
+        allowsInlineMediaPlayback: true,
+      ));
 
-  @override
-  void initState() {
-    if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
-    }
-    super.initState();
-  }
+  double progress = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Stack(children: [
-        WebView(
-          initialUrl: 'about:blank',
-          onWebViewCreated: (WebViewController webViewController) {
-            controller = webViewController;
-            loadHtmlFromAssets();
-          },
-          onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
-          },
-          onPageFinished: (url) {
-            setState(() {
-              loadingPercentage = 100;
-            });
-          },
-          javascriptMode: JavascriptMode.unrestricted,
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-        if (loadingPercentage < 100)
-          LinearProgressIndicator(
-            value: loadingPercentage / 100.0,
-          ),
-      ]),
-    );
+        body: Stack(
+          children: [
+            InAppWebView(
+              initialFile: loadHtmlFromAssets(),
+              initialUserScripts: UnmodifiableListView<UserScript>([]),
+              initialOptions: options,
+              onWebViewCreated: (controller) {
+                webViewController = controller;
+              },
+              onProgressChanged: (controller, progress) {
+                setState(() {
+                  this.progress = progress / 100;
+                });
+              },
+            ),
+            progress < 1.0
+                ? LinearProgressIndicator(value: progress)
+                : Container(),
+          ],
+        ));
   }
 
-  loadHtmlFromAssets() async {
+  loadHtmlFromAssets() {
     String fileText = "";
     if (widget.title.contains("Privasi")) {
       if (widget.isNight) {
-        fileText =
-            await rootBundle.loadString('assets/html/privacy_policy_dark.html');
+        fileText = 'assets/html/privacy_policy_dark.html';
       } else {
-        fileText =
-            await rootBundle.loadString('assets/html/privacy_policy.html');
+        fileText = 'assets/html/privacy_policy.html';
       }
     } else if (widget.title.contains("Syarat")) {
-      fileText = await rootBundle.loadString('assets/html/term_of_use.html');
+      fileText = 'assets/html/term_of_use.html';
       if (widget.isNight) {
-        fileText =
-            await rootBundle.loadString('assets/html/term_of_use_dark.html');
+        fileText = 'assets/html/term_of_use_dark.html';
       } else {
-        fileText = await rootBundle.loadString('assets/html/term_of_use.html');
+        fileText = 'assets/html/term_of_use.html';
       }
     } else {
       if (widget.isNight) {
-        fileText =
-            await rootBundle.loadString('assets/html/contribution_dark.html');
+        fileText = 'assets/html/contribution_dark.html';
       } else {
-        fileText = await rootBundle.loadString('assets/html/contribution.html');
+        fileText = 'assets/html/contribution.html';
       }
     }
-    controller.loadUrl(Uri.dataFromString(fileText,
-            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-        .toString());
+    return fileText;
   }
 }

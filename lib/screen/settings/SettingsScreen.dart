@@ -32,7 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isSwitch = MyApp.of(context).getTheme();
+    isSwitch = MyApp.of(context).isNightMode();
     methodAsync();
   }
 
