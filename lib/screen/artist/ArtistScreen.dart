@@ -9,6 +9,7 @@
 
 // ignore_for_file: file_names
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ArtistScreen extends StatefulWidget {
@@ -21,8 +22,56 @@ class ArtistScreen extends StatefulWidget {
 class _ArtistScreenState extends State<ArtistScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: Text("Artist"),
-    );
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 0.94),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {},
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 150,
+                  child: Card(
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "https://images4.alphacoders.com/113/1130246.jpg",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(2),
+                  child: const Text(
+                    "Damascus",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(2),
+                  child: const Text("Damascus"),
+                )
+              ],
+            ),
+          );
+        });
   }
 }
