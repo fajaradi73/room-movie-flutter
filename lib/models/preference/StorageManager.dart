@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageManager {
@@ -27,4 +28,21 @@ class StorageManager {
     final prefs = await SharedPreferences.getInstance();
     return prefs.remove(key);
   }
+
+
+  static Brightness getTheme() {
+    Brightness brightness = Brightness.light;
+    StorageManager.readData('themeMode').then((value) {
+      var themeMode = value ?? Brightness.light.name;
+      if (themeMode == Brightness.light.name) {
+        brightness = Brightness.light;
+      } else {
+        brightness = Brightness.dark;
+      }
+      print(brightness);
+      return brightness;
+    });
+    return brightness;
+  }
+
 }

@@ -10,8 +10,10 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:room_movie/screen/web/WebViewScreen.dart';
+import 'package:room_movie/util/ThemeCubit.dart';
 
 import '../../main.dart';
 
@@ -23,7 +25,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var isSwitch = false;
+  var isNightMode = false;
 
   var sizeCache = 0;
   var version = "";
@@ -32,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isSwitch = MyApp.of(context).isNightMode();
+    // isSwitch = MyApp.of(context).isNightMode();
     methodAsync();
   }
 
@@ -44,73 +46,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      child: Column(
-        children: [
-          themeWidget(),
-          cacheWidget(),
-          InkWell(
-            onTap: () {
-              moveToWeb("Syarat dan Ketentuan");
-            },
-            child: Container(
-                height: 30,
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.centerLeft,
-                child: const Text("Syarat dan Ketentuan")),
-          ),
-          InkWell(
-            onTap: () {
-              moveToWeb("Kebijakan dan Privasi");
-            },
-            child: Container(
-                height: 30,
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.centerLeft,
-                child: const Text("Kebijakan dan Privasi")),
-          ),
-          InkWell(
-            onTap: () {
-              moveToWeb("Kontribusi");
-            },
-            child: Container(
-                height: 30,
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.centerLeft,
-                child: const Text("Kontribusi")),
-          ),
-          const Spacer(),
-          Container(
-            alignment: Alignment.center,
-            height: 50,
-            width: 150,
-            child: const Image(
-              image: AssetImage("assets/icons/ic_tmdb.png"),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(10),
-            child: Text("Version $version"),
-          )
-        ],
-      ),
-    );
-  }
+    return BlocBuilder<ThemeCubit, ThemeData>(builder: (context, theme) {
+      isNightMode = context.read<ThemeCubit>().isNightMode();
 
-  onChangeSelected(value) {
-    if (value) {
-      MyApp.of(context).changeTheme(ThemeMode.dark);
-    } else {
-      MyApp.of(context).changeTheme(ThemeMode.light);
-    }
-    setState(() {
-      isSwitch = value;
+      return SizedBox(
+        height: double.infinity,
+        child: Column(
+          children: [
+            themeWidget(context, theme),
+            cacheWidget(),
+            InkWell(
+              onTap: () {
+                moveToWeb("Syarat dan Ketentuan");
+              },
+              child: Container(
+                  height: 30,
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.centerLeft,
+                  child: const Text("Syarat dan Ketentuan")),
+            ),
+            InkWell(
+              onTap: () {
+                moveToWeb("Kebijakan dan Privasi");
+              },
+              child: Container(
+                  height: 30,
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.centerLeft,
+                  child: const Text("Kebijakan dan Privasi")),
+            ),
+            InkWell(
+              onTap: () {
+                moveToWeb("Kontribusi");
+              },
+              child: Container(
+                  height: 30,
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.centerLeft,
+                  child: const Text("Kontribusi")),
+            ),
+            const Spacer(),
+            Container(
+              alignment: Alignment.center,
+              height: 50,
+              width: 150,
+              child: const Image(
+                image: AssetImage("assets/icons/ic_tmdb.png"),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.all(10),
+              child: Text("Version $version"),
+            )
+          ],
+        ),
+      );
     });
   }
 
-  themeWidget() {
+  themeWidget(context, theme) {
     return Container(
       height: 30,
       margin: const EdgeInsets.all(10),
@@ -119,9 +114,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const Text("Mode Malam"),
           const Spacer(),
           Switch(
-              value: isSwitch,
+              value: theme.brightness == Brightness.dark ? true : false,
               onChanged: (value) {
-                onChangeSelected(value);
+                BlocProvider.of<ThemeCubit>(context).toggleTheme();
               })
         ],
       ),
@@ -140,6 +135,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   moveToWeb(title) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WebViewScreen(title,isSwitch)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => WebViewScreen(title, isNightMode)));
   }
 }

@@ -1,66 +1,73 @@
+/*
+ * room_movie
+ *     main.dart
+ *     Created by Fajar Adi Prasetyo on 29/8/2022
+ *     email 	    : fajaradiprast@gmail.com
+ *     github 	: https://github.com/fajaradi73
+ *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ */
+
+// ignore_for_file: file_names
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:room_movie/models/preference/StorageManager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:room_movie/screen/SplashScreen.dart';
-import 'package:room_movie/util/ThemeManager.dart';
+
+import '../util/ThemeCubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  Bloc.observer = AppBlocObserver();
+  runApp(const App());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+/// Custom [BlocObserver] that observes all bloc and cubit state changes.
+class AppBlocObserver extends BlocObserver {
   @override
-  State<MyApp> createState() => _MyAppState();
-
-  static of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>()!;
-}
-
-class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.system;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    methodAsync();
-  }
-
-  void methodAsync() async {
-    _themeMode = await StorageManager.readData('themeMode').then((value) {
-      var themeMode = value ?? ThemeMode.light.name;
-      if (themeMode == ThemeMode.light.name) {
-        _themeMode = ThemeMode.light;
-      } else {
-        _themeMode = ThemeMode.dark;
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    if (bloc is Cubit && kDebugMode) {
+      if (kDebugMode) {
+        print(change);
       }
-      return _themeMode;
-    });
+    }
   }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    if (kDebugMode) {
+      print(transition);
+    }
+  }
+}
+
+class App extends StatelessWidget {
+  /// {@macro app}
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeManager().lightTheme,
-        darkTheme: ThemeManager().darkTheme,
-        themeMode: _themeMode,
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+    return BlocProvider(
+      create: (_) => ThemeCubit(),
+      child: const AppView(),
+    );
   }
+}
 
-  void changeTheme(ThemeMode themeMode) async {
-    setState(() {
-      _themeMode = themeMode;
-      StorageManager.saveData('themeMode', themeMode.name);
-    });
-  }
+class AppView extends StatelessWidget {
+  /// {@macro app_view}
+  const AppView({Key? key}) : super(key: key);
 
-  isNightMode() {
-    if (_themeMode == ThemeMode.light) {
-      return false;
-    } else {
-      return true;
-    }
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeCubit, ThemeData>(
+      builder: (_, theme) {
+        return MaterialApp(
+          theme: theme,
+          debugShowCheckedModeBanner: false,
+          home: const SplashScreen(),
+        );
+      },
+    );
   }
 }

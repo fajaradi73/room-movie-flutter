@@ -12,11 +12,8 @@
 // ignore_for_file: file_names
 
 import 'dart:collection';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -79,22 +76,21 @@ class _WebViewScreenState extends State<WebViewScreen> {
     String fileText = "";
     if (widget.title.contains("Privasi")) {
       if (widget.isNight) {
-        fileText = 'assets/html/privacy_policy_dark.html';
+        fileText = 'assets/html/dark/privacy_policy_dark.html';
       } else {
-        fileText = 'assets/html/privacy_policy.html';
+        fileText = 'assets/html/light/privacy_policy.html';
       }
     } else if (widget.title.contains("Syarat")) {
-      fileText = 'assets/html/term_of_use.html';
       if (widget.isNight) {
-        fileText = 'assets/html/term_of_use_dark.html';
+        fileText = 'assets/html/dark/term_of_use_dark.html';
       } else {
-        fileText = 'assets/html/term_of_use.html';
+        fileText = 'assets/html/light/term_of_use.html';
       }
     } else {
       if (widget.isNight) {
-        fileText = 'assets/html/contribution_dark.html';
+        fileText = 'assets/html/dark/contribution_dark.html';
       } else {
-        fileText = 'assets/html/contribution.html';
+        fileText = 'assets/html/light/contribution.html';
       }
     }
     return fileText;
