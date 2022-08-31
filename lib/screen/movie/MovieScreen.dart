@@ -63,7 +63,7 @@ class _MovieScreenState extends State<MovieScreen> {
               ),
               const SizedBox(
                 height: 260,
-                child: WidgetListView(),
+                child: WidgetListView([],true),
               )
             ],
           );

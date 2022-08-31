@@ -66,6 +66,7 @@ class _MainScreenState extends State<MainScreen> implements HomeView {
     if (index == 4) {
       return AppBar(
         elevation: 1,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text("Pengaturan"),
       );
     } else {
@@ -87,6 +88,7 @@ class _MainScreenState extends State<MainScreen> implements HomeView {
   appBar() {
     return AppBar(
       elevation: 1,
+      backgroundColor: Theme.of(context).primaryColor,
       title: SizedBox(
         height: 45,
         child: TextField(

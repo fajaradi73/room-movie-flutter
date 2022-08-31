@@ -61,7 +61,7 @@ class _SerialTvScreenState extends State<SerialTvScreen> {
               ),
               const SizedBox(
                 height: 260,
-                child: WidgetListView(),
+                child: WidgetListView([],false),
               )
             ],
           );
