@@ -11,9 +11,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:room_movie/screen/SplashScreen.dart';
+import 'package:flutter_portal/flutter_portal.dart';
+import 'package:get/get.dart';
+import 'package:room_movie/screen/screen_manager/screen_manager.dart';
+import 'package:sizer/sizer.dart';
 
 import '../util/ThemeCubit.dart';
+import 'constant/app_route.dart';
+import 'helper/binding.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
@@ -29,14 +34,6 @@ class AppBlocObserver extends BlocObserver {
       if (kDebugMode) {
         print(change);
       }
-    }
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    if (kDebugMode) {
-      print(transition);
     }
   }
 }
@@ -60,14 +57,30 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeData>(
-      builder: (_, theme) {
-        return MaterialApp(
-          theme: theme,
-          debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
-        );
-      },
-    );
+    return Sizer(builder: (context, orientation, device) {
+      return LayoutBuilder(builder: (context, constraints) {
+        SizerUtil.setScreenSize(constraints, orientation);
+        return OrientationBuilder(builder: (context, orientation) {
+          return Portal(child: BlocBuilder<ThemeCubit, ThemeData>(
+            builder: (_, theme) {
+              return GetMaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: "Room Movie",
+                navigatorKey: Get.key,
+                initialRoute: Pages.splashScreen,
+                getPages: AppRoute.routes,
+                initialBinding: InitialBinding(),
+                theme: theme,
+                builder: (context, child) {
+                  return ScreenManager(
+                    child: child ?? const SizedBox(),
+                  );
+                },
+              );
+            },
+          ));
+        });
+      });
+    });
   }
 }

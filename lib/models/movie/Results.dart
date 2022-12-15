@@ -31,7 +31,7 @@ class Results {
 
   Results.fromJson(dynamic json) {
     adult = json['adult'];
-    backdropPath = json['backdrop_path'];
+    backdropPath = json['backdrop_path'] ?? "";
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
     id = json['id'];
     originalLanguage = json['original_language'];

@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:room_movie/models/movie/Movie.dart';
 import 'package:room_movie/models/movie/Results.dart';
-import 'package:room_movie/network/ApiService.dart';
+import 'package:room_movie/service/ApiService.dart';
 import 'package:room_movie/screen/widget/LoadingScreen.dart';
 import 'package:room_movie/screen/widget/WidgetListView.dart';
 

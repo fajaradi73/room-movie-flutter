@@ -38,7 +38,7 @@ class ThemeCubit extends Cubit<ThemeData> {
 
   static final _lightTheme = ThemeData(
       primarySwatch: Colors.amber,
-      primaryColor: const Color(0xffc79700),
+      primaryColor: const Color(0xffffbe00),
       brightness: Brightness.light,
       backgroundColor: const Color(0xFFE5E5E5),
       accentColor: Colors.black,
