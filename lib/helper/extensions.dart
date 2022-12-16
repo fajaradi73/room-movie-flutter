@@ -75,6 +75,31 @@ extension TextCo on TextEditingController? {
   }
 }
 
+extension Test on GetInterface {
+  // String get string => (this).arguments as String;
+
+  // StatusType get type => (this).arguments['type'];
+
+  void error(String message, [String title = 'ERROR']) {
+    Get.snackbar(
+      title,
+      message,
+      borderRadius: 8,
+      colorText: Colors.white,
+      backgroundColor: Colors.red.withOpacity(0.7),
+    );
+  }
+
+  void success(String message, [String title = 'SUCCESS']) {
+    Get.snackbar(
+      title,
+      message,
+      borderRadius: 8,
+      colorText: Colors.white,
+      backgroundColor: Colors.green.withOpacity(0.7),
+    );
+  }
+}
 
 extension ExString on String? {
   bool equal(String compared) {
@@ -173,21 +198,22 @@ extension CommonBool on bool? {
     }
   }
 }
+
 //TOPBAR
 OverlayEntry? _previousEntry;
 
 extension TopBar on BuildContext {
   void showTopDone(
-      String message, {
-        Duration showOutAnimationDuration = const Duration(milliseconds: 1200),
-        Duration hideOutAnimationDuration = const Duration(milliseconds: 550),
-        Duration displayDuration = const Duration(seconds: 3),
-        double additionalTopPadding = 0.0,
-        VoidCallback? onTap,
-        OverlayState? overlayState,
-        double leftPadding = 0.0,
-        double rightPadding = 0.0,
-      }) {
+    String message, {
+    Duration showOutAnimationDuration = const Duration(milliseconds: 1200),
+    Duration hideOutAnimationDuration = const Duration(milliseconds: 550),
+    Duration displayDuration = const Duration(seconds: 3),
+    double additionalTopPadding = 0.0,
+    VoidCallback? onTap,
+    OverlayState? overlayState,
+    double leftPadding = 0.0,
+    double rightPadding = 0.0,
+  }) {
     overlayState ??= Overlay.of(this);
     late OverlayEntry overlayEntry;
     overlayEntry = OverlayEntry(
@@ -216,16 +242,16 @@ extension TopBar on BuildContext {
   }
 
   void showTopFail(
-      String message, {
-        Duration showOutAnimationDuration = const Duration(milliseconds: 1200),
-        Duration hideOutAnimationDuration = const Duration(milliseconds: 550),
-        Duration displayDuration = const Duration(seconds: 3),
-        double additionalTopPadding = 0.0,
-        VoidCallback? onTap,
-        OverlayState? overlayState,
-        double leftPadding = 0.0,
-        double rightPadding = 0.0,
-      }) {
+    String message, {
+    Duration showOutAnimationDuration = const Duration(milliseconds: 1200),
+    Duration hideOutAnimationDuration = const Duration(milliseconds: 550),
+    Duration displayDuration = const Duration(seconds: 3),
+    double additionalTopPadding = 0.0,
+    VoidCallback? onTap,
+    OverlayState? overlayState,
+    double leftPadding = 0.0,
+    double rightPadding = 0.0,
+  }) {
     overlayState ??= Overlay.of(this);
     late OverlayEntry overlayEntry;
     overlayEntry = OverlayEntry(
@@ -265,4 +291,3 @@ extension TopBar on BuildContext {
     }
   }
 }
-

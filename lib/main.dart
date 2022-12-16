@@ -8,12 +8,14 @@
  */
 
 // ignore_for_file: file_names
+import 'package:fimber/fimber.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/screen/screen_manager/screen_manager.dart';
+import 'package:room_movie/service/dev_tree.dart';
 import 'package:sizer/sizer.dart';
 
 import '../util/ThemeCubit.dart';
@@ -22,6 +24,7 @@ import 'helper/binding.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
+  Fimber.plantTree(DevTree());
   runApp(const App());
 }
 

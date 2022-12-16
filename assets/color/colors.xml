@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffc730</color>
+    <color name="colorPrimaryDark">#c79700</color>
+    <color name="colorPrimaryLight">#fffa66</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#787878</color>
+    <color name="iconColorPrimary">#212121</color>
+    <color name="colorBottomNavigation">#ffc730</color>
+    <color name="colorSwitchActivated">#ffc730</color>
+    <color name="background">#f6f6f6</color>
+    <color name="cardBackgroundColor">#ffffff</color>
+    <color name="backgroundSearch">#ffffff</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorBlackOverlay">#7b000000</color>
+    <color name="shimmerBG">#bdc3c7</color>
+    <color name="colorWhitePressed">#e6e6e6</color>
+    <color name="black_transparent">#AA000000</color>
+    <color name="blackTransparent">#4D000000</color>
+    <color name="greyTransparent">#77BBBBBB</color>
+    <color name="df_transparent_black_background">#80000000</color>
+</resources>

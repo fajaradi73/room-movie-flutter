@@ -10,9 +10,10 @@
 // ignore_for_file: file_names
 import 'package:get/get.dart';
 import 'package:room_movie/models/dashboard/bottom_navigation_list.dart';
+import 'package:room_movie/screen/home/home_bloc.dart';
 
 import '../artist/ArtistScreen.dart';
-import '../home/HomeScreen.dart';
+import '../home/home_screen.dart';
 import '../movie/MovieScreen.dart';
 import '../serialTv/SerialTvScreen.dart';
 import '../settings/SettingsScreen.dart';
@@ -42,7 +43,8 @@ class MainBloc extends GetxController {
     } else if (index == 1) {
       return const MovieScreen();
     } else {
-      return const HomeScreen();
+      Get.put(HomeBloc());
+      return HomeScreen();
     }
   }
 

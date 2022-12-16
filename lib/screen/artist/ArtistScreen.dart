@@ -12,14 +12,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class ArtistScreen extends StatefulWidget {
-  const ArtistScreen({Key? key}) : super(key: key);
+class ArtistScreen extends StatelessWidget {
+  const ArtistScreen({super.key});
 
-  @override
-  State<ArtistScreen> createState() => _ArtistScreenState();
-}
-
-class _ArtistScreenState extends State<ArtistScreen> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -59,8 +54,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
                   padding: const EdgeInsets.all(2),
                   child: const Text(
                     "Damascus",
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(

@@ -16,26 +16,21 @@ import 'package:room_movie/util/Util.dart';
 import '../../models/genre/Genre.dart';
 import '../../util/Constant.dart';
 
-class WidgetListView extends StatefulWidget {
+class WidgetListView extends StatelessWidget {
   final List<Results> list;
   final bool isMovie;
 
   const WidgetListView(this.list, this.isMovie, {Key? key}) : super(key: key);
 
   @override
-  State<WidgetListView> createState() => _WidgetListViewState();
-}
-
-class _WidgetListViewState extends State<WidgetListView> {
-  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      itemCount: widget.list.length > 5 ? 5 : widget.list.length,
+      itemCount: list.length > 5 ? 5 : list.length,
       itemBuilder: (BuildContext context, int index) {
-        Results data = widget.list[index];
+        Results data = list[index];
         return Container(
           width: 275,
           margin: const EdgeInsets.all(5),
@@ -51,7 +46,7 @@ class _WidgetListViewState extends State<WidgetListView> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: CachedNetworkImage(
-                    imageUrl: Constant.baseImage + data.backdropPath,
+                    imageUrl: Constant.baseImage + data.backdropPath.toString(),
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
@@ -75,7 +70,8 @@ class _WidgetListViewState extends State<WidgetListView> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: CachedNetworkImage(
-                            imageUrl: Constant.baseImage + data.posterPath,
+                            imageUrl:
+                                Constant.baseImage + data.posterPath.toString(),
                             fit: BoxFit.cover,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator()),
@@ -145,7 +141,7 @@ class _WidgetListViewState extends State<WidgetListView> {
     var genre = "";
     List<Genre> listGenre = [];
     var parse = await parseListJsonFromAssets("assets/json/genre_tv.json");
-    if (widget.isMovie) {
+    if (isMovie) {
       parse = await parseListJsonFromAssets("assets/json/genre_movie.json");
     }
     listGenre = List<Genre>.from(parse.map((e) => Genre.fromJson(e)));

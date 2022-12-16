@@ -1,6 +1,6 @@
 /*
  * room_movie
- *     Results.dart
+ *     tv_result.dart
  *     Created by Fajar Adi Prasetyo on 31/8/2022
  *     email 	    : fajaradiprast@gmail.com
  *     github 	: https://github.com/fajaradi73
@@ -10,14 +10,14 @@
 class Results {
   Results({
     this.adult,
-    required this.backdropPath,
+    this.backdropPath,
     this.genreIds,
     this.id,
     this.originalLanguage,
     this.originalTitle,
     this.overview,
     this.popularity,
-    required this.posterPath,
+    this.posterPath,
     this.releaseDate,
     this.title,
     this.video,
@@ -30,37 +30,37 @@ class Results {
   });
 
   Results.fromJson(dynamic json) {
-    adult = json['adult'];
+    adult = json['adult'] ?? false;
     backdropPath = json['backdrop_path'] ?? "";
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
-    id = json['id'];
-    originalLanguage = json['original_language'];
-    originalTitle = json['original_title'];
-    overview = json['overview'];
-    popularity = json['popularity'];
-    posterPath = json['poster_path'];
-    releaseDate = json['release_date'];
+    id = json['id'] ?? 0;
+    originalLanguage = json['original_language'] ?? "";
+    originalTitle = json['original_title'] ?? "";
+    overview = json['overview'] ?? "";
+    popularity = json['popularity'] ?? 0.0;
+    posterPath = json['poster_path'] ?? "";
+    releaseDate = json['release_date'] ?? "";
     title = json['title'];
-    video = json['video'];
+    video = json['video'] ?? false;
     voteAverage = json['vote_average'].toString();
-    voteCount = json['vote_count'];
-    firstAirDate = json['first_air_date'];
+    voteCount = json['vote_count'] ?? 0;
+    firstAirDate = json['first_air_date'] ?? "";
     name = json['name'];
     originCountry = json['origin_country'] != null
         ? json['origin_country'].cast<String>()
         : [];
-    originalName = json['original_name'];
+    originalName = json['original_name'] ?? "";
   }
 
   bool? adult;
-  late String backdropPath;
+  String? backdropPath;
   List<int>? genreIds;
   int? id;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
   double? popularity;
-  late String posterPath;
+  String? posterPath;
   String? releaseDate;
   String? title;
   bool? video;
@@ -92,5 +92,19 @@ class Results {
     map['origin_country'] = originCountry;
     map['original_name'] = originalName;
     return map;
+  }
+}
+
+class StaticResults {
+  static List<Results> jsonList(List<dynamic> mapList) {
+    var list = <Results>[];
+    for (var e in mapList) {
+      list.add(Results.fromJson(e));
+    }
+    return list;
+  }
+
+  static List<Results> get load {
+    return [Results()];
   }
 }

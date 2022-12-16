@@ -7,11 +7,10 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
-// ignore_for_file: file_names
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:room_movie/screen/widget/custom_alert_dialog.dart';
 
 import '../../constant/app_route.dart';
 
@@ -68,25 +67,22 @@ class SplashBloc extends FullLifeCycleController with FullLifeCycleMixin {
     if (success) {
       (this).loginTest();
     } else {
-      Get.dialog(AlertDialog(
-        title: const Text("Permission Needed"),
-        actions: [
-          MaterialButton(
-            onPressed: () {
-              SystemNavigator.pop();
-            },
-            child: const Text('Keluar'),
-          ),
-          MaterialButton(
-            onPressed: () {
+      Get.dialog(
+          CustomAlertDialog(
+            title: "Permission Needed",
+            description: "Permission dibutuhkan untuk menggunakan aplikasi",
+            yesTitle: "Setting",
+            noTitle: "Keluar",
+            actionYes: () async {
               (this).isSetting = true;
               openAppSettings();
               Get.back();
             },
-            child: const Text('Setting'),
+            actionNo: () async {
+              SystemNavigator.pop();
+            },
           ),
-        ],
-      ));
+          barrierDismissible: false);
     }
   }
 

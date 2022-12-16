@@ -10,18 +10,28 @@
 // ignore_for_file: file_names
 
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import 'package:room_movie/util/Constant.dart';
+import 'package:room_movie/models/artist/artist_response.dart';
+import 'package:room_movie/service/api_uri.dart';
+import 'package:room_movie/service/dio_util.dart';
 
+import '../models/movie/Movie.dart';
 
 class ApiService {
-    static Future getMoviePopular(int page){
-        return http.get(Uri.parse("${Constant.baseUrl}movie/popular?api_key=${Constant.apiKey}&page=$page"));
-    }
+  final dio = DioUtil();
 
-    static Future getTVPopular(int page){
-        return http.get(Uri.parse("${Constant.baseUrl}tv/popular?api_key=${Constant.apiKey}&page=$page"));
-    }
+  Future<Movie?> getMoviePopular(int page) async {
+    var data = await dio.get(uri: ApiUri.popularMovie(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getTVPopular(int page) async {
+    var data = await dio.get(uri: ApiUri.popularSerialTv(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<ArtistResponse?> getArtistPopular(int page) async {
+    var data = await dio.get(uri: ApiUri.popularArtist(page));
+    return ArtistResponse.fromJson(data);
+  }
 }
