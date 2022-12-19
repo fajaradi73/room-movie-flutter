@@ -25,6 +25,26 @@ class ApiService {
     return Movie.fromJson(data);
   }
 
+  Future<Movie?> getMovieNow(int page) async {
+    var data = await dio.get(uri: ApiUri.nowPLayingMovie(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getMovieUpcoming(int page) async {
+    var data = await dio.get(uri: ApiUri.upComingMovie(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getMovieTopRated(int page) async {
+    var data = await dio.get(uri: ApiUri.topRatedMovie(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getMovieTrending(int page) async {
+    var data = await dio.get(uri: ApiUri.trendingMovie(page));
+    return Movie.fromJson(data);
+  }
+
   Future<Movie?> getTVPopular(int page) async {
     var data = await dio.get(uri: ApiUri.popularSerialTv(page));
     return Movie.fromJson(data);

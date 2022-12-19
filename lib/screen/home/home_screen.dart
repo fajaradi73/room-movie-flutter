@@ -9,10 +9,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/artist/artist_list_view.dart';
+import 'package:room_movie/screen/home/home_artist_widget.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
+import 'package:room_movie/screen/home/home_movie_widget.dart';
+import 'package:room_movie/screen/home/home_tv_widget.dart';
 import 'package:room_movie/screen/widget/LoadingScreen.dart';
-import 'package:room_movie/screen/widget/WidgetListView.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -26,108 +27,13 @@ class HomeScreen extends StatelessWidget {
           ? const LoadingScreen()
           : SingleChildScrollView(
               child: Column(
-                children: [widgetMovie(), widgetTv(), widgetArtist()],
+                children: [
+                  HomeMovieWidget(),
+                  HomeTvWidget(),
+                  HomeArtistWidget()
+                ],
               ),
             )),
-    );
-  }
-
-  widgetMovie() {
-    return Column(
-      children: [
-        Card(
-          margin: EdgeInsets.zero,
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              children: [
-                Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10),
-                  child: const Text("Popular Movie",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                ),
-                const Spacer(),
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const Icon(Icons.keyboard_arrow_right))
-              ],
-            ),
-          ),
-        ),
-        Container(
-          constraints: const BoxConstraints(minHeight: 250, maxHeight: 270),
-          child: WidgetListView(logic.listMovie, true),
-        )
-      ],
-    );
-  }
-
-  widgetTv() {
-    return Column(
-      children: [
-        Card(
-          margin: EdgeInsets.zero,
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              children: [
-                Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10),
-                  child: const Text(
-                    "Popular Serial Tv",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Spacer(),
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const Icon(Icons.keyboard_arrow_right))
-              ],
-            ),
-          ),
-        ),
-        Container(
-            constraints: const BoxConstraints(minHeight: 250, maxHeight: 270),
-            child: WidgetListView(logic.listTv, false)),
-      ],
-    );
-  }
-
-  widgetArtist() {
-    return Column(
-      children: [
-        Card(
-          margin: EdgeInsets.zero,
-          child: InkWell(
-            onTap: () {},
-            child: Row(
-              children: [
-                Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10),
-                  child: const Text("Popular Artist",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                ),
-                const Spacer(),
-                Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const Icon(Icons.keyboard_arrow_right))
-              ],
-            ),
-          ),
-        ),
-        Container(
-          constraints: const BoxConstraints(minHeight: 250, maxHeight: 270),
-          child: ArtistListView(logic.listArtist),
-        )
-      ],
     );
   }
 }
