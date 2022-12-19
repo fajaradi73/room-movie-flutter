@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/screen/screen_manager/screen_manager.dart';
-import 'package:room_movie/service/dev_tree.dart';
+import 'package:room_movie/util/dev_tree.dart';
 import 'package:sizer/sizer.dart';
 
 import '../util/ThemeCubit.dart';

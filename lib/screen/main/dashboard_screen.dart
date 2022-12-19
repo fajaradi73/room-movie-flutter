@@ -9,17 +9,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/artist/ArtistScreen.dart';
+import 'package:room_movie/screen/artist/artist_screen.dart';
 import 'package:room_movie/screen/home/home_screen.dart';
 import 'package:room_movie/screen/main/dashboard_bloc.dart';
 import 'package:room_movie/screen/movie/movie_screen.dart';
-import 'package:room_movie/screen/serialTv/SerialTvScreen.dart';
+import 'package:room_movie/screen/serialTv/serial_tv_screen.dart';
 import 'package:room_movie/screen/settings/SettingsScreen.dart';
+
+import '../artist/artist_bloc.dart';
 
 class DashboardScreen extends StatelessWidget {
   DashboardScreen({super.key});
 
   final logic = Get.find<DashboardBloc>();
+  final artistLogic = Get.find<ArtistBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +33,37 @@ class DashboardScreen extends StatelessWidget {
                   title: const Text("Pengaturan"),
                 )
               : searchBar(),
-          body: SafeArea(
-            child: IndexedStack(
-              index: logic.selectedNavBar.value,
-              children: const [
-                HomeScreen(),
-                MovieScreen(),
-                SerialTvScreen(),
-                ArtistScreen(),
-                SettingsScreen()
-              ],
-            ),
+          body: IndexedStack(
+            index: logic.selectedNavBar.value,
+            children: const [
+              HomeScreen(),
+              MovieScreen(),
+              SerialTvScreen(),
+              ArtistScreen(),
+              SettingsScreen()
+            ],
           ),
           bottomNavigationBar: bottomNavigation(),
+          floatingActionButton: (logic.selectedNavBar.value == 3)
+              ? AnimatedOpacity(
+                  duration: const Duration(milliseconds: 500),
+                  //show/hide animation
+                  opacity: artistLogic.showButton.value ? 1.0 : 0.0,
+                  //set obacity to 1 on visible, or hide
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      artistLogic.scrollController.animateTo(
+                          //go to top of scroll
+                          0, //scroll offset to go
+                          duration: const Duration(milliseconds: 500),
+                          //duration of scroll
+                          curve: Curves.fastOutSlowIn //scroll type
+                          );
+                    },
+                    child: const Icon(Icons.arrow_upward),
+                  ),
+                )
+              : null,
         ));
   }
 

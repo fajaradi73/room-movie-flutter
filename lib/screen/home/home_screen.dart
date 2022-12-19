@@ -13,32 +13,22 @@ import 'package:room_movie/screen/home/home_bloc.dart';
 import 'package:room_movie/screen/home/widget/home_artist_widget.dart';
 import 'package:room_movie/screen/home/widget/home_movie_widget.dart';
 import 'package:room_movie/screen/home/widget/home_tv_widget.dart';
-import 'package:room_movie/screen/widget/LoadingScreen.dart';
 
 class HomeScreen extends GetView<HomeBloc> {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: EasyRefresh(
-        onRefresh: () async {
-          await controller.getMovie();
-        },
-        child: Center(
-          child: Obx(() => (controller.isLoading.value == true)
-              ? const LoadingScreen()
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      HomeMovieWidget(),
-                      HomeTvWidget(),
-                      HomeArtistWidget()
-                    ],
-                  ),
-                )),
+    return EasyRefresh(
+      onRefresh: () async {
+        await controller.getMovie();
+      },
+      child: Center(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [HomeMovieWidget(), HomeTvWidget(), HomeArtistWidget()],
         ),
-      ),
+      )),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:room_movie/service/logger.dart';
+import 'package:room_movie/util/logger.dart';
 
 class LoggerInterceptor extends Interceptor {
   @override

@@ -15,14 +15,14 @@ import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/service/ApiService.dart';
 
-import '../../service/exception.dart';
+import '../../util/exception.dart';
 
 class HomeBloc extends GetxController {
   var listMovie = StaticResults.load.obs;
   var listTv = StaticResults.load.obs;
   var listArtist = StaticArtistResults.load.obs;
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var service = ApiService();
 
   @override

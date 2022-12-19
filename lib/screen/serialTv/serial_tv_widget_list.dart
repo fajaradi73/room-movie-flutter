@@ -16,8 +16,8 @@ import 'package:room_movie/util/Util.dart';
 import '../../util/Constant.dart';
 
 // ignore: must_be_immutable
-class MovieWidgetList extends StatelessWidget {
-  const MovieWidgetList(this.list, {Key? key}) : super(key: key);
+class SerialTvWidgetList extends StatelessWidget {
+  const SerialTvWidgetList(this.list, {Key? key}) : super(key: key);
 
   final List<Results> list;
 
@@ -91,7 +91,7 @@ class MovieWidgetList extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   margin: const EdgeInsets.all(3),
                                   child: Text(
-                                    "${data.title}",
+                                    "${data.name}",
                                     style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class MovieWidgetList extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   margin: const EdgeInsets.all(3),
                                   child: FutureBuilder(
-                                      future: getGenre(data.genreIds, true),
+                                      future: getGenre(data.genreIds, false),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {

@@ -15,7 +15,7 @@ import 'package:room_movie/helper/extensions.dart';
 
 import '../../models/movie/Results.dart';
 import '../../service/ApiService.dart';
-import '../../service/exception.dart';
+import '../../util/exception.dart';
 
 class MovieBloc extends GetxController {
   final mapsMovie = <String, List<Results>>{

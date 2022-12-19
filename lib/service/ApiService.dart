@@ -13,7 +13,7 @@ import 'dart:async';
 
 import 'package:room_movie/models/artist/artist_response.dart';
 import 'package:room_movie/service/api_uri.dart';
-import 'package:room_movie/service/dio_util.dart';
+import 'package:room_movie/util/dio_util.dart';
 
 import '../models/movie/Movie.dart';
 
@@ -47,6 +47,21 @@ class ApiService {
 
   Future<Movie?> getTVPopular(int page) async {
     var data = await dio.get(uri: ApiUri.popularSerialTv(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getTVOnTheAir(int page) async {
+    var data = await dio.get(uri: ApiUri.onTheAirSerialTv(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getTVTopRate(int page) async {
+    var data = await dio.get(uri: ApiUri.topRateSerialTv(page));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getTVToday(int page) async {
+    var data = await dio.get(uri: ApiUri.airingTodaySerialTv(page));
     return Movie.fromJson(data);
   }
 

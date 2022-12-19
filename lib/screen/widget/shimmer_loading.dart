@@ -21,8 +21,8 @@ class ShimmerSwitch extends StatelessWidget {
       stream: (this).stream,
       builder: (context, snap) {
         return AnimatedSwitcherSize(
-          fadeDuration: const Duration(milliseconds: 300),
-          sizeDuration: const Duration(milliseconds: 300),
+          fadeDuration: const Duration(milliseconds: 500),
+          sizeDuration: const Duration(milliseconds: 500),
           child: (snap.hasData && snap.data == true).either(
             trueV: Shimmer.fromColors(
               period: const Duration(milliseconds: 2000),

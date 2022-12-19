@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:room_movie/service/exception.dart';
-import 'package:room_movie/service/interceptors.dart';
 import 'package:room_movie/util/Constant.dart';
+import 'package:room_movie/util/exception.dart';
+import 'package:room_movie/util/interceptors.dart';
 
 class DioUtil {
   final _dio = Dio();
