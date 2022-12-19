@@ -15,9 +15,7 @@ import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/service/ApiService.dart';
 
-import '../../models/genre/Genre.dart';
 import '../../service/exception.dart';
-import '../../util/Util.dart';
 
 class HomeBloc extends GetxController {
   var listMovie = StaticResults.load.obs;
@@ -30,8 +28,6 @@ class HomeBloc extends GetxController {
   @override
   void onReady() {
     (this).getMovie();
-    (this).getSerialTv();
-    (this).getArtist();
   }
 
   Future<void> getMovie() async {
@@ -40,6 +36,7 @@ class HomeBloc extends GetxController {
       var res = await service.getMoviePopular(1);
       if (res != null && res.results.isNotEmpty) {
         listMovie.rxNew(res.results);
+        (this).getSerialTv();
       }
     } catch (e) {
       if (e is APIException) {
@@ -57,6 +54,7 @@ class HomeBloc extends GetxController {
       var res = await service.getTVPopular(1);
       if (res != null && res.results.isNotEmpty) {
         listTv.rxNew(res.results);
+        (this).getArtist();
       }
     } catch (e) {
       if (e is APIException) {
@@ -83,56 +81,5 @@ class HomeBloc extends GetxController {
       }
     }
     isLoading(false);
-  }
-
-  _getGenreName(int id, bool isMovie) async {
-    var genre = "";
-    List<Genre> listGenre = [];
-    var parse = await parseListJsonFromAssets("assets/json/genre_tv.json");
-    if (isMovie) {
-      parse = await parseListJsonFromAssets("assets/json/genre_movie.json");
-    }
-    listGenre = List<Genre>.from(parse.map((e) => Genre.fromJson(e)));
-    for (var data in listGenre) {
-      if (data.id == id) {
-        genre = data.name ?? "";
-      }
-    }
-    return genre;
-  }
-
-  Future<String> getGenre(List<int>? listId, bool isMovie) async {
-    String nameGenre = "";
-    if (listId != null) {
-      for (int i = 0; i < listId.length; i++) {
-        String name = await _getGenreName(listId[i], isMovie);
-        if (name.isNotEmpty) {
-          if (i == (listId.length - 1)) {
-            nameGenre = nameGenre + name;
-          } else {
-            nameGenre = "$nameGenre$name • ";
-          }
-        }
-      }
-    }
-    return nameGenre;
-  }
-
-  Future<String> getKnowFor(List<Results>? list) async {
-    String knowFor = "";
-    if (list != null) {
-      for (int i = 0; i < list.length; i++) {
-        if (i == list.length - 1) {
-          knowFor += list[i].title == null || list[i].title?.isEmpty == true
-              ? "${list[i].name}"
-              : "${list[i].title}";
-        } else {
-          knowFor += list[i].title == null || list[i].title?.isEmpty == true
-              ? ("${list[i].name}, ")
-              : "${list[i].title}, ";
-        }
-      }
-    }
-    return knowFor;
   }
 }

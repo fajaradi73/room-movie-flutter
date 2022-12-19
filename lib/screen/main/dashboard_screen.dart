@@ -1,6 +1,6 @@
 /*
  * room_movie
- *     main_screen.dart
+ *     dashboard_screen.dart
  *     Created by Fajar Adi Prasetyo on 25/8/2022
  *     email 	    : fajaradiprast@gmail.com
  *     github 	: https://github.com/fajaradi73
@@ -9,12 +9,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/main/main_bloc.dart';
+import 'package:room_movie/screen/artist/ArtistScreen.dart';
+import 'package:room_movie/screen/home/home_screen.dart';
+import 'package:room_movie/screen/main/dashboard_bloc.dart';
+import 'package:room_movie/screen/movie/movie_screen.dart';
+import 'package:room_movie/screen/serialTv/SerialTvScreen.dart';
+import 'package:room_movie/screen/settings/SettingsScreen.dart';
 
-class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
+class DashboardScreen extends StatelessWidget {
+  DashboardScreen({super.key});
 
-  final logic = Get.find<MainBloc>();
+  final logic = Get.find<DashboardBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,18 @@ class MainScreen extends StatelessWidget {
                   title: const Text("Pengaturan"),
                 )
               : searchBar(),
-          body: logic.viewNavbar(logic.selectedNavBar),
+          body: SafeArea(
+            child: IndexedStack(
+              index: logic.selectedNavBar.value,
+              children: const [
+                HomeScreen(),
+                MovieScreen(),
+                SerialTvScreen(),
+                ArtistScreen(),
+                SettingsScreen()
+              ],
+            ),
+          ),
           bottomNavigationBar: bottomNavigation(),
         ));
   }

@@ -10,8 +10,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
-import '../widget/WidgetListView.dart';
-
 class SerialTvScreen extends StatefulWidget {
   const SerialTvScreen({Key? key}) : super(key: key);
 
@@ -58,10 +56,6 @@ class _SerialTvScreenState extends State<SerialTvScreen> {
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 260,
-                child: WidgetListView(false),
               )
             ],
           );

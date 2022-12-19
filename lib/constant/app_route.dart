@@ -9,11 +9,10 @@
 
 // ignore_for_file: file_names
 import 'package:get/get.dart';
-import 'package:room_movie/screen/main/main_screen.dart';
-import 'package:room_movie/screen/main/main_bloc.dart';
+import 'package:room_movie/screen/main/dashboard_binding.dart';
+import 'package:room_movie/screen/main/dashboard_screen.dart';
 
 import '../screen/splash_screen/splash_screen.dart';
-
 
 class AppRoute {
   static final List<GetPage> routes = [
@@ -22,15 +21,13 @@ class AppRoute {
         page: () => SplashScreen(),
         binding: BindingsBuilder(() {})),
     GetPage(
-        name: Pages.mainScreen,
-        page: () => MainScreen(),
-        binding: BindingsBuilder(() {
-          Get.put(MainBloc());
-        })),
+        name: Pages.dashboardScreen,
+        page: () => DashboardScreen(),
+        binding: DashboardBinding()),
   ];
 }
 
 class Pages {
   static const splashScreen = "/splash_screen";
-  static const mainScreen = "/main_screen";
+  static const dashboardScreen = "/dashboard_screen";
 }

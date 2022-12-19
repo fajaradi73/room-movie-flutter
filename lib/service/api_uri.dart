@@ -18,7 +18,8 @@ class ApiUri {
 
   static String upComingMovie(int page) => "${movie("upcoming")}&page=$page";
 
-  static String trendingMovie(int page) => "${movie("movie/day")}&page=$page";
+  static String trendingMovie(int page) =>
+      "trending/${movie("day")}&page=$page";
 
   static String searchMovie(int page, String query) =>
       "search/${movieNoPath()}&page=$page&query=$query";

@@ -24,7 +24,7 @@ class SplashBloc extends FullLifeCycleController with FullLifeCycleMixin {
   }
 
   void loginTest() {
-    Get.offNamed(Pages.mainScreen);
+    Get.offNamed(Pages.dashboardScreen);
   }
 
   Future<void> _splashDuration() async {
