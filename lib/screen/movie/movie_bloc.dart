@@ -12,6 +12,7 @@
 import 'package:get/get.dart';
 import 'package:room_movie/helper/base_function.dart';
 import 'package:room_movie/helper/extensions.dart';
+import 'package:room_movie/models/enum/movie_type.dart';
 
 import '../../models/movie/Results.dart';
 import '../../service/ApiService.dart';
@@ -19,11 +20,11 @@ import '../../util/exception.dart';
 
 class MovieBloc extends GetxController {
   final mapsMovie = <String, List<Results>>{
-    "Popular": [],
-    "Sedang Tayang": [],
-    "Rating Teratas": [],
-    "Mendatang": [],
-    "Sedang Tren": []
+    MovieType.POPULAR.label: [],
+    MovieType.SEDANG_TAYANG.label: [],
+    MovieType.RATING_TERATAS.label: [],
+    MovieType.MENDATANG.label: [],
+    MovieType.SEDANG_TREN.label: []
   }.obs;
 
   var isLoading = true.obs;

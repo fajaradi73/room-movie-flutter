@@ -10,8 +10,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/screen/artist/artist_screen.dart';
+import 'package:room_movie/screen/dashboard/dashboard_bloc.dart';
 import 'package:room_movie/screen/home/home_screen.dart';
-import 'package:room_movie/screen/main/dashboard_bloc.dart';
 import 'package:room_movie/screen/movie/movie_screen.dart';
 import 'package:room_movie/screen/serialTv/serial_tv_screen.dart';
 import 'package:room_movie/screen/settings/SettingsScreen.dart';
@@ -35,7 +35,7 @@ class DashboardScreen extends StatelessWidget {
               : searchBar(),
           body: IndexedStack(
             index: logic.selectedNavBar.value,
-            children: const [
+            children: [
               HomeScreen(),
               MovieScreen(),
               SerialTvScreen(),

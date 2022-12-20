@@ -11,6 +11,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 import '../screen/widget/snackbar_widget.dart';
@@ -18,7 +19,7 @@ import '../theme/responsives.dart';
 
 extension AppSizer on double {
   double width([double? tablet]) {
-    if (Responsives.isTablet()) {
+    if (Responsive.isTablet()) {
       return tablet?.w ?? (this).w;
     } else {
       return (this).w;
@@ -26,7 +27,7 @@ extension AppSizer on double {
   }
 
   double height([double? tablet]) {
-    if (Responsives.isTablet()) {
+    if (Responsive.isTablet()) {
       return tablet?.h ?? (this).h;
     } else {
       return (this).h;
@@ -38,13 +39,13 @@ extension AppSizer on double {
     bool isFixedSize = false,
   }) {
     if (isFixedSize) {
-      if (Responsives.isTablet()) {
+      if (Responsive.isTablet()) {
         return tablet ?? (this);
       } else {
         return (this);
       }
     } else {
-      if (Responsives.isTablet()) {
+      if (Responsive.isTablet()) {
         return tablet?.sp ?? (this).sp;
       } else {
         return (this).sp;
@@ -130,31 +131,31 @@ extension ExString on String? {
     }
   }
 
-//   String? dateFormat({
-//     required String currentFormat,
-//     required String desiredFormat,
-//   }) {
-//     if ((this) != null) {
-//       try {
-//         String formattedDate = "";
-//         DateTime dateTime = DateFormat(currentFormat).parse((this)!, true);
-//         formattedDate = DateFormat(desiredFormat).format(dateTime);
-//         return formattedDate.toString();
-//       } catch (e) {
-//         return '';
-//       }
-//     } else {
-//       return '';
-//     }
-//   }
-//
-//   DateTime? toDate([String format = 'dd/MM/yyyy']) {
-//     if ((this) != null) {
-//       return DateFormat(format).parse(this!);
-//     } else {
-//       return null;
-//     }
-//   }
+  String? dateFormat({
+    required String currentFormat,
+    required String desiredFormat,
+  }) {
+    if ((this) != null) {
+      try {
+        String formattedDate = "";
+        DateTime dateTime = DateFormat(currentFormat).parse((this!), true);
+        formattedDate = DateFormat(desiredFormat).format(dateTime);
+        return formattedDate.toString();
+      } catch (e) {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
+  DateTime? toDate([String format = 'dd/MM/yyyy']) {
+    if ((this) != null) {
+      return DateFormat(format).parse(this!);
+    } else {
+      return null;
+    }
+  }
 }
 
 extension CommonBool on bool? {

@@ -9,8 +9,10 @@
 
 // ignore_for_file: file_names
 import 'package:get/get.dart';
-import 'package:room_movie/screen/main/dashboard_binding.dart';
-import 'package:room_movie/screen/main/dashboard_screen.dart';
+import 'package:room_movie/screen/dashboard/dashboard_binding.dart';
+import 'package:room_movie/screen/dashboard/dashboard_screen.dart';
+import 'package:room_movie/screen/movie_list/movie_list_bloc.dart';
+import 'package:room_movie/screen/movie_list/movie_list_screen.dart';
 
 import '../screen/splash_screen/splash_screen.dart';
 
@@ -24,10 +26,17 @@ class AppRoute {
         name: Pages.dashboardScreen,
         page: () => DashboardScreen(),
         binding: DashboardBinding()),
+    GetPage(
+        name: Pages.movieListScreen,
+        page: () => MovieListScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(MovieListBloc());
+        })),
   ];
 }
 
 class Pages {
   static const splashScreen = "/splash_screen";
   static const dashboardScreen = "/dashboard_screen";
+  static const movieListScreen = "/movie_list_screen";
 }

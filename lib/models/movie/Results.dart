@@ -37,7 +37,9 @@ class Results {
     originalLanguage = json['original_language'] ?? "";
     originalTitle = json['original_title'] ?? "";
     overview = json['overview'] ?? "";
-    popularity = json['popularity'] ?? 0.0;
+    popularity = json['popularity'] != null
+        ? double.parse(json["popularity"].toString())
+        : 0.0;
     posterPath = json['poster_path'] ?? "";
     releaseDate = json['release_date'] ?? "";
     title = json['title'];

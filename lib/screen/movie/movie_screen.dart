@@ -11,13 +11,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/screen/movie/movie_bloc.dart';
 import 'package:room_movie/screen/widget/LoadingScreen.dart';
 
+import '../../constant/app_route.dart';
+import '../dashboard/dashboard_bloc.dart';
 import 'movie_widget_list.dart';
 
 class MovieScreen extends GetView<MovieBloc> {
-  const MovieScreen({super.key});
+  MovieScreen({super.key});
+
+  final dashboardBloc = Get.find<DashboardBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,10 @@ class MovieScreen extends GetView<MovieBloc> {
                   Card(
                     margin: EdgeInsets.zero,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        dashboardBloc.movieType.value = key.getType();
+                        Get.toNamed(Pages.movieListScreen);
+                      },
                       child: Row(
                         children: [
                           Container(

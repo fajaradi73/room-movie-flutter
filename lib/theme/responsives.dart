@@ -11,7 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Responsives {
+class Responsive {
   static bool isTablet() {
     return MediaQuery.of(Get.context!).size.shortestSide > 600;
   }

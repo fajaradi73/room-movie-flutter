@@ -41,7 +41,7 @@ class ThemeCubit extends Cubit<ThemeData> {
           ColorName.colorPrimary.value, getSwatch(ColorName.colorPrimary)),
       primaryColor: ColorName.colorPrimary,
       brightness: Brightness.light,
-      backgroundColor: const Color(0xFFE5E5E5),
+      backgroundColor: const Color(0xFFF6F6F6),
       accentColor: Colors.black,
       accentIconTheme: const IconThemeData(color: Colors.white),
       dividerColor: Colors.white54,

@@ -23,6 +23,7 @@ import 'constant/app_route.dart';
 import 'helper/binding.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
   Fimber.plantTree(DevTree());
   runApp(const App());

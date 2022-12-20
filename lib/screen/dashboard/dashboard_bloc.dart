@@ -10,11 +10,13 @@
 // ignore_for_file: file_names
 import 'package:get/get.dart';
 import 'package:room_movie/models/dashboard/bottom_navigation_list.dart';
+import 'package:room_movie/models/enum/movie_type.dart';
 
 class DashboardBloc extends GetxController {
   var searchHint = "".obs;
   var selectedNavBar = 0.obs;
   var bottomItem = BottomNavigationList.items.obs;
+  var movieType = MovieType.NULL.obs;
 
   @override
   void onReady() {

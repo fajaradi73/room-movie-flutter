@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/models/enum/movie_type.dart';
+import 'package:room_movie/screen/dashboard/dashboard_bloc.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
+import '../../../constant/app_route.dart';
 import '../../../models/movie/Results.dart';
 import 'item/home_results_item.dart';
 
@@ -13,6 +16,8 @@ class HomeMovieWidget extends GetView<HomeBloc> {
   late List<Results> list;
 
   HomeMovieWidget({Key? key}) : super(key: key);
+
+  final dashboardBloc = Get.find<DashboardBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,10 @@ class HomeMovieWidget extends GetView<HomeBloc> {
           Card(
             margin: EdgeInsets.zero,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                dashboardBloc.movieType.value = MovieType.POPULAR;
+                Get.toNamed(Pages.movieListScreen);
+              },
               child: Row(
                 children: [
                   Container(
