@@ -47,7 +47,7 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8,
-                      childAspectRatio: 0.078.height()),
+                      childAspectRatio: Get.width / (Get.height / 1.17)),
                   itemCount: (controller.pageLoad.value).either(
                       trueV: controller.list.length + 1,
                       falseV: controller.list.length),

@@ -10,6 +10,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/artist/artist_bloc.dart';
@@ -37,7 +38,7 @@ class ArtistScreen extends GetView<ArtistBloc> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
-                  childAspectRatio: 0.10.height()),
+                  childAspectRatio: Get.width / (Get.height / 1.5)),
               itemCount: (controller.pageLoad.value).either(
                   trueV: controller.listArtist.length + 1,
                   falseV: controller.listArtist.length),

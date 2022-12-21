@@ -30,7 +30,6 @@ class SerialTvListItem extends StatelessWidget {
         children: [
           SizedBox(
             height: 30.0.height(),
-            width: SizerUtil.width,
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -111,7 +110,7 @@ class SerialTvListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-                "${data.releaseDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                "${data.firstAirDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
                 style: const TextStyle(
                     fontSize: 14, overflow: TextOverflow.ellipsis),
                 maxLines: 1),
