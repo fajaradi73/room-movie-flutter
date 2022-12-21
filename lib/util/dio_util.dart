@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:room_movie/util/Constant.dart';
 import 'package:room_movie/util/exception.dart';
-import 'package:room_movie/util/interceptors.dart';
 
 class DioUtil {
   final _dio = Dio();
@@ -16,7 +15,7 @@ class DioUtil {
     _dio.options.baseUrl = Constant.baseUrl;
     _dio.options.connectTimeout = 90000;
     _dio.options.receiveTimeout = 30000;
-    _dio.interceptors.add(LoggerInterceptor());
+    // _dio.interceptors.add(LoggerInterceptor());
     _dio.options.headers = {
       "Content-Type": "application/json",
       "Accept": "*/*",

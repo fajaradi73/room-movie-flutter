@@ -33,11 +33,11 @@ class ArtistScreen extends GetView<ArtistBloc> {
           isLoading: controller.pageLoad.value,
           child: GridView.builder(
               controller: controller.scrollController,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
-                  childAspectRatio: 0.8),
+                  childAspectRatio: 0.10.height()),
               itemCount: (controller.pageLoad.value).either(
                   trueV: controller.listArtist.length + 1,
                   falseV: controller.listArtist.length),
@@ -56,7 +56,7 @@ class ArtistScreen extends GetView<ArtistBloc> {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 24.0.height(),
+                                height: 25.0.height(),
                                 width: SizerUtil.width,
                                 child: Card(
                                   semanticContainer: true,

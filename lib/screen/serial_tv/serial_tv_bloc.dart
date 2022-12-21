@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:room_movie/helper/base_function.dart';
 import 'package:room_movie/helper/extensions.dart';
+import 'package:room_movie/models/enum/tv_type.dart';
 import 'package:room_movie/models/movie/Results.dart';
 
 import '../../service/ApiService.dart';
@@ -8,11 +9,12 @@ import '../../util/exception.dart';
 
 class SerialTvBloc extends GetxController {
   var mapsTv = <String, List<Results>>{
-    "Sedang Tayang": [],
-    "Tayang di Tv": [],
-    "Popular": [],
-    "Rating Teratas": []
+    TvType.SEDANG_TAYANG.label: [],
+    TvType.TAYANG_DI_TV.label: [],
+    TvType.POPULAR.label: [],
+    TvType.RATING_TERATAS.label: []
   }.obs;
+
   var isLoading = true.obs;
   var service = ApiService();
   var listPopular = StaticResults.load.obs;
@@ -20,8 +22,7 @@ class SerialTvBloc extends GetxController {
   var listToday = StaticResults.load.obs;
   var listOnTheAir = StaticResults.load.obs;
 
-  @override
-  void onReady() {
+  void openScreen() {
     (this).getToday();
     (this).getOnTheAir();
     (this).getPopular();

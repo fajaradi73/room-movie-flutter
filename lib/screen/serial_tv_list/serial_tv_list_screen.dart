@@ -1,22 +1,30 @@
+// ignore_for_file: file_names
+/*
+ * 
+ *     serial_tv_list_screen
+ *     Created by Fajar Adi Prasetyo on 21/12/2022
+ *     email 	    : fajaradiprast@gmail.com
+ *     github 	  : https://github.com/fajaradi73
+ *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ */
+
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
-import 'package:room_movie/models/enum/movie_type.dart';
-import 'package:room_movie/screen/dashboard/dashboard_bloc.dart';
-import 'package:room_movie/screen/movie_list/movie_list_bloc.dart';
-import 'package:room_movie/screen/movie_list/movie_list_item.dart';
-import 'package:room_movie/screen/widget/gesture_scaffold.dart';
-import 'package:room_movie/screen/widget/global_header.dart';
+import 'package:room_movie/models/enum/tv_type.dart';
+import 'package:room_movie/screen/serial_tv_list/serial_tv_list_bloc.dart';
+import 'package:room_movie/screen/serial_tv_list/serial_tv_list_item.dart';
 
+import '../dashboard/dashboard_bloc.dart';
 import '../widget/LoadingScreen.dart';
+import '../widget/gesture_scaffold.dart';
+import '../widget/global_header.dart';
 import '../widget/lazy_load.dart';
 import '../widget/shimmer_loading.dart';
 
-/// Created by Fajar Adi Prasetyo on 20/12/2022.
-
-class MovieListScreen extends GetView<MovieListBloc> {
-  MovieListScreen({super.key});
+class SerialTvListScreen extends GetView<SerialTvListBloc> {
+  SerialTvListScreen({super.key});
 
   final dashboardBloc = Get.find<DashboardBloc>();
 
@@ -24,11 +32,11 @@ class MovieListScreen extends GetView<MovieListBloc> {
   Widget build(BuildContext context) {
     return GestureScaffold(
       appBar: GlobalHeader(
-        title: dashboardBloc.movieType.value.label,
+        title: dashboardBloc.tvType.value.label,
       ),
       body: EasyRefresh(
         onRefresh: () async {
-          await controller.getMovie(1);
+          await controller.getData(1);
         },
         child: Obx(() {
           return LazyLoad(
@@ -53,14 +61,14 @@ class MovieListScreen extends GetView<MovieListBloc> {
                         var data = controller.list[index];
                         return ShimmerSwitch(
                             stream: controller.isLoading.stream,
-                            child: MovieListItem(
+                            child: SerialTvListItem(
                               data: data,
                             ));
                       }
                     });
                   }),
               onEndOfPage: () async {
-                await controller.getMovie(controller.currentPage.value);
+                await controller.getData(controller.currentPage.value);
               });
         }),
       ),

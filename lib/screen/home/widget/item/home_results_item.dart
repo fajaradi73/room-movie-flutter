@@ -17,9 +17,9 @@ class HomeResultsItem extends GetView<HomeBloc> {
     return InkWell(
       onTap: () {},
       child: Container(
-        width: 275,
         margin: const EdgeInsets.all(5),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               height: 160,

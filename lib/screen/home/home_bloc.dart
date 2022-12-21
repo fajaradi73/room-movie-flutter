@@ -25,8 +25,7 @@ class HomeBloc extends GetxController {
   var isLoading = false.obs;
   var service = ApiService();
 
-  @override
-  void onReady() {
+  void openScreen() {
     (this).getMovie();
   }
 

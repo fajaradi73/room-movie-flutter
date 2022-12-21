@@ -30,6 +30,7 @@ class MovieScreen extends GetView<MovieBloc> {
         ? const LoadingScreen()
         : ListView.builder(
             itemCount: controller.mapsMovie.length,
+            shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               var key = controller.mapsMovie.keys.elementAt(index);
               return Column(

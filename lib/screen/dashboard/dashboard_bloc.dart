@@ -11,12 +11,26 @@
 import 'package:get/get.dart';
 import 'package:room_movie/models/dashboard/bottom_navigation_list.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
+import 'package:room_movie/models/enum/tv_type.dart';
+import 'package:room_movie/screen/artist/artist_bloc.dart';
+import 'package:room_movie/screen/home/home_bloc.dart';
+import 'package:room_movie/screen/movie/movie_bloc.dart';
+import 'package:room_movie/screen/serial_tv/serial_tv_bloc.dart';
+import 'package:room_movie/screen/settings/settings_bloc.dart';
 
 class DashboardBloc extends GetxController {
   var searchHint = "".obs;
   var selectedNavBar = 0.obs;
   var bottomItem = BottomNavigationList.items.obs;
   var movieType = MovieType.NULL.obs;
+  var tvType = TvType.NULL.obs;
+
+  //// bloc
+  final homeBloc = Get.find<HomeBloc>();
+  final movieBloc = Get.find<MovieBloc>();
+  final tvBloc = Get.find<SerialTvBloc>();
+  final artistBloc = Get.find<ArtistBloc>();
+  final settingsBloc = Get.find<SettingsBloc>();
 
   @override
   void onReady() {
@@ -25,8 +39,23 @@ class DashboardBloc extends GetxController {
 
   void changeSelectedBar(int index) {
     selectedNavBar.value = index;
-    changeAppBar(selectedNavBar);
+    changeAppBar(index);
+    openNavBar(index);
     update();
+  }
+
+  void openNavBar(int index) {
+    if (index == 1) {
+      movieBloc.openScreen();
+    } else if (index == 2) {
+      tvBloc.openScreen();
+    } else if (index == 3) {
+      artistBloc.openScreen();
+    } else if (index == 4) {
+      settingsBloc.openScreen();
+    } else {
+      homeBloc.openScreen();
+    }
   }
 
   changeAppBar(index) {

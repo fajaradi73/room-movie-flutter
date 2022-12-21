@@ -27,7 +27,7 @@ class MovieBloc extends GetxController {
     MovieType.SEDANG_TREN.label: []
   }.obs;
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var service = ApiService();
   var listPopular = StaticResults.load.obs;
   var listNowPlaying = StaticResults.load.obs;
@@ -35,8 +35,7 @@ class MovieBloc extends GetxController {
   var listTrending = StaticResults.load.obs;
   var listUpcoming = StaticResults.load.obs;
 
-  @override
-  void onReady() {
+  void openScreen() {
     (this).getMoviePopular();
     (this).getMovieTopRated();
     (this).getMovieNowPlaying();

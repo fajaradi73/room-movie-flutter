@@ -2,16 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/models/enum/tv_type.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
+import '../../../constant/app_route.dart';
 import '../../../models/movie/Results.dart';
+import '../../dashboard/dashboard_bloc.dart';
 import 'item/home_results_item.dart';
 
 class HomeTvWidget extends GetView<HomeBloc> {
   late List<Results> list;
 
   HomeTvWidget({Key? key}) : super(key: key);
+
+  final dashboardBloc = Get.find<DashboardBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,10 @@ class HomeTvWidget extends GetView<HomeBloc> {
           Card(
             margin: EdgeInsets.zero,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                dashboardBloc.tvType.value = TvType.POPULAR;
+                Get.toNamed(Pages.serialTvListScreen);
+              },
               child: Row(
                 children: [
                   Container(

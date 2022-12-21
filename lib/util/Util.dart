@@ -9,8 +9,10 @@
 
 // ignore_for_file: file_names
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:room_movie/util/logger.dart';
 
 import '../models/genre/Genre.dart';
 import '../models/movie/Results.dart';
@@ -76,4 +78,52 @@ Future<String> getKnowFor(List<Results>? list) async {
     }
   }
   return knowFor;
+}
+
+///Format file size
+renderSize(double value) {
+  List<String> unitArr = [' B', ' KB', ' MB', ' GB'];
+  int index = 0;
+  while (value > 1024) {
+    index++;
+    value = value / 1024;
+  }
+  String size = value.toStringAsFixed(2);
+  return size + unitArr[index];
+}
+
+/// Recursively calculate the size of the file
+Future<double> getTotalSizeOfFilesInDir(final FileSystemEntity file) async {
+  try {
+    if (file is File) {
+      int length = await file.length();
+      return double.parse(length.toString());
+    }
+    if (file is Directory) {
+      final List<FileSystemEntity> children = file.listSync();
+      double total = 0;
+      for (final FileSystemEntity child in children) {
+        total += await getTotalSizeOfFilesInDir(child);
+      }
+      return total;
+    }
+    return 0;
+  } catch (e) {
+    return 0;
+  }
+}
+
+///Recursively delete directories
+Future<void> delDir(FileSystemEntity file) async {
+  try {
+    if (file is Directory) {
+      final List<FileSystemEntity> children = file.listSync();
+      for (final FileSystemEntity child in children) {
+        await delDir(child);
+      }
+    }
+    await file.delete();
+  } catch (e) {
+    Logger.e(e.toString());
+  }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, must_be_immutable
 
 /*
  * room_movie
@@ -11,38 +11,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:get/get.dart';
+import 'package:room_movie/screen/settings/settings_bloc.dart';
 import 'package:room_movie/screen/web/WebViewScreen.dart';
+import 'package:room_movie/screen/widget/custom_alert_dialog.dart';
 import 'package:room_movie/util/ThemeCubit.dart';
 
-import '../../main.dart';
+class SettingsScreen extends GetView<SettingsBloc> {
+  SettingsScreen({super.key});
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
   var isNightMode = false;
-
-  var sizeCache = 0;
-  var version = "";
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // isSwitch = MyApp.of(context).isNightMode();
-    methodAsync();
-  }
-
-  methodAsync() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    version = packageInfo.version;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.all(10),
-              child: Text("Version $version"),
+              child: Text("Version ${controller.version}"),
             )
           ],
         ),
@@ -124,19 +102,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   cacheWidget() {
-    return Container(
-      height: 30,
-      margin: const EdgeInsets.all(10),
-      child: Row(
-        children: const [Text("Bersihkan cache"), Spacer(), Text("35 Mb")],
+    return InkWell(
+      onTap: () {
+        openDialog();
+      },
+      child: Container(
+        height: 30,
+        margin: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            const Text("Bersihkan cache"),
+            const Spacer(),
+            Obx(() {
+              return Text("${controller.sizeCache}");
+            })
+          ],
+        ),
       ),
     );
   }
 
+  openDialog() {
+    Get.dialog(CustomAlertDialog(
+      title: "Hapus cache",
+      description: "Apakah anda ingin menghapus cache?",
+      yesTitle: "Iya",
+      noTitle: "Tidak",
+      actionYes: () {
+        controller.clearCache();
+        Get.back();
+      },
+      actionNo: () {
+        Get.back();
+      },
+    ));
+  }
+
   moveToWeb(title) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => WebViewScreen(title, isNightMode)));
+    Get.to(WebViewScreen(title, isNightMode));
   }
 }

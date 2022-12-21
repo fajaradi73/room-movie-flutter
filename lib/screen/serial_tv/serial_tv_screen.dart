@@ -10,19 +10,25 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/serialTv/serial_tv_bloc.dart';
-import 'package:room_movie/screen/serialTv/serial_tv_widget_list.dart';
+import 'package:room_movie/models/enum/tv_type.dart';
 
+import '../../constant/app_route.dart';
+import '../dashboard/dashboard_bloc.dart';
 import '../widget/LoadingScreen.dart';
+import 'serial_tv_bloc.dart';
+import 'serial_tv_widget_list.dart';
 
 class SerialTvScreen extends GetView<SerialTvBloc> {
-  const SerialTvScreen({super.key});
+  SerialTvScreen({super.key});
+
+  final dashboardBloc = Get.find<DashboardBloc>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => (controller.isLoading.value == true)
         ? const LoadingScreen()
         : ListView.builder(
+            shrinkWrap: true,
             itemCount: controller.mapsTv.length,
             itemBuilder: (BuildContext context, int index) {
               var key = controller.mapsTv.keys.elementAt(index);
@@ -31,7 +37,10 @@ class SerialTvScreen extends GetView<SerialTvBloc> {
                   Card(
                     margin: EdgeInsets.zero,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        dashboardBloc.tvType.value = key.getType();
+                        Get.toNamed(Pages.serialTvListScreen);
+                      },
                       child: Row(
                         children: [
                           Container(
