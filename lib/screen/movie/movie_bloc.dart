@@ -37,10 +37,6 @@ class MovieBloc extends GetxController {
 
   void openScreen() {
     (this).getMoviePopular();
-    (this).getMovieTopRated();
-    (this).getMovieNowPlaying();
-    (this).getMovieTrending();
-    (this).getMovieUpcoming();
   }
 
   Future<void> getMoviePopular() async {
@@ -50,6 +46,7 @@ class MovieBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listPopular.rxNew(res.results);
         mapsMovie["Popular"] = listPopular;
+        (this).getMovieNowPlaying();
       }
     } catch (e) {
       if (e is APIException) {
@@ -57,44 +54,8 @@ class MovieBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
-  }
-
-  Future<void> getMovieTopRated() async {
-    isLoading(true);
-    try {
-      var res = await service.getMovieTopRated(1);
-      if (res != null && res.results.isNotEmpty) {
-        listTopRated.rxNew(res.results);
-        mapsMovie["Rating Teratas"] = listTopRated;
-      }
-    } catch (e) {
-      if (e is APIException) {
-        Get.error(e.message);
-      } else {
-        Get.error(e.toString());
-      }
-    }
-    isLoading(false);
-  }
-
-  Future<void> getMovieTrending() async {
-    isLoading(true);
-    try {
-      var res = await service.getMovieTrending(1);
-      if (res != null && res.results.isNotEmpty) {
-        listTrending.rxNew(res.results);
-        mapsMovie["Sedang Tren"] = listTrending;
-      }
-    } catch (e) {
-      if (e is APIException) {
-        Get.error(e.message);
-      } else {
-        Get.error(e.toString());
-      }
-    }
-    isLoading(false);
   }
 
   Future<void> getMovieNowPlaying() async {
@@ -104,6 +65,7 @@ class MovieBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listNowPlaying.rxNew(res.results);
         mapsMovie["Sedang Tayang"] = listNowPlaying;
+        (this).getMovieTopRated();
       }
     } catch (e) {
       if (e is APIException) {
@@ -111,8 +73,27 @@ class MovieBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
+  }
+
+  Future<void> getMovieTopRated() async {
+    isLoading(true);
+    try {
+      var res = await service.getMovieTopRated(1);
+      if (res != null && res.results.isNotEmpty) {
+        listTopRated.rxNew(res.results);
+        mapsMovie["Rating Teratas"] = listTopRated;
+        (this).getMovieUpcoming();
+      }
+    } catch (e) {
+      if (e is APIException) {
+        Get.error(e.message);
+      } else {
+        Get.error(e.toString());
+      }
+      isLoading(false);
+    }
   }
 
   Future<void> getMovieUpcoming() async {
@@ -122,6 +103,25 @@ class MovieBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listUpcoming.rxNew(res.results);
         mapsMovie["Mendatang"] = listUpcoming;
+        (this).getMovieTrending();
+      }
+    } catch (e) {
+      if (e is APIException) {
+        Get.error(e.message);
+      } else {
+        Get.error(e.toString());
+      }
+      isLoading(false);
+    }
+  }
+
+  Future<void> getMovieTrending() async {
+    isLoading(true);
+    try {
+      var res = await service.getMovieTrending(1);
+      if (res != null && res.results.isNotEmpty) {
+        listTrending.rxNew(res.results);
+        mapsMovie["Sedang Tren"] = listTrending;
       }
     } catch (e) {
       if (e is APIException) {

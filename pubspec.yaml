@@ -41,6 +41,7 @@ dependencies:
   fimber: ^0.6.6
   sizer: ^2.0.15
   dio: ^4.0.6
+  chips_choice: ^3.0.0
 
   flutter_staggered_animations: ^1.1.1
   animated_splash_screen: ^1.3.0
@@ -73,6 +74,7 @@ flutter_gen:
   colors:
     inputs:
       - assets/color/colors.xml
+      - assets/color/material_design_color.xml
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -84,3 +86,4 @@ flutter:
     - assets/html/dark/
     - assets/html/light/
     - assets/json/
+    - assets/svg/

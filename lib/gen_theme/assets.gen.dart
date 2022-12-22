@@ -2,7 +2,9 @@
 /// *****************************************************
 ///  FlutterGen
 /// *****************************************************
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class $AssetsHtmlGen {
   const $AssetsHtmlGen();
@@ -34,6 +36,22 @@ class $AssetsJsonGen {
 
   /// File path: assets/json/genre_tv.json
   String get genreTv => 'assets/json/genre_tv.json';
+}
+
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/facebook.svg
+  SvgGenImage get facebook => const SvgGenImage('assets/svg/facebook.svg');
+
+  /// File path: assets/svg/instagram.svg
+  SvgGenImage get instagram => const SvgGenImage('assets/svg/instagram.svg');
+
+  /// File path: assets/svg/link.svg
+  SvgGenImage get link => const SvgGenImage('assets/svg/link.svg');
+
+  /// File path: assets/svg/twitter.svg
+  SvgGenImage get twitter => const SvgGenImage('assets/svg/twitter.svg');
 }
 
 class $AssetsHtmlDarkGen {
@@ -69,6 +87,7 @@ class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsJsonGen json = $AssetsJsonGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {
@@ -131,4 +150,52 @@ class AssetGenImage {
   String get path => _assetName;
 
   String get keyName => 'packages/room_movie/$_assetName';
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package = 'room_movie',
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    Color? color,
+    BlendMode colorBlendMode = BlendMode.srcIn,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    Clip clipBehavior = Clip.hardEdge,
+    bool cacheColorFilter = false,
+    SvgTheme? theme,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+      theme: theme,
+    );
+  }
+
+  String get path => _assetName;
 }

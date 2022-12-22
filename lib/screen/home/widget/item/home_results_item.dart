@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
 
+import '../../../../router/app_route.dart';
 import '../../../../util/Constant.dart';
 import '../../../../util/Util.dart';
 
@@ -15,15 +17,17 @@ class HomeResultsItem extends GetView<HomeBloc> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Pages.movieDetailScreen, arguments: {"idMovie": data.id});
+      },
       child: Container(
         margin: const EdgeInsets.all(5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 160,
-              width: 275,
+              height: 18.5.height(),
+              width: 75.0.width(),
               child: Card(
                 semanticContainer: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -45,8 +49,8 @@ class HomeResultsItem extends GetView<HomeBloc> {
                 child: Row(
                   children: [
                     SizedBox(
-                      height: 70,
-                      width: 70,
+                      height: 10.0.height(),
+                      width: 22.0.width(),
                       child: Card(
                         semanticContainer: true,
                         clipBehavior: Clip.antiAliasWithSaveLayer,

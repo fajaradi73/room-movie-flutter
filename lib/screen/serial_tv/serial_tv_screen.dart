@@ -8,13 +8,16 @@
  */
 
 // ignore_for_file: file_names
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/tv_type.dart';
+import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../constant/app_route.dart';
+import '../../router/app_route.dart';
 import '../dashboard/dashboard_bloc.dart';
-import '../widget/LoadingScreen.dart';
+import '../widget/animated_list_builder.dart';
 import 'serial_tv_bloc.dart';
 import 'serial_tv_widget_list.dart';
 
@@ -25,48 +28,53 @@ class SerialTvScreen extends GetView<SerialTvBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => (controller.isLoading.value == true)
-        ? const LoadingScreen()
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.mapsTv.length,
-            itemBuilder: (BuildContext context, int index) {
-              var key = controller.mapsTv.keys.elementAt(index);
-              return Column(
-                children: [
-                  Card(
-                    margin: EdgeInsets.zero,
-                    child: InkWell(
-                      onTap: () {
-                        dashboardBloc.tvType.value = key.getType();
-                        Get.toNamed(Pages.serialTvListScreen);
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(
-                              key,
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
+    return EasyRefresh(
+      onRefresh: () async {
+        controller.openScreen();
+      },
+      child: Obx(() => AnimatedListBuilder(
+          shrinkWrap: true,
+          itemCount: controller.mapsTv.length,
+          itemBuilder: (BuildContext context, int index) {
+            var key = controller.mapsTv.keys.elementAt(index);
+            return Column(
+              children: [
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: InkWell(
+                    onTap: () {
+                      dashboardBloc.tvType.value = key.getType();
+                      Get.toNamed(Pages.serialTvListScreen);
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            key,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
-                          const Spacer(),
-                          Container(
-                              margin: const EdgeInsets.all(10),
-                              child: const Icon(Icons.keyboard_arrow_right))
-                        ],
-                      ),
+                        ),
+                        const Spacer(),
+                        Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Icon(Icons.keyboard_arrow_right))
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 270,
-                    child: SerialTvWidgetList(controller.mapsTv[key]!),
-                  )
-                ],
-              );
-            }));
+                ),
+                SizedBox(
+                  height: 33.0.height(),
+                  child: ShimmerSwitch(
+                      stream: controller.isLoading.stream,
+                      child: SerialTvWidgetList(controller.mapsTv[key]!)),
+                )
+              ],
+            );
+          })),
+    );
   }
 }

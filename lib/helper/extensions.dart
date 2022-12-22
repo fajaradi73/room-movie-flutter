@@ -292,3 +292,7 @@ extension TopBar on BuildContext {
     }
   }
 }
+
+extension Maps on Map<String, dynamic> {
+  int get idMovie => (this)['idMovie'];
+}

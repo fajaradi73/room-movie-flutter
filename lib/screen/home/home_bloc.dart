@@ -43,8 +43,8 @@ class HomeBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   Future<void> getSerialTv() async {
@@ -61,8 +61,8 @@ class HomeBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   Future<void> getArtist() async {

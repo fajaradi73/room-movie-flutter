@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/screen/dashboard/dashboard_bloc.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../../constant/app_route.dart';
 import '../../../models/movie/Results.dart';
+import '../../../router/app_route.dart';
 import 'item/home_results_item.dart';
 
 class HomeMovieWidget extends GetView<HomeBloc> {
@@ -51,7 +52,8 @@ class HomeMovieWidget extends GetView<HomeBloc> {
             ),
           ),
           Container(
-            constraints: const BoxConstraints(minHeight: 250, maxHeight: 270),
+            constraints:
+                BoxConstraints(minHeight: 250, maxHeight: 33.0.height()),
             child: AnimatedListBuilder(
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),

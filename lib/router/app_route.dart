@@ -11,6 +11,8 @@
 import 'package:get/get.dart';
 import 'package:room_movie/screen/dashboard/dashboard_binding.dart';
 import 'package:room_movie/screen/dashboard/dashboard_screen.dart';
+import 'package:room_movie/screen/movie_detail/bloc.dart';
+import 'package:room_movie/screen/movie_detail/screen.dart';
 import 'package:room_movie/screen/movie_list/movie_list_bloc.dart';
 import 'package:room_movie/screen/movie_list/movie_list_screen.dart';
 import 'package:room_movie/screen/serial_tv_list/serial_tv_list_screen.dart';
@@ -35,6 +37,12 @@ class AppRoute {
           Get.put(MovieListBloc());
         })),
     GetPage(
+        name: Pages.movieDetailScreen,
+        page: () => const MovieDetailScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(MovieDetailBloc());
+        })),
+    GetPage(
         name: Pages.serialTvListScreen,
         page: () => SerialTvListScreen(),
         binding: BindingsBuilder(() {
@@ -47,5 +55,6 @@ class Pages {
   static const splashScreen = "/splash_screen";
   static const dashboardScreen = "/dashboard_screen";
   static const movieListScreen = "/movie_list_screen";
+  static const movieDetailScreen = "/movie_detail_Screen";
   static const serialTvListScreen = "/serial_tv_list_screen";
 }

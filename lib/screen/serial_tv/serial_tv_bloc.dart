@@ -24,9 +24,6 @@ class SerialTvBloc extends GetxController {
 
   void openScreen() {
     (this).getToday();
-    (this).getOnTheAir();
-    (this).getPopular();
-    (this).getTopRate();
   }
 
   Future<void> getToday() async {
@@ -36,6 +33,7 @@ class SerialTvBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listToday.rxNew(res.results);
         mapsTv['Sedang Tayang'] = listToday;
+        (this).getOnTheAir();
       }
     } catch (e) {
       if (e is APIException) {
@@ -43,8 +41,8 @@ class SerialTvBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   Future<void> getOnTheAir() async {
@@ -54,6 +52,7 @@ class SerialTvBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listOnTheAir.rxNew(res.results);
         mapsTv['Tayang di Tv'] = listOnTheAir;
+        (this).getPopular();
       }
     } catch (e) {
       if (e is APIException) {
@@ -61,8 +60,8 @@ class SerialTvBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   Future<void> getPopular() async {
@@ -72,6 +71,7 @@ class SerialTvBloc extends GetxController {
       if (res != null && res.results.isNotEmpty) {
         listPopular.rxNew(res.results);
         mapsTv['Popular'] = listPopular;
+        (this).getTopRate();
       }
     } catch (e) {
       if (e is APIException) {
@@ -79,8 +79,8 @@ class SerialTvBloc extends GetxController {
       } else {
         Get.error(e.toString());
       }
+      isLoading(false);
     }
-    isLoading(false);
   }
 
   Future<void> getTopRate() async {

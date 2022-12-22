@@ -6,9 +6,10 @@ import 'package:room_movie/models/enum/tv_type.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../../constant/app_route.dart';
 import '../../../models/movie/Results.dart';
+import '../../../router/app_route.dart';
 import '../../dashboard/dashboard_bloc.dart';
+import '../../widget/animated_list_builder.dart';
 import 'item/home_results_item.dart';
 
 class HomeTvWidget extends GetView<HomeBloc> {
@@ -53,7 +54,7 @@ class HomeTvWidget extends GetView<HomeBloc> {
           ),
           Container(
               constraints: const BoxConstraints(minHeight: 250, maxHeight: 270),
-              child: ListView.builder(
+              child: AnimatedListBuilder(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:room_movie/screen/widget/custom_alert_dialog.dart';
 
-import '../../constant/app_route.dart';
+import '../../router/app_route.dart';
 
 class SplashBloc extends FullLifeCycleController with FullLifeCycleMixin {
   var screenLoad = false.obs;

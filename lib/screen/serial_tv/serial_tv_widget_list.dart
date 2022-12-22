@@ -10,10 +10,12 @@
 // ignore_for_file: file_names
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/util/Util.dart';
 
 import '../../util/Constant.dart';
+import '../widget/animated_list_builder.dart';
 
 // ignore: must_be_immutable
 class SerialTvWidgetList extends StatelessWidget {
@@ -23,7 +25,7 @@ class SerialTvWidgetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return AnimatedListBuilder(
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,
@@ -33,13 +35,12 @@ class SerialTvWidgetList extends StatelessWidget {
         return InkWell(
           onTap: () {},
           child: Container(
-            width: 275,
             margin: const EdgeInsets.all(5),
             child: Column(
               children: [
                 SizedBox(
-                  height: 160,
-                  width: 275,
+                  height: 18.5.height(),
+                  width: 75.0.width(),
                   child: Card(
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -62,8 +63,8 @@ class SerialTvWidgetList extends StatelessWidget {
                     child: Row(
                       children: [
                         SizedBox(
-                          height: 70,
-                          width: 70,
+                          height: 10.0.height(),
+                          width: 20.0.width(),
                           child: Card(
                             semanticContainer: true,
                             clipBehavior: Clip.antiAliasWithSaveLayer,

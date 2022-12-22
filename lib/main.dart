@@ -19,8 +19,8 @@ import 'package:room_movie/util/dev_tree.dart';
 import 'package:sizer/sizer.dart';
 
 import '../util/ThemeCubit.dart';
-import 'constant/app_route.dart';
 import 'helper/binding.dart';
+import 'router/app_route.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

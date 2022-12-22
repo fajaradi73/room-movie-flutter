@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/screen/home/home_bloc.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../util/Constant.dart';
 import '../../../../util/Util.dart';
@@ -18,13 +18,13 @@ class HomeArtistItem extends GetView<HomeBloc> {
     return InkWell(
       onTap: () {},
       child: Container(
-        width: 175,
+        width: 45.0.width(),
         margin: const EdgeInsets.all(5),
         child: Column(
           children: [
             SizedBox(
-              height: 180,
-              width: 275,
+              height: 21.0.height(),
+              width: 75.0.width(),
               child: Card(
                 semanticContainer: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -41,7 +41,7 @@ class HomeArtistItem extends GetView<HomeBloc> {
               ),
             ),
             Container(
-              width: SizerUtil.width,
+              width: Get.width,
               margin: const EdgeInsets.all(2),
               padding: const EdgeInsets.all(2),
               child: Center(
@@ -53,7 +53,7 @@ class HomeArtistItem extends GetView<HomeBloc> {
               ),
             ),
             Container(
-              width: SizerUtil.width,
+              width: Get.width,
               margin: const EdgeInsets.all(2),
               padding: const EdgeInsets.all(2),
               child: FutureBuilder(

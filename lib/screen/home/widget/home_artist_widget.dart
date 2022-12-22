@@ -4,6 +4,7 @@ import 'package:room_movie/screen/home/widget/item/home_artist_item.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
 import '../../../models/artist/artist_results.dart';
+import '../../widget/animated_list_builder.dart';
 import '../home_bloc.dart';
 
 // ignore: must_be_immutable
@@ -42,7 +43,7 @@ class HomeArtistWidget extends GetView<HomeBloc> {
           ),
           Container(
             constraints: const BoxConstraints(minHeight: 200, maxHeight: 250),
-            child: ListView.builder(
+            child: AnimatedListBuilder(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
