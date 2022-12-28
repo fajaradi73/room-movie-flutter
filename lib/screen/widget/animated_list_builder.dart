@@ -5,7 +5,7 @@ class AnimatedListBuilder extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool shrinkWrap;
   final ScrollPhysics? physics;
-  final int itemCount;
+  final int? itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
   final Axis? scrollDirection;
 

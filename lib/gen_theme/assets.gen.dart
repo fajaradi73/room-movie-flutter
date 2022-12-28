@@ -44,6 +44,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/facebook.svg
   SvgGenImage get facebook => const SvgGenImage('assets/svg/facebook.svg');
 
+  /// File path: assets/svg/imdb.svg
+  SvgGenImage get imdb => const SvgGenImage('assets/svg/imdb.svg');
+
   /// File path: assets/svg/instagram.svg
   SvgGenImage get instagram => const SvgGenImage('assets/svg/instagram.svg');
 
@@ -52,6 +55,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/twitter.svg
   SvgGenImage get twitter => const SvgGenImage('assets/svg/twitter.svg');
+
+  /// File path: assets/svg/wikipedia.svg
+  SvgGenImage get wikipedia => const SvgGenImage('assets/svg/wikipedia.svg');
 }
 
 class $AssetsHtmlDarkGen {

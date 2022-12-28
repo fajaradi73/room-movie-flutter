@@ -9,62 +9,66 @@
  */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/models/artist/artist_results.dart';
-import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
-import 'package:room_movie/screen/movie_detail/widget_actor.dart';
-import 'package:room_movie/screen/movie_detail/widget_appbar.dart';
-import 'package:room_movie/screen/movie_detail/widget_info.dart';
-import 'package:room_movie/screen/movie_detail/widget_media.dart';
-import 'package:room_movie/screen/movie_detail/widget_overview.dart';
-import 'package:room_movie/screen/movie_detail/widget_recommendation.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_actor.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_appbar.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_info.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_media.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_overview.dart';
+import 'package:room_movie/screen/movie_detail/widget/widget_recommendation.dart';
+import 'package:room_movie/screen/widget/LoadingScreen.dart';
 
 class MovieDetailScreen extends GetView<MovieDetailBloc> {
   const MovieDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MovieDetailBloc>(
-      assignId: true,
-      builder: (logic) {
-        return Scaffold(
-          body: NestedScrollView(
-            controller: controller.scrollController,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                MovieDetailWidgetAppbar(
-                  data: Results(),
-                ),
-              ];
-            },
-            body: Container(
-              color: Theme.of(context).primaryColor,
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView(
-                  children: [
-                    MovieDetailWidgetOverview(
-                      data: Results(),
-                    ),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    MovieDetailWidgetInfo(
-                      data: Results(),
-                    ),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    MovieDetailWidgetActor(data: ArtistResults()),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    MovieDetailWidgetMedia(),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    MovieDetailWidgetRecommendation()
-                  ],
+    return Scaffold(body: Obx(() {
+      var data = controller.data.value;
+      return (controller.isLoading.value == true)
+          ? const Center(
+              child: LoadingScreen(),
+            )
+          : NestedScrollView(
+              controller: controller.scrollController,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  MovieDetailWidgetAppbar(
+                    data: data,
+                  ),
+                ];
+              },
+              body: Container(
+                color: Theme.of(context).primaryColor,
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView(
+                    children: [
+                      MovieDetailWidgetOverview(
+                        data: data,
+                      ),
+                      const Padding(padding: EdgeInsets.all(2)),
+                      MovieDetailWidgetInfo(
+                        data: data,
+                      ),
+                      const Padding(padding: EdgeInsets.all(2)),
+                      MovieDetailWidgetActor(data: data.credits),
+                      const Padding(padding: EdgeInsets.all(2)),
+                      MovieDetailWidgetMedia(
+                        videos: data.videos!,
+                        images: data.images!,
+                      ),
+                      const Padding(padding: EdgeInsets.all(2)),
+                      MovieDetailWidgetRecommendation(
+                        list: data.recommendations!.results!,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        );
-      },
-    );
+            );
+    }));
   }
 }

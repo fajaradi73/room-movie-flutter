@@ -12,4 +12,7 @@ class Constant {
   static var apiKey = "84f84d665c4e67dbd2a7ca5693f9ca51";
   static var baseUrl = 'https://api.themoviedb.org/3/';
   static var baseImage = 'https://image.tmdb.org/t/p/w500';
+  static var baseThumbnail = 'https://img.youtube.com/vi/';
+  static var defaultQuality = '/default.jpg';
+  static var sdQuality = '/sddefault.jpg';
 }

@@ -293,6 +293,46 @@ extension TopBar on BuildContext {
   }
 }
 
+extension DoubleExt on double {
+  String toEuro() {
+    return NumberFormat.simpleCurrency(
+      name: 'EUR',
+    ).format(this / 100);
+  }
+
+  String toPln() {
+    return NumberFormat.simpleCurrency(
+      name: 'PLN',
+    ).format(this / 100);
+  }
+
+  String toDollar() {
+    return NumberFormat.simpleCurrency(
+      name: "US",
+    ).format(this / 100);
+  }
+}
+
+extension IntegerExt on int {
+  String toIntEuro() {
+    return NumberFormat.simpleCurrency(
+      name: 'EUR',
+    ).format(this / 100);
+  }
+
+  String toIntPln() {
+    return NumberFormat.simpleCurrency(
+      name: 'PLN',
+    ).format(this / 100);
+  }
+
+  String toIntDollar() {
+    return NumberFormat.simpleCurrency(
+      name: "US",
+    ).format(this / 100);
+  }
+}
+
 extension Maps on Map<String, dynamic> {
   int get idMovie => (this)['idMovie'];
 }

@@ -11,8 +11,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:room_movie/util/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/genre/Genre.dart';
 import '../models/movie/Results.dart';
@@ -125,5 +128,83 @@ Future<void> delDir(FileSystemEntity file) async {
     await file.delete();
   } catch (e) {
     Logger.e(e.toString());
+  }
+}
+
+String prettify(double d) {
+  return d.toStringAsFixed(1).replaceFirst(RegExp(r'\.?0*$'), '');
+}
+
+String durationToString(int minutes) {
+  var d = Duration(minutes: minutes);
+  List<String> parts = d.toString().split(':');
+  return '${parts[0].padLeft(1, '')}h ${parts[1].padLeft(1, '')}m';
+}
+
+Future<void> openFacebook(String url) async {
+  String fbProtocolUrl;
+  if (Platform.isIOS) {
+    fbProtocolUrl = 'fb://profile/$url';
+  } else {
+    // fbProtocolUrl = 'fb://facewebmodal/f?href=$url';
+
+    fbProtocolUrl = 'fb://page/$url';
+  }
+
+  var fallbackUrl = Uri.parse('https://www.facebook.com/$url');
+
+  try {
+    Uri fbBundleUri = Uri.parse(fbProtocolUrl);
+    if (await canLaunchUrl(fbBundleUri)) {
+      print("launch Apps");
+      launchUrl(fbBundleUri, mode: LaunchMode.externalApplication);
+    } else if (await canLaunchUrl(fallbackUrl)) {
+      print("launch Web");
+      await launchUrl(fallbackUrl, mode: LaunchMode.platformDefault);
+    }
+  } catch (e) {
+    Logger.e("error lauch", ex: e);
+  }
+}
+
+launchURL(String url) async {
+  final canLaunch = await canLaunchUrl(Uri.parse(url));
+  if (kIsWeb) {
+    if (canLaunch) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw "Could not launch $url";
+    }
+    return;
+  }
+  if (Platform.isAndroid) {
+    if (url.startsWith("https://www.facebook.com/")) {
+      final url2 = "fb://facewebmodal/f?href=$url";
+      final intent2 = AndroidIntent(action: "action_view", data: url2);
+      var canWork = await intent2.canResolveActivity() ?? false;
+      if (canWork) return intent2.launch();
+    }
+    final intent = AndroidIntent(action: "action_view", data: url);
+    return intent.launch();
+  } else {
+    if (canLaunch) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw "Could not launch $url";
+    }
+  }
+}
+
+launchInstagram(String id) async {
+  var nativeUrl = Uri.parse("http://instagram.com/_u/$id");
+  var webUrl = Uri.parse("https://www.instagram.com/$id/");
+  try {
+    if (await canLaunchUrl(nativeUrl)) {
+      await launchUrl(nativeUrl, mode: LaunchMode.externalApplication);
+    } else if (await canLaunchUrl(webUrl)) {
+      await launchUrl(webUrl, mode: LaunchMode.platformDefault);
+    }
+  } catch (e) {
+    print("can't open Instagram : $e");
   }
 }

@@ -9,9 +9,13 @@
  */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
+import 'package:room_movie/util/Util.dart';
 
-class MovieDetailWidgetOverview extends StatelessWidget {
+import '../bloc.dart';
+
+class MovieDetailWidgetOverview extends GetView<MovieDetailBloc> {
   const MovieDetailWidgetOverview({Key? key, required this.data})
       : super(key: key);
   final Results data;
@@ -27,14 +31,14 @@ class MovieDetailWidgetOverview extends StatelessWidget {
             width: Get.width,
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
-            child: const Text(
-              "Action, Fantasy, Horror",
-              style: TextStyle(fontSize: 18),
-            ),
+            child: Text(controller.getGenre(data.genres),
+                style: const TextStyle(
+                    fontSize: 18, overflow: TextOverflow.ellipsis),
+                maxLines: 1),
           ),
           Row(
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.all(3),
                 child: Icon(
                   Icons.star,
@@ -43,8 +47,11 @@ class MovieDetailWidgetOverview extends StatelessWidget {
                 ),
               ),
               Text(
-                "10 \u2022 20/08/2020 \u2022 1h 32m",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                "${prettify(double.parse("${data.voteAverage}"))} \u2022 "
+                "${data.releaseDate?.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}"
+                " \u2022 ${durationToString(data.runtime!)}",
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -52,9 +59,9 @@ class MovieDetailWidgetOverview extends StatelessWidget {
             width: Get.width,
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
-            child: const Text(
-              "Tagline",
-              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+            child: Text(
+              "${data.tagline}",
+              style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             ),
           ),
           Container(
@@ -70,9 +77,9 @@ class MovieDetailWidgetOverview extends StatelessWidget {
             width: Get.width,
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
-            child: const Text(
-              "Lorem Ipsum adalah contoh teks atau dummy dalam industri percetakan dan penataan huruf atau typesetting. Lorem Ipsum telah menjadi standar contoh teks sejak tahun 1500an, saat seorang tukang cetak yang tidak dikenal mengambil sebuah kumpulan teks dan mengacaknya untuk menjadi sebuah buku contoh huruf. Ia tidak hanya bertahan selama 5 abad, tapi juga telah beralih ke penataan huruf elektronik, tanpa ada perubahan apapun. Ia mulai dipopulerkan pada tahun 1960 dengan diluncurkannya lembaran-lembaran Letraset yang menggunakan kalimat-kalimat dari Lorem Ipsum, dan seiring munculnya perangkat lunak Desktop Publishing seperti Aldus PageMaker juga memiliki versi Lorem Ipsum.",
-              style: TextStyle(fontSize: 14),
+            child: Text(
+              "${data.overview}",
+              style: const TextStyle(fontSize: 14),
             ),
           ),
         ],
