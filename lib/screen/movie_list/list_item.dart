@@ -27,7 +27,6 @@ class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.posterPath);
     return InkWell(
       onTap: () {
         Get.toNamed(Pages.movieDetailScreen, arguments: {"idMovie": data.id});

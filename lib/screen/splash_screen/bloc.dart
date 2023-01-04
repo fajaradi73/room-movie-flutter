@@ -7,6 +7,7 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -113,6 +114,9 @@ class SplashBloc extends FullLifeCycleController with FullLifeCycleMixin {
           granted = false;
         }
       }
+    }
+    if (kDebugMode) {
+      print(granted);
     }
     /*{Permission.camera: PermissionStatus.granted, Permission.storage: PermissionStatus.granted}*/
     return statuses;

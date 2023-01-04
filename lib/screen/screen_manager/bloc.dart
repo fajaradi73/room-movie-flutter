@@ -7,9 +7,6 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
-// ignore_for_file: file_names
-
-import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../helper/restartable_timer.dart';
@@ -32,6 +29,5 @@ class AppManager extends GetxController {
     //   ),
     // );
     //CANCEL AFTER INIT
-    super.onReady();
   }
 }

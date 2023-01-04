@@ -36,10 +36,10 @@ class DashboardScreen extends StatelessWidget {
           body: IndexedStack(
             index: logic.selectedNavBar.value,
             children: [
-              HomeScreen(),
+              const HomeScreen(),
               MovieScreen(),
               SerialTvScreen(),
-              ArtistScreen(),
+              const ArtistScreen(),
               SettingsScreen()
             ],
           ),

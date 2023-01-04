@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 /*
  * room_movie
  *     Genre.dart
@@ -9,13 +11,15 @@
 
 class Genre {
   Genre({
-      this.id, 
-      this.name,});
+    this.id,
+    this.name,
+  });
 
   Genre.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
   }
+
   int? id;
   String? name;
 
@@ -25,5 +29,4 @@ class Genre {
     map['name'] = name;
     return map;
   }
-
 }

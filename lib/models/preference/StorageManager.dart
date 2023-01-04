@@ -1,5 +1,6 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageManager {
@@ -29,7 +30,6 @@ class StorageManager {
     return prefs.remove(key);
   }
 
-
   static Brightness getTheme() {
     Brightness brightness = Brightness.light;
     StorageManager.readData('themeMode').then((value) {
@@ -39,10 +39,8 @@ class StorageManager {
       } else {
         brightness = Brightness.dark;
       }
-      print(brightness);
       return brightness;
     });
     return brightness;
   }
-
 }

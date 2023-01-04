@@ -156,10 +156,8 @@ Future<void> openFacebook(String url) async {
   try {
     Uri fbBundleUri = Uri.parse(fbProtocolUrl);
     if (await canLaunchUrl(fbBundleUri)) {
-      print("launch Apps");
       launchUrl(fbBundleUri, mode: LaunchMode.externalApplication);
     } else if (await canLaunchUrl(fallbackUrl)) {
-      print("launch Web");
       await launchUrl(fallbackUrl, mode: LaunchMode.platformDefault);
     }
   } catch (e) {
@@ -192,19 +190,5 @@ launchURL(String url) async {
     } else {
       throw "Could not launch $url";
     }
-  }
-}
-
-launchInstagram(String id) async {
-  var nativeUrl = Uri.parse("http://instagram.com/_u/$id");
-  var webUrl = Uri.parse("https://www.instagram.com/$id/");
-  try {
-    if (await canLaunchUrl(nativeUrl)) {
-      await launchUrl(nativeUrl, mode: LaunchMode.externalApplication);
-    } else if (await canLaunchUrl(webUrl)) {
-      await launchUrl(webUrl, mode: LaunchMode.platformDefault);
-    }
-  } catch (e) {
-    print("can't open Instagram : $e");
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 /// Created by Fajar Adi Prasetyo on 20/12/2022.
 import 'package:enum_to_string/enum_to_string.dart';
 
