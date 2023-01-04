@@ -10,12 +10,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_actor.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_appbar.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_info.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_media.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_overview.dart';
-import 'package:room_movie/screen/movie_detail/widget/widget_recommendation.dart';
+import 'package:room_movie/screen/movie_detail/widget/actor.dart';
+import 'package:room_movie/screen/movie_detail/widget/appbar.dart';
+import 'package:room_movie/screen/movie_detail/widget/info.dart';
+import 'package:room_movie/screen/movie_detail/widget/media.dart';
+import 'package:room_movie/screen/movie_detail/widget/overview.dart';
+import 'package:room_movie/screen/movie_detail/widget/recommendation.dart';
 import 'package:room_movie/screen/widget/LoadingScreen.dart';
 
 class MovieDetailScreen extends GetView<MovieDetailBloc> {

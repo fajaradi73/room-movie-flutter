@@ -17,7 +17,7 @@ import 'package:room_movie/util/logger.dart';
 
 import '../../gen_theme/assets.gen.dart';
 import '../../models/movie/detail/genres.dart';
-import '../../service/ApiService.dart';
+import '../../service/api_service.dart';
 import '../../util/exception.dart';
 
 class MovieDetailBloc extends GetxController {

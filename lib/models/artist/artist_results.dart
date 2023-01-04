@@ -36,6 +36,7 @@ class ArtistResults {
     _popularity = json['popularity'];
     _profilePath = json['profile_path'];
   }
+
   bool? _adult;
   num? _gender;
   num? _id;
@@ -44,6 +45,7 @@ class ArtistResults {
   String? _name;
   num? _popularity;
   String? _profilePath;
+
   ArtistResults copyWith({
     bool? adult,
     num? gender,
@@ -64,13 +66,21 @@ class ArtistResults {
         popularity: popularity ?? _popularity,
         profilePath: profilePath ?? _profilePath,
       );
+
   bool? get adult => _adult;
+
   num? get gender => _gender;
+
   num? get id => _id;
+
   List<Results>? get knownFor => _knownFor;
+
   String? get knownForDepartment => _knownForDepartment;
+
   String? get name => _name;
+
   num? get popularity => _popularity;
+
   String? get profilePath => _profilePath;
 
   Map<String, dynamic> toJson() {
@@ -99,6 +109,13 @@ class StaticArtistResults {
   }
 
   static List<ArtistResults> get load {
-    return [ArtistResults()];
+    return [
+      ArtistResults(),
+      ArtistResults(),
+      ArtistResults(),
+      ArtistResults(),
+      ArtistResults(),
+      ArtistResults()
+    ];
   }
 }

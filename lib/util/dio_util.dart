@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:room_movie/util/Constant.dart';
+import 'package:room_movie/util/constant.dart';
 import 'package:room_movie/util/exception.dart';
 
 class DioUtil {

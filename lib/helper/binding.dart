@@ -9,9 +9,9 @@
 
 // ignore_for_file: file_names
 import 'package:get/get.dart';
-import 'package:room_movie/bloc/app_manager.dart';
 
-import '../screen/splash_screen/splash_bloc.dart';
+import '../screen/screen_manager/bloc.dart';
+import '../screen/splash_screen/bloc.dart';
 
 class InitialBinding extends Bindings {
   @override

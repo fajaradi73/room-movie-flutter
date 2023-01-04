@@ -142,10 +142,10 @@ extension ExString on String? {
         formattedDate = DateFormat(desiredFormat).format(dateTime);
         return formattedDate.toString();
       } catch (e) {
-        return '';
+        return null;
       }
     } else {
-      return '';
+      return null;
     }
   }
 

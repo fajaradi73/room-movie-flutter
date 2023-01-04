@@ -14,11 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/screen_manager/screen_manager.dart';
+import 'package:room_movie/screen/screen_manager/screen.dart';
+import 'package:room_movie/theme/theme_cubit.dart';
 import 'package:room_movie/util/dev_tree.dart';
 import 'package:sizer/sizer.dart';
 
-import '../util/ThemeCubit.dart';
 import 'helper/binding.dart';
 import 'router/app_route.dart';
 

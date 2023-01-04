@@ -26,6 +26,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/background.jpg
   AssetGenImage get background =>
       const AssetGenImage('assets/images/background.jpg');
+
+  /// File path: assets/images/no-image.png
+  AssetGenImage get noImage =>
+      const AssetGenImage('assets/images/no-image.png');
 }
 
 class $AssetsJsonGen {

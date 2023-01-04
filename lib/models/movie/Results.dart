@@ -213,6 +213,10 @@ class StaticResults {
   }
 
   static List<Results> get load {
-    return [Results()];
+    return [Results(), Results(), Results(), Results(), Results()];
+  }
+
+  static List<Results> get newData {
+    return [];
   }
 }

@@ -9,16 +9,16 @@
 
 // ignore_for_file: file_names
 import 'package:get/get.dart';
-import 'package:room_movie/screen/dashboard/dashboard_binding.dart';
-import 'package:room_movie/screen/dashboard/dashboard_screen.dart';
+import 'package:room_movie/screen/dashboard/binding.dart';
+import 'package:room_movie/screen/dashboard/screen.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/screen/movie_detail/screen.dart';
-import 'package:room_movie/screen/movie_list/movie_list_bloc.dart';
-import 'package:room_movie/screen/movie_list/movie_list_screen.dart';
-import 'package:room_movie/screen/serial_tv_list/serial_tv_list_screen.dart';
+import 'package:room_movie/screen/movie_list/bloc.dart';
+import 'package:room_movie/screen/movie_list/screen.dart';
+import 'package:room_movie/screen/serial_tv_list/screen.dart';
 
-import '../screen/serial_tv_list/serial_tv_list_bloc.dart';
-import '../screen/splash_screen/splash_screen.dart';
+import '../screen/serial_tv_list/bloc.dart';
+import '../screen/splash_screen/screen.dart';
 
 class AppRoute {
   static final List<GetPage> routes = [
