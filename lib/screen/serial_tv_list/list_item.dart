@@ -10,11 +10,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../gen_theme/assets.gen.dart';
 import '../../models/movie/Results.dart';
+import '../../router/app_route.dart';
 import '../../util/constant.dart';
 import '../../util/util.dart';
 
@@ -26,7 +28,10 @@ class SerialTvListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Pages.serialTvDetailScreen,
+            arguments: {"idResults": data.id});
+      },
       child: Column(
         children: [
           SizedBox(

@@ -1,27 +1,28 @@
 // ignore_for_file: file_names
 /*
  * 
- *     movie_detail_bloc
- *     Created by Fajar Adi Prasetyo on 22/12/2022
+ *     bloc
+ *     Created by Fajar Adi Prasetyo on 04/01/2023
  *     email 	    : fajaradiprast@gmail.com
  *     github 	  : https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
-import 'package:room_movie/models/movie/Results.dart';
-import 'package:room_movie/models/movie/detail/external_ids.dart';
-import 'package:room_movie/models/movie/detail/spoken_languages.dart';
-import 'package:room_movie/util/logger.dart';
 
 import '../../gen_theme/assets.gen.dart';
+import '../../models/movie/Results.dart';
+import '../../models/movie/detail/external_ids.dart';
 import '../../models/movie/detail/genres.dart';
+import '../../models/movie/detail/spoken_languages.dart';
 import '../../service/api_service.dart';
 import '../../util/exception.dart';
+import '../../util/logger.dart';
 
-class MovieDetailBloc extends GetxController {
-  var idMovie = 0;
+class SerialTvDetailBloc extends GetxController {
+  var idTv = 0;
   Map<String, dynamic> argument = {};
   final scrollController = ScrollController();
   var isShow = false.obs;
@@ -37,8 +38,8 @@ class MovieDetailBloc extends GetxController {
   void onReady() {
     addScrollListener();
     argument.addAll(Get.arguments);
-    idMovie = argument.idResults;
-    (this).getMovieDetail(idMovie);
+    idTv = argument.idResults;
+    (this).getTvDetail(idTv);
   }
 
   void addScrollListener() {
@@ -49,10 +50,10 @@ class MovieDetailBloc extends GetxController {
     });
   }
 
-  Future<void> getMovieDetail(int id) async {
+  Future<void> getTvDetail(int id) async {
     isLoading(true);
     try {
-      var res = await service.getMovieDetail(id);
+      var res = await service.getTvDetail(id);
       if (res != null) {
         data.value = res;
         getExternalIds(data.value.externalIds);
@@ -66,6 +67,14 @@ class MovieDetailBloc extends GetxController {
       Logger.e("errorMovie", ex: e);
     }
     isLoading(false);
+  }
+
+  int getEpisodeRuntime(List<int>? list) {
+    var runtime = 0;
+    if (list != null && list.isNotEmpty) {
+      runtime = list[0];
+    }
+    return runtime;
   }
 
   String getGenre(List<Genres>? list) {
@@ -83,19 +92,6 @@ class MovieDetailBloc extends GetxController {
       }
     }
     return genre;
-  }
-
-  String getLanguage(String? string, List<SpokenLanguages>? list) {
-    var language = "";
-    if (list != null) {
-      for (var data in list) {
-        if (data.iso6391 == string) {
-          language = data.name ?? "";
-          break;
-        }
-      }
-    }
-    return language;
   }
 
   Future<void> getExternalIds(ExternalIds? item) async {
@@ -141,5 +137,18 @@ class MovieDetailBloc extends GetxController {
         }.entries);
       }
     }
+  }
+
+  String getLanguage(String? string, List<SpokenLanguages>? list) {
+    var language = "";
+    if (list != null) {
+      for (var data in list) {
+        if (data.iso6391 == string) {
+          language = data.name ?? "";
+          break;
+        }
+      }
+    }
+    return language;
   }
 }

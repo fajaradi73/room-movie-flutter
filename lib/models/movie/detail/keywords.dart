@@ -10,9 +10,7 @@
 import 'package:room_movie/models/movie/detail/keyword_item.dart';
 
 class Keywords {
-  Keywords({
-    this.keywords,
-  });
+  Keywords({this.keywords, this.results});
 
   Keywords.fromJson(dynamic json) {
     if (json['keywords'] != null) {
@@ -21,13 +19,23 @@ class Keywords {
         keywords?.add(KeywordItem.fromJson(v));
       });
     }
+    if (json['results'] != null) {
+      results = [];
+      json['results'].forEach((v) {
+        results?.add(KeywordItem.fromJson(v));
+      });
+    }
   }
   List<KeywordItem>? keywords;
+  List<KeywordItem>? results;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (keywords != null) {
       map['keywords'] = keywords?.map((v) => v.toJson()).toList();
+    }
+    if (results != null) {
+      map['results'] = results?.map((v) => v.toJson()).toList();
     }
     return map;
   }

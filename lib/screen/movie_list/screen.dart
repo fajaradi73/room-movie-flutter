@@ -1,16 +1,17 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/screen/dashboard/bloc.dart';
 import 'package:room_movie/screen/movie_list/bloc.dart';
 import 'package:room_movie/screen/movie_list/list_item.dart';
-import 'package:room_movie/screen/widget/animated_grid_builder.dart';
 import 'package:room_movie/screen/widget/gesture_scaffold.dart';
 import 'package:room_movie/screen/widget/global_header.dart';
 
 import '../widget/LoadingScreen.dart';
+import '../widget/animated_stagger_builder.dart';
 import '../widget/lazy_load.dart';
 import '../widget/shimmer_loading.dart';
 
@@ -34,13 +35,11 @@ class MovieListScreen extends GetView<MovieListBloc> {
         child: Obx(() {
           return LazyLoad(
               isLoading: controller.pageLoad.value,
-              child: AnimatedGridBuilder(
+              child: AnimatedStaggerBuilder(
                   controller: controller.scrollController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: Get.width / (Get.height / 1.16)),
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
                   itemCount: (controller.pageLoad.value).either(
                       trueV: controller.list.length + 1,
                       falseV: controller.list.length),
@@ -59,6 +58,16 @@ class MovieListScreen extends GetView<MovieListBloc> {
                             ));
                       }
                     });
+                  },
+                  staggeredTileBuilder: (index) {
+                    if (controller.pageLoad.value &&
+                        index >= controller.list.length) {
+                      return StaggeredTile.count(
+                          2, Get.width / (Get.height / 1));
+                    } else {
+                      return StaggeredTile.count(
+                          1, Get.width / (Get.height / 0.45.height()));
+                    }
                   }),
               onEndOfPage: () async {
                 await controller.getMovie(controller.currentPage.value);

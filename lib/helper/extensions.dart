@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
+import '../models/movie/detail/images_item.dart';
 import '../screen/widget/snackbar_widget.dart';
 import '../theme/responsives.dart';
 
@@ -334,5 +335,8 @@ extension IntegerExt on int {
 }
 
 extension Maps on Map<String, dynamic> {
-  int get idMovie => (this)['idMovie'];
+  int get idResults => (this)['idResults'];
+  List<ImagesItem> get listImage => (this)["listImage"];
+  int get currentIndex => (this)['currentIndex'];
+  bool get isDetail => (this)['isDetail'];
 }

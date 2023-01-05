@@ -11,6 +11,7 @@
 
 import 'package:room_movie/models/movie/detail/credits.dart';
 import 'package:room_movie/models/movie/detail/external_ids.dart';
+import 'package:room_movie/models/movie/detail/network_item.dart';
 
 import 'detail/genres.dart';
 import 'detail/images.dart';
@@ -53,7 +54,10 @@ class Results {
       this.recommendations,
       this.homepage,
       this.imdbId,
-      this.externalIds});
+      this.externalIds,
+      this.episodeRunTime,
+      this.type,
+      this.networks});
 
   Results.fromJson(dynamic json) {
     adult = json['adult'] ?? false;
@@ -110,6 +114,16 @@ class Results {
     externalIds = json['external_ids'] != null
         ? ExternalIds.fromJson(json['external_ids'])
         : null;
+    episodeRunTime = json['episode_run_time'] != null
+        ? json['episode_run_time'].cast<int>()
+        : [];
+    type = json['type'];
+    if (json['networks'] != null) {
+      networks = [];
+      json['networks'].forEach((v) {
+        networks?.add(NetworkItem.fromJson(v));
+      });
+    }
   }
 
   bool? adult;
@@ -146,6 +160,9 @@ class Results {
   Images? images;
   Recommendations? recommendations;
   ExternalIds? externalIds;
+  List<int>? episodeRunTime;
+  String? type;
+  List<NetworkItem>? networks;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -198,6 +215,11 @@ class Results {
     }
     if (externalIds != null) {
       map['external_ids'] = externalIds?.toJson();
+    }
+    map['episode_run_time'] = episodeRunTime;
+    map['type'] = type;
+    if (networks != null) {
+      map['networks'] = networks?.map((v) => v.toJson()).toList();
     }
     return map;
   }

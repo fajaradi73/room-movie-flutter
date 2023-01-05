@@ -29,7 +29,7 @@ class MovieWidgetListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Pages.movieDetailScreen, arguments: {"idMovie": data.id});
+        Get.toNamed(Pages.movieDetailScreen, arguments: {"idResults": data.id});
       },
       child: Container(
         margin: const EdgeInsets.all(5),

@@ -16,6 +16,7 @@ import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/util/util.dart';
 
 import '../../gen_theme/assets.gen.dart';
+import '../../router/app_route.dart';
 import '../../util/constant.dart';
 
 // ignore: must_be_immutable
@@ -26,7 +27,10 @@ class SerialTvWidgetListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Pages.serialTvDetailScreen,
+            arguments: {"idResults": data.id});
+      },
       child: Container(
         margin: const EdgeInsets.all(5),
         child: Column(

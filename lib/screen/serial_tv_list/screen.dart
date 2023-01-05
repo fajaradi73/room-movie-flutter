@@ -10,6 +10,7 @@
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/tv_type.dart';
@@ -18,6 +19,7 @@ import 'package:room_movie/screen/serial_tv_list/list_item.dart';
 
 import '../dashboard/bloc.dart';
 import '../widget/LoadingScreen.dart';
+import '../widget/animated_stagger_builder.dart';
 import '../widget/gesture_scaffold.dart';
 import '../widget/global_header.dart';
 import '../widget/lazy_load.dart';
@@ -41,13 +43,11 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
         child: Obx(() {
           return LazyLoad(
               isLoading: controller.pageLoad.value,
-              child: GridView.builder(
+              child: AnimatedStaggerBuilder(
                   controller: controller.scrollController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: Get.width / (Get.height / 1.16)),
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
                   itemCount: (controller.pageLoad.value).either(
                       trueV: controller.list.length + 1,
                       falseV: controller.list.length),
@@ -66,6 +66,16 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
                             ));
                       }
                     });
+                  },
+                  staggeredTileBuilder: (index) {
+                    if (controller.pageLoad.value &&
+                        index >= controller.list.length) {
+                      return StaggeredTile.count(
+                          2, Get.width / (Get.height / 1));
+                    } else {
+                      return StaggeredTile.count(
+                          1, Get.width / (Get.height / 0.45.height()));
+                    }
                   }),
               onEndOfPage: () async {
                 await controller.getData(controller.currentPage.value);

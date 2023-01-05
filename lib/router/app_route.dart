@@ -11,10 +11,14 @@
 import 'package:get/get.dart';
 import 'package:room_movie/screen/dashboard/binding.dart';
 import 'package:room_movie/screen/dashboard/screen.dart';
+import 'package:room_movie/screen/gallery/preview/bloc.dart';
+import 'package:room_movie/screen/gallery/preview/screen.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/screen/movie_detail/screen.dart';
 import 'package:room_movie/screen/movie_list/bloc.dart';
 import 'package:room_movie/screen/movie_list/screen.dart';
+import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
+import 'package:room_movie/screen/serial_tv_detail/screen.dart';
 import 'package:room_movie/screen/serial_tv_list/screen.dart';
 
 import '../screen/serial_tv_list/bloc.dart';
@@ -48,6 +52,18 @@ class AppRoute {
         binding: BindingsBuilder(() {
           Get.put(SerialTvListBloc());
         })),
+    GetPage(
+        name: Pages.serialTvDetailScreen,
+        page: () => const SerialTvDetailScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(SerialTvDetailBloc());
+        })),
+    GetPage(
+        name: Pages.previewScreen,
+        page: () => const PreviewScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(PreviewBloc());
+        })),
   ];
 }
 
@@ -57,4 +73,6 @@ class Pages {
   static const movieListScreen = "/movie_list_screen";
   static const movieDetailScreen = "/movie_detail_Screen";
   static const serialTvListScreen = "/serial_tv_list_screen";
+  static const serialTvDetailScreen = "/serial_tv_detail_screen";
+  static const previewScreen = "/preview_screen";
 }

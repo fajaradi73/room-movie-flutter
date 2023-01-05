@@ -1,25 +1,23 @@
 // ignore_for_file: file_names
 /*
- * 
- *     widget_recomendation
- *     Created by Fajar Adi Prasetyo on 22/12/2022
+ *     Created by Fajar Adi Prasetyo on 05/01/2023
  *     email 	    : fajaradiprast@gmail.com
  *     github 	  : https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
-import 'package:room_movie/screen/movie_detail/bloc.dart';
+import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
 import '../../../models/movie/Results.dart';
 import '../../../util/constant.dart';
 import '../../../util/util.dart';
 
-class MovieDetailWidgetRecommendation extends GetView<MovieDetailBloc> {
-  const MovieDetailWidgetRecommendation({Key? key, required this.list})
+class SerialTvDetailWidgetRecommendation extends GetView<SerialTvDetailBloc> {
+  const SerialTvDetailWidgetRecommendation({Key? key, required this.list})
       : super(key: key);
 
   final List<Results> list;
@@ -51,7 +49,7 @@ class MovieDetailWidgetRecommendation extends GetView<MovieDetailBloc> {
                   var item = list[index];
                   return InkWell(
                     onTap: () async {
-                      await controller.getMovieDetail(item.id!);
+                      await controller.getTvDetail(item.id!);
                     },
                     child: Container(
                       width: 75.0.width(),
@@ -105,7 +103,7 @@ class MovieDetailWidgetRecommendation extends GetView<MovieDetailBloc> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 3),
                               child: Text(
-                                "${item.title}",
+                                "${item.name}",
                                 style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,

@@ -73,6 +73,13 @@ class ApiService {
     return Movie.fromJson(data);
   }
 
+  Future<Results?> getTvDetail(int id) async {
+    var data = await dio.get(
+        uri: ApiUri.detailSerialTv(id,
+            "images,videos,keywords,credits,recommendations,external_ids,content_ratings"));
+    return Results.fromJson(data);
+  }
+
   Future<ArtistResponse?> getArtistPopular(int page) async {
     var data = await dio.get(uri: ApiUri.popularArtist(page));
     return ArtistResponse.fromJson(data);

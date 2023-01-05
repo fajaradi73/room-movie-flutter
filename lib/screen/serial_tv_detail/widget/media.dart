@@ -1,11 +1,9 @@
 // ignore_for_file: file_names
 /*
- * 
- *     widget_media
- *     Created by Fajar Adi Prasetyo on 22/12/2022
+ *     Created by Fajar Adi Prasetyo on 05/01/2023
  *     email 	    : fajaradiprast@gmail.com
  *     github 	  : https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,14 +13,14 @@ import 'package:room_movie/gen_theme/colors.gen.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/detail/images.dart';
 import 'package:room_movie/models/movie/detail/videos.dart';
+import 'package:room_movie/screen/gallery/screen.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
 import '../../../router/app_route.dart';
 import '../../../util/constant.dart';
-import '../../gallery/screen.dart';
 
-class MovieDetailWidgetMedia extends StatelessWidget {
-  const MovieDetailWidgetMedia(
+class SerialTvDetailWidgetMedia extends StatelessWidget {
+  const SerialTvDetailWidgetMedia(
       {Key? key, required this.videos, required this.images})
       : super(key: key);
   final Videos videos;
@@ -164,22 +162,22 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                 visible: images.backdrops != null &&
                     images.backdrops?.isNotEmpty == true,
                 child: InkWell(
-                    onTap: () {
-                      Get.to(() => GalleryScreen(
-                            list: images.backdrops!,
-                            title: "Gambar Latar",
-                            ratio: 0.3,
-                          ));
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(2),
-                      padding: const EdgeInsets.all(2),
-                      child: const Text(
-                        "Lihat Semua Gambar Latar",
-                        style:
-                            TextStyle(fontSize: 16, color: ColorName.blue500),
-                      ),
-                    )),
+                  onTap: () {
+                    Get.to(() => GalleryScreen(
+                          list: images.backdrops!,
+                          title: "Gambar Latar",
+                          ratio: 0.3,
+                        ));
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(2),
+                    padding: const EdgeInsets.all(2),
+                    child: const Text(
+                      "Lihat Semua Gambar Latar",
+                      style: TextStyle(fontSize: 16, color: ColorName.blue500),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -255,9 +253,9 @@ class MovieDetailWidgetMedia extends StatelessWidget {
               ),
               const Spacer(),
               Visibility(
-                  visible: images.posters != null &&
-                      images.posters?.isNotEmpty == true,
-                  child: InkWell(
+                visible: images.posters != null &&
+                    images.posters?.isNotEmpty == true,
+                child: InkWell(
                     onTap: () {
                       Get.to(() => GalleryScreen(
                             list: images.posters!,
@@ -273,8 +271,8 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                         style:
                             TextStyle(fontSize: 16, color: ColorName.blue500),
                       ),
-                    ),
-                  )),
+                    )),
+              ),
             ],
           ),
           Container(
