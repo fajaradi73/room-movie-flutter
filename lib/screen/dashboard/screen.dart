@@ -15,6 +15,7 @@ import 'package:room_movie/screen/home/screen.dart';
 import 'package:room_movie/screen/movie/screen.dart';
 import 'package:room_movie/screen/serial_tv/screen.dart';
 import 'package:room_movie/screen/settings/screen.dart';
+import 'package:room_movie/screen/widget/gesture_scaffold.dart';
 
 import '../../router/app_route.dart';
 import '../artist/bloc.dart';
@@ -27,13 +28,13 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
+    return Obx(() => GestureScaffold(
           appBar: (logic.selectedNavBar.value == 4)
               ? AppBar(
                   elevation: 1,
                   title: const Text("Pengaturan"),
                 )
-              : searchBar(),
+              : searchBar(context),
           body: IndexedStack(
             index: logic.selectedNavBar.value,
             children: [
@@ -81,20 +82,23 @@ class DashboardScreen extends StatelessWidget {
         ));
   }
 
-  searchBar() {
+  searchBar(context) {
     return AppBar(
       elevation: 1,
-      title: SizedBox(
-        height: 45,
+      titleSpacing: 5,
+      title: Container(
+        height: kToolbarHeight,
+        alignment: Alignment.center,
         child: TextField(
           onTap: () {
             Get.toNamed(Pages.searchScreen);
           },
           textAlignVertical: TextAlignVertical.center,
+          readOnly: true,
           decoration: InputDecoration(
-              enabled: false,
               contentPadding: EdgeInsets.zero,
               hintText: logic.searchHint.value,
+              hintStyle: const TextStyle(fontSize: 18),
               filled: true,
               prefixIcon: Icon(
                 Icons.search,

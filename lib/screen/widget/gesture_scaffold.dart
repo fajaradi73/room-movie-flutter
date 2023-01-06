@@ -6,7 +6,8 @@ class GestureScaffold extends StatelessWidget {
   final Color? backgroundColor;
   final Widget? bottomSheet;
   final Widget? body;
-  final Widget? floatingAction;
+  final Widget? floatingActionButton;
+  final Widget? bottomNavigationBar;
 
   const GestureScaffold(
       {super.key,
@@ -14,7 +15,8 @@ class GestureScaffold extends StatelessWidget {
       this.bottomSheet,
       this.appBar,
       this.backgroundColor,
-      this.floatingAction});
+      this.floatingActionButton,
+      this.bottomNavigationBar});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,8 @@ class GestureScaffold extends StatelessWidget {
         appBar: (this).appBar,
         body: (this).body,
         bottomSheet: (this).bottomSheet,
-        floatingActionButton: (this).floatingAction,
+        floatingActionButton: (this).floatingActionButton,
+        bottomNavigationBar: (this).bottomNavigationBar,
       ),
     );
   }

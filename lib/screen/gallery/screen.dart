@@ -29,7 +29,7 @@ class GalleryScreen extends GetView<GalleryBloc> {
         title: controller.title,
       ),
       body: controller.listImages.isNotEmpty ? widgetImages() : widgetVideo(),
-      floatingAction: Obx(() {
+      floatingActionButton: Obx(() {
         return AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
           //show/hide animation

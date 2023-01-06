@@ -82,7 +82,7 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
               });
         }),
       ),
-      floatingAction: Obx(() {
+      floatingActionButton: Obx(() {
         return AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
           //show/hide animation

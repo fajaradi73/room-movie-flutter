@@ -65,7 +65,7 @@ class Results {
 
   Results.fromJson(dynamic json) {
     adult = json['adult'] ?? false;
-    backdropPath = json['backdrop_path'] ?? "";
+    backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
     id = json['id'] ?? 0;
     originalLanguage = json['original_language'] ?? "";
@@ -74,7 +74,7 @@ class Results {
     popularity = json['popularity'] != null
         ? double.parse(json["popularity"].toString())
         : 0.0;
-    posterPath = json['poster_path'] ?? "";
+    posterPath = json['poster_path'];
     releaseDate = json['release_date'] ?? "";
     title = json['title'];
     video = json['video'] ?? false;

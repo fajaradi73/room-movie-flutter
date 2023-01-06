@@ -282,6 +282,8 @@ extension TopBar on BuildContext {
     _previousEntry = overlayEntry;
   }
 
+  bool get hasFocus => FocusScope.of(this).hasFocus;
+
   void unFocus() {
     if (FocusScope.of(this).hasFocus) {
       FocusScope.of(this).unfocus();
