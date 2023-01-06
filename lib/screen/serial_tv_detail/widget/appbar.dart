@@ -54,29 +54,32 @@ class SerialTvDetailWidgetAppbar extends GetView<SerialTvDetailBloc> {
                 child: Container(
                   color: Theme.of(context).primaryColor.withOpacity(0.5),
                   child: Center(
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: "${Constant.baseImage}${data.posterPath}",
-                        fit: BoxFit.cover,
-                        imageBuilder: (context, imageProvider) => Container(
-                            height: 16.0.height(),
-                            width: 35.0.width(),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1.0,
-                                ))),
-                        placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                    child: Hero(
+                      tag: "${data.id}",
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: "${Constant.baseImage}${data.posterPath}",
+                          fit: BoxFit.cover,
+                          imageBuilder: (context, imageProvider) => Container(
+                              height: 16.0.height(),
+                              width: 35.0.width(),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ))),
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
                   ),

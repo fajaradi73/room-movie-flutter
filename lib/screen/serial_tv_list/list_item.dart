@@ -36,52 +36,55 @@ class SerialTvListItem extends StatelessWidget {
         children: [
           SizedBox(
             height: 30.0.height(),
-            child: Card(
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: "${Constant.baseImage}${data.posterPath}",
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  alignment: Alignment.topRight,
-                  child: Container(
-                      width: 45,
-                      height: 25,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(15.0))),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3.5),
-                              child: Icon(
-                                Icons.star,
-                                size: 16,
-                                color: Colors.amber,
-                              ),
-                            ),
-                            Text(
-                              "${data.voteAverage}",
-                              style: const TextStyle(fontSize: 13),
-                            ),
-                          ],
-                        ),
-                      )),
+            child: Hero(
+              tag: "${data.id}",
+              child: Card(
+                semanticContainer: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    Assets.images.noImage.image(),
+                child: CachedNetworkImage(
+                  imageUrl: "${Constant.baseImage}${data.posterPath}",
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    alignment: Alignment.topRight,
+                    child: Container(
+                        width: 45,
+                        height: 25,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(15.0))),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3.5),
+                                child: Icon(
+                                  Icons.star,
+                                  size: 16,
+                                  color: Colors.amber,
+                                ),
+                              ),
+                              Text(
+                                "${data.voteAverage}",
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ],
+                          ),
+                        )),
+                  ),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      Assets.images.noImage.image(),
+                ),
               ),
             ),
           ),

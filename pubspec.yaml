@@ -83,6 +83,11 @@ flutter_gen:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
+  fonts:
+    - family: palatino_linotype
+      fonts:
+        - asset: assets/font/palatino_linotype.ttf
+
   assets:
     - assets/images/
     - assets/icons/

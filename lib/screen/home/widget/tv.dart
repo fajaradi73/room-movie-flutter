@@ -55,7 +55,7 @@ class HomeTvWidget extends GetView<HomeBloc> {
           ),
           Container(
               constraints: BoxConstraints(
-                  minHeight: Get.height * 0.3, maxHeight: Get.height * 0.345),
+                  minHeight: Get.height * 0.3, maxHeight: Get.height * 0.352),
               child: AnimatedListBuilder(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),

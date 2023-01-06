@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:room_movie/gen_theme/colors.gen.dart';
 
+import '../gen_theme/fonts.gen.dart';
 import '../models/preference/StorageManager.dart';
 
 class ThemeCubit extends Cubit<ThemeData> {
@@ -37,6 +38,7 @@ class ThemeCubit extends Cubit<ThemeData> {
   }
 
   static final _lightTheme = ThemeData(
+      fontFamily: FontFamily.palatinoLinotype,
       primarySwatch: MaterialColor(
           ColorName.colorPrimary.value, getSwatch(ColorName.colorPrimary)),
       primaryColor: ColorName.colorPrimary,
@@ -77,6 +79,7 @@ class ThemeCubit extends Cubit<ThemeData> {
           foregroundColor: Colors.black));
 
   static final _darkTheme = ThemeData(
+      fontFamily: FontFamily.palatinoLinotype,
       primarySwatch: Colors.grey,
       primaryColor: const Color(0xFF212121),
       brightness: Brightness.dark,
