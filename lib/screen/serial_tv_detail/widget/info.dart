@@ -186,6 +186,42 @@ class SerialTvDetailWidgetInfo extends GetView<SerialTvDetailBloc> {
               margin: const EdgeInsets.all(6),
               padding: const EdgeInsets.all(3),
               child: const Text(
+                "Total Season",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              width: Get.width,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.all(3),
+              child: Text(
+                "${data.numberOfSeason} Season",
+                style: const TextStyle(fontSize: 14),
+              ),
+            ),
+            Container(
+              width: Get.width,
+              margin: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(3),
+              child: const Text(
+                "Total Episode",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              width: Get.width,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.all(3),
+              child: Text(
+                "${data.numberOfEpisode} Episode",
+                style: const TextStyle(fontSize: 14),
+              ),
+            ),
+            Container(
+              width: Get.width,
+              margin: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(3),
+              child: const Text(
                 "Kata Kunci",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),

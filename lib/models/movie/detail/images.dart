@@ -56,3 +56,9 @@ class Images {
     return map;
   }
 }
+
+class StaticImage {
+  static List<ImagesItem> get newData {
+    return [];
+  }
+}

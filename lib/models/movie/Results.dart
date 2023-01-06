@@ -12,6 +12,7 @@
 import 'package:room_movie/models/movie/detail/credits.dart';
 import 'package:room_movie/models/movie/detail/external_ids.dart';
 import 'package:room_movie/models/movie/detail/network_item.dart';
+import 'package:room_movie/models/movie/detail/season_item.dart';
 
 import 'detail/genres.dart';
 import 'detail/images.dart';
@@ -57,7 +58,10 @@ class Results {
       this.externalIds,
       this.episodeRunTime,
       this.type,
-      this.networks});
+      this.networks,
+      this.seasons,
+      this.numberOfSeason,
+      this.numberOfEpisode});
 
   Results.fromJson(dynamic json) {
     adult = json['adult'] ?? false;
@@ -124,6 +128,14 @@ class Results {
         networks?.add(NetworkItem.fromJson(v));
       });
     }
+    if (json['seasons'] != null) {
+      seasons = [];
+      json['seasons'].forEach((v) {
+        seasons?.add(SeasonItem.fromJson(v));
+      });
+    }
+    numberOfSeason = json['number_of_seasons'];
+    numberOfEpisode = json['number_of_episodes'];
   }
 
   bool? adult;
@@ -163,6 +175,9 @@ class Results {
   List<int>? episodeRunTime;
   String? type;
   List<NetworkItem>? networks;
+  List<SeasonItem>? seasons;
+  int? numberOfSeason;
+  int? numberOfEpisode;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -221,6 +236,11 @@ class Results {
     if (networks != null) {
       map['networks'] = networks?.map((v) => v.toJson()).toList();
     }
+    if (seasons != null) {
+      map['seasons'] = seasons?.map((v) => v.toJson()).toList();
+    }
+    map['number_of_episodes'] = numberOfEpisode;
+    map['number_of_seasons'] = numberOfSeason;
     return map;
   }
 }

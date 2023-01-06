@@ -12,6 +12,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:room_movie/models/movie/detail/videos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../models/movie/detail/images_item.dart';
@@ -339,4 +340,7 @@ extension Maps on Map<String, dynamic> {
   List<ImagesItem> get listImage => (this)["listImage"];
   int get currentIndex => (this)['currentIndex'];
   bool get isDetail => (this)['isDetail'];
+  List<VideosItem> get listVideo => (this)["listVideo"];
+  String get title => (this)["title"];
+  double get ratio => (this)["ratio"];
 }

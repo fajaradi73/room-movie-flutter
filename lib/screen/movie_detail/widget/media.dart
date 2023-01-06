@@ -19,7 +19,6 @@ import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
 import '../../../router/app_route.dart';
 import '../../../util/constant.dart';
-import '../../gallery/screen.dart';
 
 class MovieDetailWidgetMedia extends StatelessWidget {
   const MovieDetailWidgetMedia(
@@ -67,14 +66,24 @@ class MovieDetailWidgetMedia extends StatelessWidget {
               Visibility(
                 visible: videos.results != null &&
                     videos.results?.isNotEmpty == true,
-                child: Container(
-                  margin: const EdgeInsets.all(2),
-                  padding: const EdgeInsets.all(2),
-                  child: const Text(
-                    "Lihat Semua Video",
-                    style: TextStyle(fontSize: 16, color: ColorName.blue500),
-                  ),
-                ),
+                child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Pages.galleryScreen, arguments: {
+                        "listImage": StaticImage.newData,
+                        "title": "Videos",
+                        "ratio": 0.0,
+                        "listVideo": videos.results!,
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(2),
+                      padding: const EdgeInsets.all(2),
+                      child: const Text(
+                        "Lihat Semua Video",
+                        style:
+                            TextStyle(fontSize: 16, color: ColorName.blue500),
+                      ),
+                    )),
               ),
             ],
           ),
@@ -95,41 +104,45 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                       return InkWell(
                         onTap: () {},
                         child: Container(
+                          height: 25.0.height(),
+                          width: 65.0.width(),
                           margin: const EdgeInsets.all(3),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(
-                                height: 25.0.height(),
-                                width: 65.0.width(),
-                                child: Card(
-                                  semanticContainer: true,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        "${Constant.baseThumbnail}${item.key}${Constant.sdQuality}",
-                                    fit: BoxFit.cover,
-                                    placeholder: (context, url) => const Center(
-                                        child: CircularProgressIndicator()),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 65.0.width(),
-                                margin: const EdgeInsets.all(2),
-                                padding: const EdgeInsets.all(2),
-                                child: Text("${item.name}",
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        overflow: TextOverflow.ellipsis),
-                                    maxLines: 1),
-                              )
-                            ],
+                          child: Card(
+                            semanticContainer: true,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "${Constant.baseThumbnail}${item.key}${Constant.sdQuality}",
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              imageBuilder: (context, imageProvider) {
+                                return Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    alignment: Alignment.bottomLeft,
+                                    child: Container(
+                                      color: Colors.black54,
+                                      height: 50,
+                                      width: 65.0.width(),
+                                      padding: const EdgeInsets.all(10),
+                                      child: Text("${item.name}",
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              overflow: TextOverflow.ellipsis),
+                                          maxLines: 1),
+                                    ));
+                              },
+                            ),
                           ),
                         ),
                       );
@@ -165,11 +178,12 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                     images.backdrops?.isNotEmpty == true,
                 child: InkWell(
                     onTap: () {
-                      Get.to(() => GalleryScreen(
-                            list: images.backdrops!,
-                            title: "Gambar Latar",
-                            ratio: 0.3,
-                          ));
+                      Get.toNamed(Pages.galleryScreen, arguments: {
+                        "listImage": images.backdrops!,
+                        "title": "Gambar Latar",
+                        "ratio": 0.3,
+                        "listVideo": StaticVideo.newData,
+                      });
                     },
                     child: Container(
                       margin: const EdgeInsets.all(2),
@@ -259,11 +273,12 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                       images.posters?.isNotEmpty == true,
                   child: InkWell(
                     onTap: () {
-                      Get.to(() => GalleryScreen(
-                            list: images.posters!,
-                            title: "Poster",
-                            ratio: 2,
-                          ));
+                      Get.toNamed(Pages.galleryScreen, arguments: {
+                        "listImage": images.posters!,
+                        "title": "Poster",
+                        "ratio": 2.0,
+                        "listVideo": StaticVideo.newData,
+                      });
                     },
                     child: Container(
                       margin: const EdgeInsets.all(2),

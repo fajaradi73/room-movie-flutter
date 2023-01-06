@@ -114,7 +114,7 @@ class SerialTvDetailWidgetActor extends GetView<MovieDetailBloc> {
               child: const Text(
                 "Kru & Aktor Lainnya",
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: ColorName.blue500),
               ),

@@ -32,6 +32,12 @@ class Videos {
   }
 }
 
+class StaticVideo {
+  static List<VideosItem> get newData {
+    return [];
+  }
+}
+
 class VideosItem {
   VideosItem({
     this.iso6391,

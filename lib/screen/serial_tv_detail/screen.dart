@@ -16,6 +16,7 @@ import 'package:room_movie/screen/serial_tv_detail/widget/info.dart';
 import 'package:room_movie/screen/serial_tv_detail/widget/media.dart';
 import 'package:room_movie/screen/serial_tv_detail/widget/overview.dart';
 import 'package:room_movie/screen/serial_tv_detail/widget/recommendation.dart';
+import 'package:room_movie/screen/serial_tv_detail/widget/season.dart';
 
 import '../widget/LoadingScreen.dart';
 
@@ -54,6 +55,11 @@ class SerialTvDetailScreen extends GetView<SerialTvDetailBloc> {
                       SerialTvDetailWidgetInfo(data: data),
                       const Padding(padding: EdgeInsets.all(2)),
                       SerialTvDetailWidgetActor(data: data.credits),
+                      const Padding(padding: EdgeInsets.all(2)),
+                      SerialTvDetailWidgetSeason(
+                        item: data.seasons?.last,
+                        title: data.name,
+                      ),
                       const Padding(padding: EdgeInsets.all(2)),
                       SerialTvDetailWidgetMedia(
                           videos: data.videos!, images: data.images!),

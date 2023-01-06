@@ -8,6 +8,7 @@ class AnimatedListBuilder extends StatelessWidget {
   final int? itemCount;
   final Widget Function(BuildContext, int) itemBuilder;
   final Axis? scrollDirection;
+  final ScrollController? controller;
 
   const AnimatedListBuilder({
     Key? key,
@@ -15,6 +16,7 @@ class AnimatedListBuilder extends StatelessWidget {
     this.shrinkWrap = true,
     this.physics,
     this.scrollDirection,
+    this.controller,
     required this.itemCount,
     required this.itemBuilder,
   }) : super(key: key);
@@ -23,6 +25,7 @@ class AnimatedListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimationLimiter(
       child: ListView.builder(
+        controller: controller,
         padding: padding,
         itemCount: itemCount,
         shrinkWrap: shrinkWrap,

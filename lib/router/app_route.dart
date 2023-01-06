@@ -11,6 +11,7 @@
 import 'package:get/get.dart';
 import 'package:room_movie/screen/dashboard/binding.dart';
 import 'package:room_movie/screen/dashboard/screen.dart';
+import 'package:room_movie/screen/gallery/bloc.dart';
 import 'package:room_movie/screen/gallery/preview/bloc.dart';
 import 'package:room_movie/screen/gallery/preview/screen.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
@@ -21,6 +22,7 @@ import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/serial_tv_detail/screen.dart';
 import 'package:room_movie/screen/serial_tv_list/screen.dart';
 
+import '../screen/gallery/screen.dart';
 import '../screen/serial_tv_list/bloc.dart';
 import '../screen/splash_screen/screen.dart';
 
@@ -59,6 +61,12 @@ class AppRoute {
           Get.put(SerialTvDetailBloc());
         })),
     GetPage(
+        name: Pages.galleryScreen,
+        page: () => const GalleryScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(GalleryBloc());
+        })),
+    GetPage(
         name: Pages.previewScreen,
         page: () => const PreviewScreen(),
         binding: BindingsBuilder(() {
@@ -74,5 +82,6 @@ class Pages {
   static const movieDetailScreen = "/movie_detail_Screen";
   static const serialTvListScreen = "/serial_tv_list_screen";
   static const serialTvDetailScreen = "/serial_tv_detail_screen";
+  static const galleryScreen = "/gallery_screen";
   static const previewScreen = "/preview_screen";
 }
