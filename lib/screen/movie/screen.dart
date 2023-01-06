@@ -69,7 +69,7 @@ class MovieScreen extends GetView<MovieBloc> {
                 Container(
                     constraints: BoxConstraints(
                         minHeight: Get.height * 0.3,
-                        maxHeight: Get.height * 0.352),
+                        maxHeight: Get.height * 0.36),
                     child: AnimatedListBuilder(
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),

@@ -18,6 +18,8 @@ import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/screen/movie_detail/screen.dart';
 import 'package:room_movie/screen/movie_list/bloc.dart';
 import 'package:room_movie/screen/movie_list/screen.dart';
+import 'package:room_movie/screen/search/bloc.dart';
+import 'package:room_movie/screen/search/screen.dart';
 import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/serial_tv_detail/screen.dart';
 import 'package:room_movie/screen/serial_tv_list/screen.dart';
@@ -72,6 +74,12 @@ class AppRoute {
         binding: BindingsBuilder(() {
           Get.put(PreviewBloc());
         })),
+    GetPage(
+        name: Pages.searchScreen,
+        page: () => const SearchScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(SearchBloc());
+        })),
   ];
 }
 
@@ -84,4 +92,5 @@ class Pages {
   static const serialTvDetailScreen = "/serial_tv_detail_screen";
   static const galleryScreen = "/gallery_screen";
   static const previewScreen = "/preview_screen";
+  static const searchScreen = "/search_screen";
 }

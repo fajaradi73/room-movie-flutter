@@ -24,15 +24,7 @@ class ShimmerSwitch extends StatelessWidget {
           fadeDuration: const Duration(milliseconds: 2000),
           sizeDuration: const Duration(milliseconds: 2000),
           child: (snap.hasData && snap.data == true).either(
-            trueV: Shimmer.fromColors(
-              period: const Duration(milliseconds: 2000),
-              baseColor: ColorName.shimmerBG.withOpacity(0.7),
-              highlightColor: Colors.grey.shade200,
-              child: IgnorePointer(
-                ignoring: true,
-                child: child,
-              ),
-            ),
+            trueV: ShimmerChild(child: child),
             falseV: child,
           ),
         );

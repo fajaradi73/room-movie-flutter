@@ -85,8 +85,9 @@ class SerialTvWidgetListItem extends StatelessWidget {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      constraints: BoxConstraints(
-                          minWidth: Get.width * 0.4, maxWidth: Get.width * 0.5),
+                      width: Get.width * 0.5,
+                      // constraints: BoxConstraints(
+                      //     minWidth: Get.width * 0.4, maxWidth: Get.width * 0.5),
                       child: Column(
                         children: [
                           Container(

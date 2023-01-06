@@ -16,6 +16,7 @@ import 'package:room_movie/screen/movie/screen.dart';
 import 'package:room_movie/screen/serial_tv/screen.dart';
 import 'package:room_movie/screen/settings/screen.dart';
 
+import '../../router/app_route.dart';
 import '../artist/bloc.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -85,19 +86,20 @@ class DashboardScreen extends StatelessWidget {
       elevation: 1,
       title: SizedBox(
         height: 45,
-        child: Obx(
-          () => TextField(
-            onTap: () {},
-            textAlignVertical: TextAlignVertical.center,
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                hintText: logic.searchHint.value,
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Theme.of(Get.context!).primaryIconTheme.color,
-                )),
-          ),
+        child: TextField(
+          onTap: () {
+            Get.toNamed(Pages.searchScreen);
+          },
+          textAlignVertical: TextAlignVertical.center,
+          decoration: InputDecoration(
+              enabled: false,
+              contentPadding: EdgeInsets.zero,
+              hintText: logic.searchHint.value,
+              filled: true,
+              prefixIcon: Icon(
+                Icons.search,
+                color: Theme.of(Get.context!).primaryIconTheme.color,
+              )),
         ),
       ),
     );
