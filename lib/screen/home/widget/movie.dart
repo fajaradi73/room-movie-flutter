@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/screen/dashboard/bloc.dart';
 import 'package:room_movie/screen/home/bloc.dart';
+import 'package:room_movie/screen/shimmer/shimmer_results.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
@@ -51,25 +52,38 @@ class HomeMovieWidget extends GetView<HomeBloc> {
             ),
           ),
           Container(
-            constraints: BoxConstraints(
-                minHeight: Get.height * 0.3, maxHeight: Get.height * 0.36),
-            child: AnimatedListBuilder(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: list.length > 5 ? 5 : list.length,
-              itemBuilder: (BuildContext context, int index) {
-                Results data = list[index];
-                return ShimmerSwitch(
-                  stream: controller.isLoading.stream,
-                  child: HomeResultsItem(
-                    data: data,
-                    isMovie: true,
-                  ),
-                );
-              },
-            ),
-          )
+              constraints: BoxConstraints(
+                  minHeight: Get.height * 0.3, maxHeight: Get.height * 0.36),
+              child: (list.isNotEmpty)
+                  ? AnimatedListBuilder(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list.length > 5 ? 5 : list.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Results data = list[index];
+                        return HomeResultsItem(
+                          data: data,
+                          isMovie: true,
+                        );
+                      },
+                    )
+                  : SwitcherBuilder(
+                      fadeDuration: const Duration(milliseconds: 1000),
+                      sizeDuration: const Duration(milliseconds: 1000),
+                      builder: () {
+                        return AnimatedListBuilder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ShimmerSwitch(
+                              stream: controller.isLoading.stream,
+                              child: const ShimmerResults(),
+                            );
+                          },
+                        );
+                      },
+                    ))
         ],
       );
     });

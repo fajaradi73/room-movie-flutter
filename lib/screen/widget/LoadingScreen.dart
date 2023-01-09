@@ -11,8 +11,11 @@
 
 import 'package:flutter/material.dart';
 
-class LoadingScreen extends StatelessWidget{
-  const LoadingScreen({Key? key}) : super(key: key);
+class LoadingScreen extends StatelessWidget {
+  const LoadingScreen({Key? key, this.height = 40.0, this.width = 40.0})
+      : super(key: key);
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +24,14 @@ class LoadingScreen extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
+        children: [
           SizedBox(
-            height: 40.0,
-            width: 40.0,
-            child: CircularProgressIndicator(),
+            height: height,
+            width: width,
+            child: const CircularProgressIndicator(),
           ),
         ],
       ),
     );
   }
-
 }

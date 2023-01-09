@@ -6,18 +6,17 @@
  *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/widget/animated_grid_builder.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 
 import '../../../gen_theme/colors.gen.dart';
 import '../../../models/movie/Results.dart';
 import '../../../models/movie/detail/keyword_item.dart';
-import '../../../util/constant.dart';
 import '../../../util/util.dart';
 
 class SerialTvDetailWidgetInfo extends GetView<SerialTvDetailBloc> {
@@ -144,18 +143,21 @@ class SerialTvDetailWidgetInfo extends GetView<SerialTvDetailBloc> {
                   var item = data.networks![index];
                   return InkWell(
                       onTap: () async {},
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(8),
-                          child: Center(
-                            child: CachedNetworkImage(
-                              imageUrl: "${Constant.baseImage}${item.logoPath}",
-                              height: 75,
-                              width: 75,
+                      child: SizedBox(
+                        child: Card(
+                          semanticContainer: true,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          margin: const EdgeInsets.all(3),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Center(
+                              child: ImageView(
+                                url: item.logoPath,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),

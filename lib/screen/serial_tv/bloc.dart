@@ -9,18 +9,18 @@ import '../../util/exception.dart';
 
 class SerialTvBloc extends GetxController {
   var mapsTv = <String, List<Results>>{
-    TvType.SEDANG_TAYANG.label: StaticResults.load.obs,
-    TvType.TAYANG_DI_TV.label: StaticResults.load.obs,
-    TvType.POPULAR.label: StaticResults.load.obs,
-    TvType.RATING_TERATAS.label: StaticResults.load.obs
+    TvType.SEDANG_TAYANG.label: StaticResults.newData.obs,
+    TvType.TAYANG_DI_TV.label: StaticResults.newData.obs,
+    TvType.POPULAR.label: StaticResults.newData.obs,
+    TvType.RATING_TERATAS.label: StaticResults.newData.obs
   }.obs;
 
   var isLoading = true.obs;
   var service = ApiService();
-  var listPopular = StaticResults.load.obs;
-  var listTopRate = StaticResults.load.obs;
-  var listToday = StaticResults.load.obs;
-  var listOnTheAir = StaticResults.load.obs;
+  var listPopular = StaticResults.newData.obs;
+  var listTopRate = StaticResults.newData.obs;
+  var listToday = StaticResults.newData.obs;
+  var listOnTheAir = StaticResults.newData.obs;
   var isFirstOpen = true;
 
   void openScreen() {

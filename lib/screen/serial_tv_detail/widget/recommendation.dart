@@ -5,15 +5,14 @@
  *     github 	  : https://github.com/fajaradi73
  *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 
 import '../../../models/movie/Results.dart';
-import '../../../util/constant.dart';
 import '../../../util/util.dart';
 
 class SerialTvDetailWidgetRecommendation extends GetView<SerialTvDetailBloc> {
@@ -66,34 +65,16 @@ class SerialTvDetailWidgetRecommendation extends GetView<SerialTvDetailBloc> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: CachedNetworkImage(
-                                  imageUrl:
-                                      "${Constant.baseImage}${item.posterPath}",
-                                  fit: BoxFit.cover,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        alignment: Alignment.topRight,
-                                        child: widgetVote(context, item),
-                                      ),
-                                  placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/no-image.png"),
-                                          ),
-                                        ),
-                                        alignment: Alignment.topRight,
-                                        child: widgetVote(context, item),
-                                      )),
+                              child: Stack(
+                                alignment: Alignment.topRight,
+                                children: [
+                                  ImageView(
+                                    url: item.posterPath,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  widgetVote(context, item)
+                                ],
+                              ),
                             ),
                           ),
                           Container(

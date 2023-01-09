@@ -14,7 +14,7 @@ class DioUtil {
   DioUtil._internal() {
     _dio.options.baseUrl = Constant.baseUrl;
     _dio.options.connectTimeout = 90000;
-    _dio.options.receiveTimeout = 30000;
+    _dio.options.receiveTimeout = 50000;
     // _dio.interceptors.add(LoggerInterceptor());
     _dio.options.headers = {
       "Content-Type": "application/json",

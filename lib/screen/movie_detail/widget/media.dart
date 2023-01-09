@@ -8,7 +8,6 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/gen_theme/colors.gen.dart';
@@ -19,6 +18,7 @@ import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
 import '../../../router/app_route.dart';
 import '../../../util/constant.dart';
+import '../../widget/image_view.dart';
 
 class MovieDetailWidgetMedia extends StatelessWidget {
   const MovieDetailWidgetMedia(
@@ -113,35 +113,25 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "${Constant.baseThumbnail}${item.key}${Constant.sdQuality}",
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              imageBuilder: (context, imageProvider) {
-                                return Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    alignment: Alignment.bottomLeft,
-                                    child: Container(
-                                      color: Colors.black54,
-                                      height: 50,
-                                      width: 65.0.width(),
-                                      padding: const EdgeInsets.all(10),
-                                      child: Text("${item.name}",
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              overflow: TextOverflow.ellipsis),
-                                          maxLines: 1),
-                                    ));
-                              },
+                            child: Stack(
+                              alignment: Alignment.bottomLeft,
+                              children: [
+                                ImageView(
+                                    url:
+                                        "${Constant.baseThumbnail}${item.key}${Constant.sdQuality}",
+                                    fit: BoxFit.cover),
+                                Container(
+                                  color: Colors.black54,
+                                  height: 50,
+                                  width: 65.0.width(),
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text("${item.name}",
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          overflow: TextOverflow.ellipsis),
+                                      maxLines: 1),
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -225,20 +215,13 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                           height: 25.0.height(),
                           width: 65.0.width(),
                           child: Card(
-                            semanticContainer: true,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: "${Constant.baseImage}${item.filePath}",
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
+                              semanticContainer: true,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: ImageView(
+                                  url: item.filePath, fit: BoxFit.cover)),
                         ),
                       );
                     })
@@ -325,14 +308,8 @@ class MovieDetailWidgetMedia extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            child: CachedNetworkImage(
-                              imageUrl: "${Constant.baseImage}${item.filePath}",
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
+                            child: ImageView(
+                                url: item.filePath, fit: BoxFit.cover),
                           ),
                         ),
                       );

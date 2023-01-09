@@ -17,4 +17,6 @@ class Constant {
   static var sdQuality = '/sddefault.jpg';
   static var noImage =
       'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+  static var transparentImage =
+      "https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png";
 }

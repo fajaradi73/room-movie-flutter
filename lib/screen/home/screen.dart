@@ -21,7 +21,7 @@ class HomeScreen extends GetView<HomeBloc> {
   Widget build(BuildContext context) {
     return EasyRefresh(
       onRefresh: () async {
-        await controller.getMovie();
+        await controller.easyRefresh();
       },
       child: Center(
           child: SingleChildScrollView(

@@ -118,4 +118,8 @@ class StaticArtistResults {
       ArtistResults()
     ];
   }
+
+  static List<ArtistResults> get newData {
+    return [];
+  }
 }

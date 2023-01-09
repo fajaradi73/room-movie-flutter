@@ -5,14 +5,13 @@
  *     github 	  : https://github.com/fajaradi73
  *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/detail/season_item.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 
 import '../../../gen_theme/colors.gen.dart';
-import '../../../util/constant.dart';
 
 class SerialTvDetailWidgetSeason extends StatelessWidget {
   const SerialTvDetailWidgetSeason(
@@ -44,20 +43,15 @@ class SerialTvDetailWidgetSeason extends StatelessWidget {
                 height: 21.0.height(),
                 width: Get.width * 0.35,
                 child: Card(
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: "${Constant.baseImage}${item?.posterPath}",
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
-                ),
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: ImageView(
+                      url: item?.posterPath,
+                      fit: BoxFit.cover,
+                    )),
               ),
               Container(
                 width: Get.width * 0.59,

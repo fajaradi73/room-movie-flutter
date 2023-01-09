@@ -7,14 +7,13 @@
  *     github 	  : https://github.com/fajaradi73
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 
-import '../../util/constant.dart';
 import '../../util/util.dart';
+import '../widget/image_view.dart';
 
 class ArtistResultsItem extends StatelessWidget {
   const ArtistResultsItem({Key? key, required this.data}) : super(key: key);
@@ -35,12 +34,9 @@ class ArtistResultsItem extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              child: CachedNetworkImage(
-                imageUrl: "${Constant.baseImage}${data.profilePath}",
+              child: ImageView(
+                url: data.profilePath,
                 fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

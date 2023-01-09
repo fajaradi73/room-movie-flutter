@@ -18,11 +18,11 @@ import 'package:room_movie/service/api_service.dart';
 import '../../util/exception.dart';
 
 class HomeBloc extends GetxController {
-  var listMovie = StaticResults.load.obs;
-  var listTv = StaticResults.load.obs;
-  var listArtist = StaticArtistResults.load.obs;
+  var listMovie = StaticResults.newData.obs;
+  var listTv = StaticResults.newData.obs;
+  var listArtist = StaticArtistResults.newData.obs;
 
-  var isLoading = false.obs;
+  var isLoading = true.obs;
   var service = ApiService();
   var isFirstOpen = true;
 
@@ -31,6 +31,14 @@ class HomeBloc extends GetxController {
       (this).getMovie();
       isFirstOpen = false;
     }
+  }
+
+  Future<void> easyRefresh() async {
+    listMovie.clear();
+    listTv.clear();
+    listArtist.clear();
+    isLoading.value = true;
+    (this).getMovie();
   }
 
   Future<void> getMovie() async {

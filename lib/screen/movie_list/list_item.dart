@@ -8,14 +8,12 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../gen_theme/assets.gen.dart';
 import '../../router/app_route.dart';
 import '../../util/constant.dart';
 import '../../util/util.dart';
@@ -32,62 +30,54 @@ class MovieListItem extends StatelessWidget {
         Get.toNamed(Pages.movieDetailScreen, arguments: {"idResults": data.id});
       },
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
             height: 30.0.height(),
-            width: SizerUtil.width,
-            child: Hero(
-              tag: "${data.id}",
-              child: Card(
-                semanticContainer: true,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: data.posterPath != null
-                      ? "${Constant.baseImage}${data.posterPath}"
-                      : "",
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    alignment: Alignment.topRight,
-                    child: Container(
-                        width: 45,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).backgroundColor,
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(15.0))),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 3.5),
-                                child: Icon(
-                                  Icons.star,
-                                  size: 16,
-                                  color: Colors.amber,
-                                ),
-                              ),
-                              Text(
-                                "${data.voteAverage}",
-                                style: const TextStyle(fontSize: 13),
-                              ),
-                            ],
-                          ),
-                        )),
+            width: Get.width,
+            child: Card(
+              semanticContainer: true,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(data.posterPath != null
+                        ? "${Constant.baseImage}${data.posterPath}"
+                        : Constant.transparentImage),
+                    fit: BoxFit.cover,
                   ),
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Assets.images.noImage.image(),
                 ),
+                alignment: Alignment.topRight,
+                child: Container(
+                    width: 45,
+                    height: 25,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(15.0))),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3.5),
+                            child: Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Colors.amber,
+                            ),
+                          ),
+                          Text(
+                            data.voteAverage != null
+                                ? prettify(double.parse("${data.voteAverage}"))
+                                : "",
+                            style: const TextStyle(fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    )),
               ),
             ),
           ),

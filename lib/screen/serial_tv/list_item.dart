@@ -7,17 +7,14 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
-// ignore_for_file: file_names
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/util/util.dart';
 
-import '../../gen_theme/assets.gen.dart';
 import '../../router/app_route.dart';
-import '../../util/constant.dart';
+import '../widget/image_view.dart';
 
 // ignore: must_be_immutable
 class SerialTvWidgetListItem extends StatelessWidget {
@@ -45,15 +42,9 @@ class SerialTvWidgetListItem extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: data.backdropPath != null
-                      ? "${Constant.baseImage}${data.backdropPath}"
-                      : "",
+                child: ImageView(
+                  url: data.backdropPath,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Assets.images.noImage.image(),
                 ),
               ),
             ),
@@ -71,15 +62,9 @@ class SerialTvWidgetListItem extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: data.posterPath != null
-                              ? "${Constant.baseImage}${data.posterPath}"
-                              : "",
+                        child: ImageView(
+                          url: data.posterPath,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              Assets.images.noImage.image(),
                         ),
                       ),
                     ),

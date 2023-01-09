@@ -8,12 +8,10 @@ import 'animated_size_switcher.dart';
 class ShimmerSwitch extends StatelessWidget {
   final Stream<bool>? stream;
   final Widget child;
+  final Widget? loadingChild;
 
-  const ShimmerSwitch({
-    super.key,
-    this.stream,
-    required this.child,
-  });
+  const ShimmerSwitch(
+      {super.key, this.stream, required this.child, this.loadingChild});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +19,10 @@ class ShimmerSwitch extends StatelessWidget {
       stream: (this).stream,
       builder: (context, snap) {
         return AnimatedSwitcherSize(
-          fadeDuration: const Duration(milliseconds: 2000),
-          sizeDuration: const Duration(milliseconds: 2000),
+          fadeDuration: const Duration(milliseconds: 4000),
+          sizeDuration: const Duration(milliseconds: 4000),
           child: (snap.hasData && snap.data == true).either(
-            trueV: ShimmerChild(child: child),
+            trueV: ShimmerChild(child: loadingChild ?? child),
             falseV: child,
           ),
         );

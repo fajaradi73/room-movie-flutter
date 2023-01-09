@@ -5,7 +5,6 @@
  *     github 	  : https://github.com/fajaradi73
  *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/gen_theme/colors.gen.dart';
@@ -13,8 +12,7 @@ import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/detail/credits.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
-
-import '../../../util/constant.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 
 class SerialTvDetailWidgetActor extends GetView<MovieDetailBloc> {
   const SerialTvDetailWidgetActor({Key? key, required this.data})
@@ -66,14 +64,9 @@ class SerialTvDetailWidgetActor extends GetView<MovieDetailBloc> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        "${Constant.baseImage}${item?.profilePath}",
+                                  child: ImageView(
+                                    url: item?.profilePath,
                                     fit: BoxFit.cover,
-                                    placeholder: (context, url) => const Center(
-                                        child: CircularProgressIndicator()),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
                                   ),
                                 ),
                               ),

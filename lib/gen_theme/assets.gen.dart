@@ -30,6 +30,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/no-image.png
   AssetGenImage get noImage =>
       const AssetGenImage('assets/images/no-image.png');
+
+  /// File path: assets/images/transparent.png
+  AssetGenImage get transparent =>
+      const AssetGenImage('assets/images/transparent.png');
 }
 
 class $AssetsJsonGen {

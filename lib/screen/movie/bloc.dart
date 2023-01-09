@@ -20,20 +20,20 @@ import '../../util/exception.dart';
 
 class MovieBloc extends GetxController {
   final mapsMovie = <String, List<Results>>{
-    MovieType.POPULAR.label: StaticResults.load,
-    MovieType.SEDANG_TAYANG.label: StaticResults.load,
-    MovieType.RATING_TERATAS.label: StaticResults.load,
-    MovieType.MENDATANG.label: StaticResults.load,
-    MovieType.SEDANG_TREN.label: StaticResults.load
+    MovieType.POPULAR.label: StaticResults.newData,
+    MovieType.SEDANG_TAYANG.label: StaticResults.newData,
+    MovieType.RATING_TERATAS.label: StaticResults.newData,
+    MovieType.MENDATANG.label: StaticResults.newData,
+    MovieType.SEDANG_TREN.label: StaticResults.newData
   }.obs;
 
-  var isLoading = false.obs;
+  var isLoading = true.obs;
   var service = ApiService();
-  var listPopular = StaticResults.load.obs;
-  var listNowPlaying = StaticResults.load.obs;
-  var listTopRated = StaticResults.load.obs;
-  var listTrending = StaticResults.load.obs;
-  var listUpcoming = StaticResults.load.obs;
+  var listPopular = StaticResults.newData.obs;
+  var listNowPlaying = StaticResults.newData.obs;
+  var listTopRated = StaticResults.newData.obs;
+  var listTrending = StaticResults.newData.obs;
+  var listUpcoming = StaticResults.newData.obs;
   var isFirstOpen = true;
 
   void openScreen() {

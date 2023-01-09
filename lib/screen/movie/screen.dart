@@ -18,6 +18,7 @@ import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
 import '../../router/app_route.dart';
 import '../dashboard/bloc.dart';
+import '../shimmer/shimmer_results.dart';
 import '../widget/animated_list_builder.dart';
 import 'list_item.dart';
 
@@ -70,18 +71,33 @@ class MovieScreen extends GetView<MovieBloc> {
                     constraints: BoxConstraints(
                         minHeight: Get.height * 0.3,
                         maxHeight: Get.height * 0.36),
-                    child: AnimatedListBuilder(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: list.length > 5 ? 5 : list.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = list[index];
-                        return ShimmerSwitch(
-                            stream: controller.isLoading.stream,
-                            child: MovieWidgetListItem(data));
-                      },
-                    )),
+                    child: (list.isNotEmpty)
+                        ? AnimatedListBuilder(
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: list.length > 5 ? 5 : list.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var data = list[index];
+                              return MovieWidgetListItem(data);
+                            },
+                          )
+                        : SwitcherBuilder(
+                            fadeDuration: const Duration(milliseconds: 1000),
+                            sizeDuration: const Duration(milliseconds: 1000),
+                            builder: () {
+                              return AnimatedListBuilder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 5,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ShimmerSwitch(
+                                    stream: controller.isLoading.stream,
+                                    child: const ShimmerResults(),
+                                  );
+                                },
+                              );
+                            },
+                          )),
               ],
             );
           })),

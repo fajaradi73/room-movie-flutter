@@ -6,7 +6,7 @@ import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/screen/dashboard/bloc.dart';
 import 'package:room_movie/screen/movie_list/bloc.dart';
-import 'package:room_movie/screen/movie_list/list_item.dart';
+import 'package:room_movie/screen/shimmer/shimmer_movie_list.dart';
 import 'package:room_movie/screen/widget/gesture_scaffold.dart';
 import 'package:room_movie/screen/widget/global_header.dart';
 
@@ -14,6 +14,7 @@ import '../widget/LoadingScreen.dart';
 import '../widget/animated_stagger_builder.dart';
 import '../widget/lazy_load.dart';
 import '../widget/shimmer_loading.dart';
+import 'list_item.dart';
 
 /// Created by Fajar Adi Prasetyo on 20/12/2022.
 
@@ -30,48 +31,71 @@ class MovieListScreen extends GetView<MovieListBloc> {
       ),
       body: EasyRefresh(
         onRefresh: () async {
+          controller.list.clear();
           await controller.getMovie(1);
         },
         child: Obx(() {
-          return LazyLoad(
-              isLoading: controller.pageLoad.value,
-              child: AnimatedStaggerBuilder(
-                  controller: controller.scrollController,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  itemCount: (controller.pageLoad.value).either(
-                      trueV: controller.list.length + 1,
-                      falseV: controller.list.length),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return SwitcherBuilder(builder: () {
+          if (controller.list.isNotEmpty) {
+            return LazyLoad(
+                isLoading: controller.pageLoad.value,
+                child: AnimatedStaggerBuilder(
+                    controller: controller.scrollController,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    itemCount: (controller.pageLoad.value).either(
+                        trueV: controller.list.length + 1,
+                        falseV: controller.list.length),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return SwitcherBuilder(builder: () {
+                        if (controller.pageLoad.value &&
+                            index >= controller.list.length) {
+                          return const Center(child: LoadingScreen());
+                        } else {
+                          var data = controller.list[index];
+                          return MovieListItem(
+                            data: data,
+                          );
+                        }
+                      });
+                    },
+                    staggeredTileBuilder: (index) {
                       if (controller.pageLoad.value &&
                           index >= controller.list.length) {
-                        return const Center(child: LoadingScreen());
+                        return StaggeredTile.count(
+                            2, Get.width / (Get.height / 1));
                       } else {
-                        var data = controller.list[index];
+                        return StaggeredTile.count(
+                            1, Get.width / (Get.height / 0.45.height()));
+                      }
+                    }),
+                onEndOfPage: () async {
+                  await controller.getMovie(controller.currentPage.value);
+                });
+          } else {
+            return AnimatedStaggerBuilder(
+                controller: controller.scrollController,
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                itemCount: 8,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return SwitcherBuilder(
+                      fadeDuration: const Duration(milliseconds: 1000),
+                      sizeDuration: const Duration(milliseconds: 1000),
+                      builder: () {
                         return ShimmerSwitch(
                             stream: controller.isLoading.stream,
-                            child: MovieListItem(
-                              data: data,
-                            ));
-                      }
-                    });
-                  },
-                  staggeredTileBuilder: (index) {
-                    if (controller.pageLoad.value &&
-                        index >= controller.list.length) {
-                      return StaggeredTile.count(
-                          2, Get.width / (Get.height / 1));
-                    } else {
-                      return StaggeredTile.count(
-                          1, Get.width / (Get.height / 0.45.height()));
-                    }
-                  }),
-              onEndOfPage: () async {
-                await controller.getMovie(controller.currentPage.value);
-              });
+                            child: const ShimmerMovieList());
+                      });
+                },
+                staggeredTileBuilder: (index) {
+                  return StaggeredTile.count(
+                      1, Get.width / (Get.height / 0.45.height()));
+                });
+          }
         }),
       ),
       floatingActionButton: Obx(() {
