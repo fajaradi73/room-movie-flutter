@@ -133,6 +133,38 @@ extension ExString on String? {
     }
   }
 
+  String? calculateAge({required String format}) {
+    var ageS = "";
+    if ((this) != null) {
+      DateTime dateTime = DateFormat(format).parse((this!));
+      DateTime currentDate = DateTime.now();
+      int milliSecond =
+          currentDate.millisecondsSinceEpoch - dateTime.millisecondsSinceEpoch;
+      var diffDate = DateTime.fromMillisecondsSinceEpoch(milliSecond);
+      var age = diffDate.year - 1970;
+      //Check if less than a year
+      if (age == 0) {
+        age = diffDate.month;
+        //Check if less than a month
+        if (age == 0) {
+          age = diffDate.weekday;
+          //Check if less than a week
+          if (age == 1) {
+            age = diffDate.day;
+            ageS = "${age - 1} days old";
+          } else {
+            ageS = "${age - 1} weeks old";
+          }
+        } else {
+          ageS = "$age months old";
+        }
+      } else {
+        ageS = "$age years old";
+      }
+    }
+    return ageS;
+  }
+
   String? dateFormat({
     required String currentFormat,
     required String desiredFormat,
@@ -152,7 +184,7 @@ extension ExString on String? {
   }
 
   DateTime? toDate([String format = 'dd/MM/yyyy']) {
-    if ((this) != null) {
+    if ((this) != null && (this)?.isNotEmpty == true) {
       return DateFormat(format).parse(this!);
     } else {
       return null;

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 
+import '../../router/app_route.dart';
 import '../../util/util.dart';
 import '../widget/image_view.dart';
 
@@ -22,7 +23,10 @@ class ArtistResultsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Pages.artistDetailScreen,
+            arguments: {"idResults": data.id});
+      },
       child: Column(
         children: [
           SizedBox(

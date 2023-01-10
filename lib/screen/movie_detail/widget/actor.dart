@@ -16,6 +16,7 @@ import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/screen/shimmer/shimmer_results.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
+import '../../../router/app_route.dart';
 import '../../widget/image_view.dart';
 
 class MovieDetailWidgetActor extends GetView<MovieDetailBloc> {
@@ -52,7 +53,10 @@ class MovieDetailWidgetActor extends GetView<MovieDetailBloc> {
                     itemBuilder: (BuildContext context, int index) {
                       var item = data?.cast![index];
                       return InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(Pages.artistDetailScreen,
+                              arguments: {"idResults": item?.id});
+                        },
                         child: Container(
                           width: 45.0.width(),
                           margin: const EdgeInsets.all(5),

@@ -27,6 +27,13 @@ class $AssetsImagesGen {
   AssetGenImage get background =>
       const AssetGenImage('assets/images/background.jpg');
 
+  /// File path: assets/images/film-background.jpg
+  AssetGenImage get filmBackground =>
+      const AssetGenImage('assets/images/film-background.jpg');
+
+  /// File path: assets/images/film.jpg
+  AssetGenImage get film => const AssetGenImage('assets/images/film.jpg');
+
   /// File path: assets/images/no-image.png
   AssetGenImage get noImage =>
       const AssetGenImage('assets/images/no-image.png');

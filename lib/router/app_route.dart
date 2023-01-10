@@ -9,6 +9,8 @@
 
 // ignore_for_file: file_names
 import 'package:get/get.dart';
+import 'package:room_movie/screen/artist_detail/bloc.dart';
+import 'package:room_movie/screen/artist_detail/screen.dart';
 import 'package:room_movie/screen/dashboard/binding.dart';
 import 'package:room_movie/screen/dashboard/screen.dart';
 import 'package:room_movie/screen/gallery/bloc.dart';
@@ -80,6 +82,12 @@ class AppRoute {
         binding: BindingsBuilder(() {
           Get.put(SearchBloc());
         })),
+    GetPage(
+        name: Pages.artistDetailScreen,
+        page: () => const ArtistDetailScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(ArtistDetailBloc());
+        })),
   ];
 }
 
@@ -93,4 +101,5 @@ class Pages {
   static const galleryScreen = "/gallery_screen";
   static const previewScreen = "/preview_screen";
   static const searchScreen = "/search_screen";
+  static const artistDetailScreen = "/artist_detail_screen";
 }

@@ -8,22 +8,27 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 class CreditsItem {
-  CreditsItem({
-    this.adult,
-    this.gender,
-    this.id,
-    this.knownForDepartment,
-    this.name,
-    this.originalName,
-    this.popularity,
-    this.profilePath,
-    this.castId,
-    this.character,
-    this.creditId,
-    this.order,
-    this.department,
-    this.job,
-  });
+  CreditsItem(
+      {this.adult,
+      this.gender,
+      this.id,
+      this.knownForDepartment,
+      this.name,
+      this.originalName,
+      this.popularity,
+      this.profilePath,
+      this.castId,
+      this.character,
+      this.creditId,
+      this.order,
+      this.department,
+      this.job,
+      this.voteCount,
+      this.posterPath,
+      this.title,
+      this.mediaType,
+      this.releaseDate,
+      this.firstAirDate});
 
   CreditsItem.fromJson(dynamic json) {
     adult = json['adult'];
@@ -40,6 +45,12 @@ class CreditsItem {
     order = json['order'];
     department = json['department'];
     job = json['job'];
+    voteCount = json['vote_count'];
+    posterPath = json['poster_path'];
+    title = json['title'];
+    mediaType = json['media_type'];
+    releaseDate = json['release_date'];
+    firstAirDate = json['first_air_date'];
   }
 
   bool? adult;
@@ -57,6 +68,12 @@ class CreditsItem {
 
   String? department;
   String? job;
+  num? voteCount;
+  String? posterPath;
+  String? title;
+  String? mediaType;
+  String? firstAirDate;
+  String? releaseDate;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -74,6 +91,12 @@ class CreditsItem {
     map['order'] = order;
     map['department'] = department;
     map['job'] = job;
+    map['vote_count'] = voteCount;
+    map['poster_path'] = posterPath;
+    map['title'] = title;
+    map['media_type'] = mediaType;
+    map['release_date'] = releaseDate;
+    map['first_air_date'] = firstAirDate;
     return map;
   }
 }

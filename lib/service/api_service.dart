@@ -12,6 +12,7 @@
 import 'dart:async';
 
 import 'package:room_movie/models/artist/artist_response.dart';
+import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/service/api_uri.dart';
 import 'package:room_movie/util/dio_util.dart';
@@ -83,5 +84,11 @@ class ApiService {
   Future<ArtistResponse?> getArtistPopular(int page) async {
     var data = await dio.get(uri: ApiUri.popularArtist(page));
     return ArtistResponse.fromJson(data);
+  }
+
+  Future<ArtistResults?> getArtistDetail(int id) async {
+    var data = await dio.get(
+        uri: ApiUri.detailArtist(id, "combined_credits,external_ids"));
+    return ArtistResults.fromJson(data);
   }
 }

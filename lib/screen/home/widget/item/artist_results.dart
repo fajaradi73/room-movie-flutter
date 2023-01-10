@@ -4,6 +4,7 @@ import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/screen/home/bloc.dart';
 
+import '../../../../router/app_route.dart';
 import '../../../../util/util.dart';
 import '../../../widget/image_view.dart';
 
@@ -15,7 +16,10 @@ class HomeArtistItem extends GetView<HomeBloc> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Pages.artistDetailScreen,
+            arguments: {"idResults": item.id});
+      },
       child: Container(
         width: 45.0.width(),
         margin: const EdgeInsets.all(5),

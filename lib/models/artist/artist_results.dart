@@ -1,4 +1,7 @@
+import 'package:room_movie/models/movie/detail/credits.dart';
+
 import '../movie/Results.dart';
+import '../movie/detail/external_ids.dart';
 
 class ArtistResults {
   ArtistResults({
@@ -10,6 +13,12 @@ class ArtistResults {
     String? name,
     num? popularity,
     String? profilePath,
+    ExternalIds? externalIds,
+    Credits? combineCredits,
+    String? biography,
+    List<String>? alsoKnownAs,
+    String? birthday,
+    String? placeOfBirth,
   }) {
     _adult = adult;
     _gender = gender;
@@ -19,6 +28,12 @@ class ArtistResults {
     _name = name;
     _popularity = popularity;
     _profilePath = profilePath;
+    _externalIds = externalIds;
+    _combineCredits = combineCredits;
+    _biography = biography;
+    _alsoKnownAs = alsoKnownAs;
+    _birthday = birthday;
+    _placeOfBirth = placeOfBirth;
   }
 
   ArtistResults.fromJson(dynamic json) {
@@ -35,6 +50,18 @@ class ArtistResults {
     _name = json['name'];
     _popularity = json['popularity'];
     _profilePath = json['profile_path'];
+    _externalIds = json['external_ids'] != null
+        ? ExternalIds.fromJson(json['external_ids'])
+        : null;
+    _combineCredits = json['combined_credits'] != null
+        ? Credits.fromJson(json['combined_credits'])
+        : null;
+    _biography = json['biography'];
+    _birthday = json['birthday'];
+    _alsoKnownAs = json['also_known_as'] != null
+        ? json['also_known_as'].cast<String>()
+        : [];
+    _placeOfBirth = json['place_of_birth'];
   }
 
   bool? _adult;
@@ -45,27 +72,12 @@ class ArtistResults {
   String? _name;
   num? _popularity;
   String? _profilePath;
-
-  ArtistResults copyWith({
-    bool? adult,
-    num? gender,
-    num? id,
-    List<Results>? knownFor,
-    String? knownForDepartment,
-    String? name,
-    num? popularity,
-    String? profilePath,
-  }) =>
-      ArtistResults(
-        adult: adult ?? _adult,
-        gender: gender ?? _gender,
-        id: id ?? _id,
-        knownFor: knownFor ?? _knownFor,
-        knownForDepartment: knownForDepartment ?? _knownForDepartment,
-        name: name ?? _name,
-        popularity: popularity ?? _popularity,
-        profilePath: profilePath ?? _profilePath,
-      );
+  ExternalIds? _externalIds;
+  Credits? _combineCredits;
+  String? _biography;
+  List<String>? _alsoKnownAs;
+  String? _birthday;
+  String? _placeOfBirth;
 
   bool? get adult => _adult;
 
@@ -83,6 +95,18 @@ class ArtistResults {
 
   String? get profilePath => _profilePath;
 
+  ExternalIds? get externalIds => _externalIds;
+
+  Credits? get combineCredits => _combineCredits;
+
+  String? get biography => _biography;
+
+  List<String>? get alsoKnownAs => _alsoKnownAs;
+
+  String? get birthday => _birthday;
+
+  String? get placeOfBirth => _placeOfBirth;
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['adult'] = _adult;
@@ -95,6 +119,16 @@ class ArtistResults {
     map['name'] = _name;
     map['popularity'] = _popularity;
     map['profile_path'] = _profilePath;
+    if (_externalIds != null) {
+      map['external_ids'] = _externalIds?.toJson();
+    }
+    if (_combineCredits != null) {
+      map['combined_credits'] = _combineCredits?.toJson();
+    }
+    map['biography'] = _biography;
+    map['also_known_as'] = _alsoKnownAs;
+    map['birthday'] = _birthday;
+    map['place_of_birth'] = _placeOfBirth;
     return map;
   }
 }
