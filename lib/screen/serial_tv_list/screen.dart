@@ -74,7 +74,7 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
                           2, Get.width / (Get.height / 1));
                     } else {
                       return StaggeredTile.count(
-                          1, Get.width / (Get.height / 0.45.height()));
+                          1, Get.width / (Get.height / 0.47.height()));
                     }
                   }),
               onEndOfPage: () async {
