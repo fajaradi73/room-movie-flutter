@@ -56,8 +56,7 @@ class ArtistScreen extends GetView<ArtistBloc> {
                     index >= controller.listArtist.length) {
                   return StaggeredTile.count(2, Get.width / (Get.height / 1));
                 } else {
-                  return StaggeredTile.count(
-                      1, Get.width / (Get.height / 0.36.height()));
+                  return const StaggeredTile.fit(1);
                 }
               }),
           onEndOfPage: () async {

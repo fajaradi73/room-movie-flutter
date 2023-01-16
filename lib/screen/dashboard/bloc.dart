@@ -18,12 +18,15 @@ import 'package:room_movie/screen/movie/bloc.dart';
 import 'package:room_movie/screen/serial_tv/bloc.dart';
 import 'package:room_movie/screen/settings/bloc.dart';
 
+import '../../models/enum/search_type.dart';
+
 class DashboardBloc extends GetxController {
   var searchHint = "".obs;
   var selectedNavBar = 0.obs;
   var bottomItem = BottomNavigationList.items.obs;
   var movieType = MovieType.NULL.obs;
   var tvType = TvType.NULL.obs;
+  var searchType = SearchType.NULL.obs;
 
   //// bloc
   final homeBloc = Get.find<HomeBloc>();
@@ -61,12 +64,16 @@ class DashboardBloc extends GetxController {
   changeAppBar(index) {
     if (index == 0) {
       searchHint = "Search Movie, Serial Tv, Artist".obs;
-    } else if (index == 3) {
-      searchHint = "Search Artist".obs;
-    } else if (index == 2) {
-      searchHint = "Search Serial Tv".obs;
+      searchType.value = SearchType.ALL;
     } else if (index == 1) {
       searchHint = "Search Movie".obs;
+      searchType.value = SearchType.MOVIE;
+    } else if (index == 2) {
+      searchHint = "Search Serial Tv".obs;
+      searchType.value = SearchType.TV;
+    } else if (index == 3) {
+      searchHint = "Search Artist".obs;
+      searchType.value = SearchType.ARTIST;
     }
   }
 }

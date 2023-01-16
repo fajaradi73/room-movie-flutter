@@ -52,7 +52,7 @@ class ThemeCubit extends Cubit<ThemeData> {
         selectionColor: Colors.grey,
         selectionHandleColor: Colors.grey,
       ),
-      primaryIconTheme: const IconThemeData(color: Colors.grey),
+      primaryIconTheme: const IconThemeData(color: Colors.black),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
           selectedItemColor: ColorName.colorPrimary,

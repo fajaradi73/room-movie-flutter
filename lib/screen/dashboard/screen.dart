@@ -89,22 +89,25 @@ class DashboardScreen extends StatelessWidget {
       title: Container(
         height: kToolbarHeight,
         alignment: Alignment.center,
-        child: TextField(
-          onTap: () {
-            Get.toNamed(Pages.searchScreen);
-          },
-          textAlignVertical: TextAlignVertical.center,
-          readOnly: true,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.zero,
-              hintText: logic.searchHint.value,
-              hintStyle: const TextStyle(fontSize: 18),
-              filled: true,
-              prefixIcon: Icon(
-                Icons.search,
-                color: Theme.of(Get.context!).primaryIconTheme.color,
-              )),
-        ),
+        child: Obx(() {
+          return TextField(
+            onTap: () {
+              Get.toNamed(Pages.searchScreen,
+                  arguments: {"search_type": logic.searchType.value});
+            },
+            textAlignVertical: TextAlignVertical.center,
+            readOnly: true,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                hintText: logic.searchHint.value,
+                hintStyle: const TextStyle(fontSize: 18),
+                filled: true,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Theme.of(context).primaryIconTheme.color,
+                )),
+          );
+        }),
       ),
     );
   }

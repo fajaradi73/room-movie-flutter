@@ -13,6 +13,7 @@ class ApiUri {
   static String artist(String path) => "person/$path?api_key=$apiKey";
 
   static String artistNoPath() => "person?api_key=$apiKey";
+  static String multiNoPath() => "multi?api_key=$apiKey";
 
   static String popularMovie(int page) => "${movie("popular")}&page=$page";
 
@@ -57,4 +58,7 @@ class ApiUri {
 
   static String detailArtist(int id, String append) =>
       "${artist("$id")}&append_to_response=$append";
+
+  static String searchMulti(int page, String query) =>
+      "search/${multiNoPath()}&page=$page&query=$query";
 }

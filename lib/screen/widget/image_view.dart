@@ -37,15 +37,17 @@ class ImageView extends StatelessWidget {
           child: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,
             placeholderFit: BoxFit.contain,
-            image: url != null
-                ? url?.contains("https") == true
-                    ? "$url"
-                    : "${Constant.baseImage}$url"
-                : Constant.transparentImage,
+            image: url?.contains("https") == true
+                ? "$url"
+                : "${Constant.baseImage}$url",
             imageErrorBuilder: (context, error, stackTrace) {
-              return Assets.images.noImage.image(
-                  width: width != 0.0 ? width : null,
-                  height: height != 0.0 ? height : null);
+              return Container(
+                color: Theme.of(context).cardTheme.color,
+                child: Assets.images.noImage.image(
+                    width: width != 0.0 ? width : null,
+                    height: height != 0.0 ? height : null,
+                    color: Colors.black),
+              );
             },
             fit: fit,
             width: width != 0.0 ? width : null,

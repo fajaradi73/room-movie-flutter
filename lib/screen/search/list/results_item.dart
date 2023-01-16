@@ -1,34 +1,35 @@
 // ignore_for_file: file_names
 /*
- * 
- *     movie_list_item
- *     Created by Fajar Adi Prasetyo on 20/12/2022
+ *     Created by Fajar Adi Prasetyo on 16/01/2023
  *     email 	    : fajaradiprast@gmail.com
  *     github 	  : https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
-import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../router/app_route.dart';
-import '../../util/constant.dart';
-import '../../util/util.dart';
+import '../../../models/movie/Results.dart';
+import '../../../router/app_route.dart';
+import '../../../util/constant.dart';
+import '../../../util/util.dart';
 
-class MovieListItem extends StatelessWidget {
-  const MovieListItem({super.key, required this.data});
+class SearchResultsItem extends StatelessWidget {
+  const SearchResultsItem({Key? key, required this.data, required this.isMovie})
+      : super(key: key);
 
   final Results data;
+  final bool isMovie;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Pages.movieDetailScreen, arguments: {"idResults": data.id});
+        Get.toNamed(
+            (isMovie) ? Pages.movieDetailScreen : Pages.serialTvDetailScreen,
+            arguments: {"idResults": data.id});
       },
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -39,6 +40,7 @@ class MovieListItem extends StatelessWidget {
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
+              // color: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
@@ -86,7 +88,7 @@ class MovieListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-              "${data.title}",
+              "${data.title ?? data.name}",
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               maxLines: 1,
             ),
@@ -96,15 +98,16 @@ class MovieListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: FutureBuilder(
-                future: getGenre(data.genreIds, true),
+                future: getGenre(data.genreIds, isMovie),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data?.isNotEmpty == true) {
                     return Text("${snapshot.data}",
                         style: const TextStyle(
                             fontSize: 14, overflow: TextOverflow.ellipsis),
                         maxLines: 1);
                   } else {
-                    return const Text("");
+                    return const Text("-");
                   }
                 }),
           ),
@@ -113,7 +116,7 @@ class MovieListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-                "${data.releaseDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                "${(data.releaseDate ?? data.firstAirDate).dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
                 style: const TextStyle(
                     fontSize: 14, overflow: TextOverflow.ellipsis),
                 maxLines: 1),

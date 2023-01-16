@@ -1,28 +1,24 @@
 // ignore_for_file: file_names
-
 /*
- * room_movie
- *     tv_result.dart
- *     Created by Fajar Adi Prasetyo on 31/8/2022
+ *     Created by Fajar Adi Prasetyo on 16/01/2023
  *     email 	    : fajaradiprast@gmail.com
- *     github 	: https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     github 	  : https://github.com/fajaradi73
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
+import '../movie/Results.dart';
+import '../movie/detail/credits.dart';
+import '../movie/detail/external_ids.dart';
+import '../movie/detail/genres.dart';
+import '../movie/detail/images.dart';
+import '../movie/detail/keywords.dart';
+import '../movie/detail/network_item.dart';
+import '../movie/detail/recommendations.dart';
+import '../movie/detail/season_item.dart';
+import '../movie/detail/spoken_languages.dart';
+import '../movie/detail/videos.dart';
 
-import 'package:room_movie/models/movie/detail/credits.dart';
-import 'package:room_movie/models/movie/detail/external_ids.dart';
-import 'package:room_movie/models/movie/detail/network_item.dart';
-import 'package:room_movie/models/movie/detail/season_item.dart';
-
-import 'detail/genres.dart';
-import 'detail/images.dart';
-import 'detail/keywords.dart';
-import 'detail/recommendations.dart';
-import 'detail/spoken_languages.dart';
-import 'detail/videos.dart';
-
-class Results {
-  Results(
+class SearchItem {
+  SearchItem(
       {this.adult,
       this.backdropPath,
       this.genreIds,
@@ -61,9 +57,19 @@ class Results {
       this.networks,
       this.seasons,
       this.numberOfSeason,
-      this.numberOfEpisode});
+      this.numberOfEpisode,
+      this.gender,
+      this.knownFor,
+      this.knownForDepartment,
+      this.profilePath,
+      this.combineCredits,
+      this.biography,
+      this.alsoKnownAs,
+      this.birthday,
+      this.placeOfBirth,
+      this.mediaType});
 
-  Results.fromJson(dynamic json) {
+  SearchItem.fromJson(dynamic json) {
     adult = json['adult'] ?? false;
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
@@ -136,6 +142,26 @@ class Results {
     }
     numberOfSeason = json['number_of_seasons'];
     numberOfEpisode = json['number_of_episodes'];
+
+    gender = json['gender'];
+    if (json['known_for'] != null) {
+      knownFor = [];
+      json['known_for'].forEach((v) {
+        knownFor?.add(Results.fromJson(v));
+      });
+    }
+    knownForDepartment = json['known_for_department'];
+    profilePath = json['profile_path'];
+    combineCredits = json['combined_credits'] != null
+        ? Credits.fromJson(json['combined_credits'])
+        : null;
+    biography = json['biography'];
+    birthday = json['birthday'];
+    alsoKnownAs = json['also_known_as'] != null
+        ? json['also_known_as'].cast<String>()
+        : [];
+    placeOfBirth = json['place_of_birth'];
+    mediaType = json['media_type'];
   }
 
   bool? adult;
@@ -156,7 +182,6 @@ class Results {
   String? name;
   List<String>? originCountry;
   String? originalName;
-
   int? budget;
   List<Genres>? genres;
   String? homepage;
@@ -178,6 +203,17 @@ class Results {
   List<SeasonItem>? seasons;
   int? numberOfSeason;
   int? numberOfEpisode;
+
+  num? gender;
+  List<Results>? knownFor;
+  String? knownForDepartment;
+  String? profilePath;
+  Credits? combineCredits;
+  String? biography;
+  List<String>? alsoKnownAs;
+  String? birthday;
+  String? placeOfBirth;
+  String? mediaType;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -241,24 +277,46 @@ class Results {
     }
     map['number_of_episodes'] = numberOfEpisode;
     map['number_of_seasons'] = numberOfSeason;
+
+    map['gender'] = gender;
+    if (knownFor != null) {
+      map['known_for'] = knownFor?.map((v) => v.toJson()).toList();
+    }
+    map['known_for_department'] = knownForDepartment;
+    map['profile_path'] = profilePath;
+    if (combineCredits != null) {
+      map['combined_credits'] = combineCredits?.toJson();
+    }
+    map['biography'] = biography;
+    map['also_known_as'] = alsoKnownAs;
+    map['birthday'] = birthday;
+    map['place_of_birth'] = placeOfBirth;
+    map['media_type'] = mediaType;
     return map;
   }
 }
 
-class StaticResults {
-  static List<Results> jsonList(List<dynamic> mapList) {
-    var list = <Results>[];
+class StaticSearchItem {
+  static List<SearchItem> jsonList(List<dynamic> mapList) {
+    var list = <SearchItem>[];
     for (var e in mapList) {
-      list.add(Results.fromJson(e));
+      list.add(SearchItem.fromJson(e));
     }
     return list;
   }
 
-  static List<Results> get load {
-    return [Results(), Results(), Results(), Results(), Results()];
+  static List<SearchItem> get load {
+    return [
+      SearchItem(),
+      SearchItem(),
+      SearchItem(),
+      SearchItem(),
+      SearchItem(),
+      SearchItem()
+    ];
   }
 
-  static List<Results> get newData {
+  static List<SearchItem> get newData {
     return [];
   }
 }

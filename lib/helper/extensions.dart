@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:room_movie/models/movie/detail/videos.dart';
 import 'package:sizer/sizer.dart';
 
+import '../models/enum/search_type.dart';
 import '../models/movie/detail/images_item.dart';
 import '../screen/widget/snackbar_widget.dart';
 import '../theme/responsives.dart';
@@ -322,10 +323,8 @@ extension TopBar on BuildContext {
     }
   }
 
-  void getunFocus() {
-    if (FocusScope.of(this).hasFocus) {
-      FocusScope.of(this).unfocus();
-    }
+  void focus(focusNode) {
+    FocusScope.of(this).requestFocus(focusNode);
   }
 }
 
@@ -377,4 +376,5 @@ extension Maps on Map<String, dynamic> {
   List<VideosItem> get listVideo => (this)["listVideo"];
   String get title => (this)["title"];
   double get ratio => (this)["ratio"];
+  SearchType get searchType => (this)["search_type"];
 }

@@ -14,6 +14,7 @@ import 'dart:async';
 import 'package:room_movie/models/artist/artist_response.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/models/movie/Results.dart';
+import 'package:room_movie/models/search/search_response.dart';
 import 'package:room_movie/service/api_uri.dart';
 import 'package:room_movie/util/dio_util.dart';
 
@@ -90,5 +91,25 @@ class ApiService {
     var data = await dio.get(
         uri: ApiUri.detailArtist(id, "combined_credits,external_ids"));
     return ArtistResults.fromJson(data);
+  }
+
+  Future<Movie?> getSearchMovie(int page, String value) async {
+    var data = await dio.get(uri: ApiUri.searchMovie(page, value));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getSearchTv(int page, String value) async {
+    var data = await dio.get(uri: ApiUri.searchSerialTv(page, value));
+    return Movie.fromJson(data);
+  }
+
+  Future<ArtistResponse?> getSearchArtist(int page, String value) async {
+    var data = await dio.get(uri: ApiUri.searchArtist(page, value));
+    return ArtistResponse.fromJson(data);
+  }
+
+  Future<SearchResponse?> getSearchMulti(int page, String value) async {
+    var data = await dio.get(uri: ApiUri.searchMulti(page, value));
+    return SearchResponse.fromJson(data);
   }
 }

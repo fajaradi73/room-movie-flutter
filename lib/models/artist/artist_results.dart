@@ -5,130 +5,87 @@ import '../movie/detail/external_ids.dart';
 
 class ArtistResults {
   ArtistResults({
-    bool? adult,
-    num? gender,
-    num? id,
-    List<Results>? knownFor,
-    String? knownForDepartment,
-    String? name,
-    num? popularity,
-    String? profilePath,
-    ExternalIds? externalIds,
-    Credits? combineCredits,
-    String? biography,
-    List<String>? alsoKnownAs,
-    String? birthday,
-    String? placeOfBirth,
-  }) {
-    _adult = adult;
-    _gender = gender;
-    _id = id;
-    _knownFor = knownFor;
-    _knownForDepartment = knownForDepartment;
-    _name = name;
-    _popularity = popularity;
-    _profilePath = profilePath;
-    _externalIds = externalIds;
-    _combineCredits = combineCredits;
-    _biography = biography;
-    _alsoKnownAs = alsoKnownAs;
-    _birthday = birthday;
-    _placeOfBirth = placeOfBirth;
-  }
+    this.adult,
+    this.gender,
+    this.id,
+    this.knownFor,
+    this.knownForDepartment,
+    this.name,
+    this.popularity,
+    this.profilePath,
+    this.externalIds,
+    this.combineCredits,
+    this.biography,
+    this.alsoKnownAs,
+    this.birthday,
+    this.placeOfBirth,
+  });
 
   ArtistResults.fromJson(dynamic json) {
-    _adult = json['adult'];
-    _gender = json['gender'];
-    _id = json['id'];
+    adult = json['adult'];
+    gender = json['gender'];
+    id = json['id'];
     if (json['known_for'] != null) {
-      _knownFor = [];
+      knownFor = [];
       json['known_for'].forEach((v) {
-        _knownFor?.add(Results.fromJson(v));
+        knownFor?.add(Results.fromJson(v));
       });
     }
-    _knownForDepartment = json['known_for_department'];
-    _name = json['name'];
-    _popularity = json['popularity'];
-    _profilePath = json['profile_path'];
-    _externalIds = json['external_ids'] != null
+    knownForDepartment = json['known_for_department'];
+    name = json['name'];
+    popularity = json['popularity'];
+    profilePath = json['profile_path'];
+    externalIds = json['external_ids'] != null
         ? ExternalIds.fromJson(json['external_ids'])
         : null;
-    _combineCredits = json['combined_credits'] != null
+    combineCredits = json['combined_credits'] != null
         ? Credits.fromJson(json['combined_credits'])
         : null;
-    _biography = json['biography'];
-    _birthday = json['birthday'];
-    _alsoKnownAs = json['also_known_as'] != null
+    biography = json['biography'];
+    birthday = json['birthday'];
+    alsoKnownAs = json['also_known_as'] != null
         ? json['also_known_as'].cast<String>()
         : [];
-    _placeOfBirth = json['place_of_birth'];
+    placeOfBirth = json['place_of_birth'];
   }
 
-  bool? _adult;
-  num? _gender;
-  num? _id;
-  List<Results>? _knownFor;
-  String? _knownForDepartment;
-  String? _name;
-  num? _popularity;
-  String? _profilePath;
-  ExternalIds? _externalIds;
-  Credits? _combineCredits;
-  String? _biography;
-  List<String>? _alsoKnownAs;
-  String? _birthday;
-  String? _placeOfBirth;
-
-  bool? get adult => _adult;
-
-  num? get gender => _gender;
-
-  num? get id => _id;
-
-  List<Results>? get knownFor => _knownFor;
-
-  String? get knownForDepartment => _knownForDepartment;
-
-  String? get name => _name;
-
-  num? get popularity => _popularity;
-
-  String? get profilePath => _profilePath;
-
-  ExternalIds? get externalIds => _externalIds;
-
-  Credits? get combineCredits => _combineCredits;
-
-  String? get biography => _biography;
-
-  List<String>? get alsoKnownAs => _alsoKnownAs;
-
-  String? get birthday => _birthday;
-
-  String? get placeOfBirth => _placeOfBirth;
+  bool? adult;
+  num? gender;
+  num? id;
+  List<Results>? knownFor;
+  String? knownForDepartment;
+  String? name;
+  num? popularity;
+  String? profilePath;
+  ExternalIds? externalIds;
+  Credits? combineCredits;
+  String? biography;
+  List<String>? alsoKnownAs;
+  String? birthday;
+  String? placeOfBirth;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['adult'] = _adult;
-    map['gender'] = _gender;
-    map['id'] = _id;
-    if (_knownFor != null) {
-      map['known_for'] = _knownFor?.map((v) => v.toJson()).toList();
+    map['adult'] = adult;
+    map['gender'] = gender;
+    map['id'] = id;
+    if (knownFor != null) {
+      map['known_for'] = knownFor?.map((v) => v.toJson()).toList();
     }
-    map['known_for_department'] = _knownForDepartment;
-    map['name'] = _name;
-    map['popularity'] = _popularity;
-    map['profile_path'] = _profilePath;
-    if (_externalIds != null) {
-      map['external_ids'] = _externalIds?.toJson();
+    map['known_for_department'] = knownForDepartment;
+    map['name'] = name;
+    map['popularity'] = popularity;
+    map['profile_path'] = profilePath;
+    if (externalIds != null) {
+      map['external_ids'] = externalIds?.toJson();
     }
-    if (_combineCredits != null) {
-      map['combined_credits'] = _combineCredits?.toJson();
+    if (combineCredits != null) {
+      map['combined_credits'] = combineCredits?.toJson();
     }
-    map['biography'] = _biography;
-    map['also_known_as'] = _alsoKnownAs;
-    map['birthday'] = _birthday;
-    map['place_of_birth'] = _placeOfBirth;
+    map['biography'] = biography;
+    map['also_known_as'] = alsoKnownAs;
+    map['birthday'] = birthday;
+    map['place_of_birth'] = placeOfBirth;
     return map;
   }
 }
