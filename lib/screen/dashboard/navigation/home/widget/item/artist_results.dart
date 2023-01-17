@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
-import 'package:room_movie/screen/home/bloc.dart';
-
-import '../../../../router/app_route.dart';
-import '../../../../util/util.dart';
-import '../../../widget/image_view.dart';
+import 'package:room_movie/router/app_route.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/bloc.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
+import 'package:room_movie/util/util.dart';
 
 class HomeArtistItem extends GetView<HomeBloc> {
   final ArtistResults item;

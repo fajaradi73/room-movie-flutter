@@ -11,6 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
+import 'package:room_movie/models/movie/detail/keyword_item.dart';
 
 import '../../gen_theme/assets.gen.dart';
 import '../../models/movie/Results.dart';
@@ -150,5 +151,18 @@ class SerialTvDetailBloc extends GetxController {
       }
     }
     return language;
+  }
+
+  KeywordItem getKeyword(List<KeywordItem>? list, int id) {
+    KeywordItem item = KeywordItem();
+    if (list != null) {
+      for (var data in list) {
+        if (data.id == id) {
+          item = data;
+          break;
+        }
+      }
+    }
+    return item;
   }
 }

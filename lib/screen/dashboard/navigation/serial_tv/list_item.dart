@@ -11,10 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/Results.dart';
+import 'package:room_movie/router/app_route.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 import 'package:room_movie/util/util.dart';
-
-import '../../router/app_route.dart';
-import '../widget/image_view.dart';
 
 // ignore: must_be_immutable
 class SerialTvWidgetListItem extends StatelessWidget {

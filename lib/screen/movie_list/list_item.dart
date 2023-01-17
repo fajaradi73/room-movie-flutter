@@ -45,9 +45,12 @@ class MovieListItem extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  ImageView(
-                    url: "${Constant.baseImage}${data.posterPath}",
-                    fit: BoxFit.cover,
+                  Hero(
+                    tag: "${data.id}",
+                    child: ImageView(
+                      url: "${Constant.baseImage}${data.posterPath}",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Container(
                       width: 45,

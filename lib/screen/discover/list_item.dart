@@ -1,55 +1,56 @@
 // ignore_for_file: file_names
 /*
- * 
- *     serial_tv_list_item
- *     Created by Fajar Adi Prasetyo on 21/12/2022
+ *     Created by Fajar Adi Prasetyo on 17/01/2023
  *     email 	    : fajaradiprast@gmail.com
  *     github 	  : https://github.com/fajaradi73
- *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
+ *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../models/movie/Results.dart';
-import '../../router/app_route.dart';
-import '../../util/constant.dart';
-import '../../util/util.dart';
+import '../../../models/movie/Results.dart';
+import '../../../router/app_route.dart';
+import '../../../util/constant.dart';
+import '../../../util/util.dart';
 
-class SerialTvListItem extends StatelessWidget {
-  const SerialTvListItem({super.key, required this.data});
+class DiscoverListItem extends StatelessWidget {
+  const DiscoverListItem({Key? key, required this.data, required this.isMovie})
+      : super(key: key);
 
   final Results data;
+  final bool isMovie;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Pages.serialTvDetailScreen,
+        Get.toNamed(
+            (isMovie) ? Pages.movieDetailScreen : Pages.serialTvDetailScreen,
             arguments: {"idResults": data.id});
       },
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
             height: 30.0.height(),
+            width: Get.width,
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
+              // color: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
               child: Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  Hero(
-                      tag: "${data.id}",
-                      child: ImageView(
-                        url: "${Constant.baseImage}${data.posterPath}",
-                        fit: BoxFit.cover,
-                      )),
+                  ImageView(
+                    url: "${Constant.baseImage}${data.posterPath}",
+                    fit: BoxFit.cover,
+                  ),
                   Container(
                       width: 45,
                       height: 25,
@@ -69,7 +70,10 @@ class SerialTvListItem extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "${data.voteAverage}",
+                              data.voteAverage != null
+                                  ? prettify(
+                                      double.parse("${data.voteAverage}"))
+                                  : "",
                               style: const TextStyle(fontSize: 13),
                             ),
                           ],
@@ -84,9 +88,12 @@ class SerialTvListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-              "${data.name}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              maxLines: 1,
+              "${data.title ?? data.name}",
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
+              maxLines: 2,
             ),
           ),
           Container(
@@ -94,15 +101,16 @@ class SerialTvListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: FutureBuilder(
-                future: getGenre(data.genreIds, false),
+                future: getGenre(data.genreIds, isMovie),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data?.isNotEmpty == true) {
                     return Text("${snapshot.data}",
                         style: const TextStyle(
                             fontSize: 14, overflow: TextOverflow.ellipsis),
                         maxLines: 1);
                   } else {
-                    return const Text("");
+                    return const Text("-");
                   }
                 }),
           ),
@@ -111,7 +119,7 @@ class SerialTvListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-                "${data.firstAirDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                "${(data.releaseDate ?? data.firstAirDate).dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
                 style: const TextStyle(
                     fontSize: 14, overflow: TextOverflow.ellipsis),
                 maxLines: 1),

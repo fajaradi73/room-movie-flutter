@@ -14,8 +14,7 @@ import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
 import 'package:room_movie/models/movie/Results.dart';
 import 'package:room_movie/service/api_service.dart';
-
-import '../../util/exception.dart';
+import 'package:room_movie/util/exception.dart';
 
 class HomeBloc extends GetxController {
   var listMovie = StaticResults.newData.obs;

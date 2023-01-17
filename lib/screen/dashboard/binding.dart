@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:room_movie/screen/artist/bloc.dart';
-import 'package:room_movie/screen/dashboard/bloc.dart';
-import 'package:room_movie/screen/home/bloc.dart';
-import 'package:room_movie/screen/movie/bloc.dart';
-import 'package:room_movie/screen/serial_tv/bloc.dart';
 import 'package:room_movie/screen/settings/bloc.dart';
+
+import 'bloc.dart';
+import 'navigation/artist/bloc.dart';
+import 'navigation/home/bloc.dart';
+import 'navigation/movie/bloc.dart';
+import 'navigation/serial_tv/bloc.dart';
 
 class DashboardBinding extends Bindings {
   @override

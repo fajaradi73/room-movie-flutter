@@ -13,7 +13,10 @@ class ApiUri {
   static String artist(String path) => "person/$path?api_key=$apiKey";
 
   static String artistNoPath() => "person?api_key=$apiKey";
+
   static String multiNoPath() => "multi?api_key=$apiKey";
+
+  static String discover(String path) => "discover/$path?api_key=$apiKey";
 
   static String popularMovie(int page) => "${movie("popular")}&page=$page";
 
@@ -61,4 +64,12 @@ class ApiUri {
 
   static String searchMulti(int page, String query) =>
       "search/${multiNoPath()}&page=$page&query=$query";
+
+  static String discoverTv(int page, String sortBy, String genre,
+          String keyword, String network) =>
+      "${discover("tv")}&page=$page&sort_by=$sortBy&with_genres=$genre&with_keywords=$keyword&with_networks=$network";
+
+  static String discoverMovie(
+          int page, String sortBy, String genre, String keyword) =>
+      "${discover("movie")}&page=$page&sort_by=$sortBy&with_genres=$genre&with_keywords=$keyword";
 }

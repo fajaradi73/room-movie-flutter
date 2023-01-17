@@ -10,6 +10,7 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:room_movie/router/app_route.dart';
 import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/widget/animated_grid_builder.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
@@ -142,7 +143,13 @@ class SerialTvDetailWidgetInfo extends GetView<SerialTvDetailBloc> {
                 itemBuilder: (context, index) {
                   var item = data.networks![index];
                   return InkWell(
-                      onTap: () async {},
+                      onTap: () async {
+                        Get.toNamed(Pages.discoverScreen, arguments: {
+                          "title": item.name,
+                          "network": item.id.toString(),
+                          "isMovie": false
+                        });
+                      },
                       child: SizedBox(
                         child: Card(
                           semanticContainer: true,
@@ -237,7 +244,15 @@ class SerialTvDetailWidgetInfo extends GetView<SerialTvDetailBloc> {
                     padding: const EdgeInsets.all(3),
                     child: ChipsChoice.single(
                       value: "",
-                      onChanged: (val) {},
+                      onChanged: (val) {
+                        var item = controller.getKeyword(
+                            data.keywords?.results, val as int);
+                        Get.toNamed(Pages.discoverScreen, arguments: {
+                          "title": item.name,
+                          "keyword": item.id.toString(),
+                          "isMovie": false
+                        });
+                      },
                       wrapped: true,
                       choiceItems: C2Choice.listFrom<int, KeywordItem>(
                         source: data.keywords?.results ?? [],

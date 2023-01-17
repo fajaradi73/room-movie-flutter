@@ -66,17 +66,19 @@ class ThemeCubit extends Cubit<ThemeData> {
               states.contains(MaterialState.selected)
                   ? ColorName.colorPrimary
                   : null)),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1)),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1)),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1)),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1))),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1))),
       cardTheme: const CardTheme(color: Colors.white70, elevation: 1),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: ColorName.colorPrimary,
-          foregroundColor: Colors.black));
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: ColorName.colorPrimary, foregroundColor: Colors.black));
 
   static final _darkTheme = ThemeData(
       fontFamily: FontFamily.palatinoLinotype,
@@ -106,13 +108,16 @@ class ThemeCubit extends Cubit<ThemeData> {
               states.contains(MaterialState.selected)
                   ? ColorName.colorPrimary
                   : null)),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1)),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1)),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1)),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1))),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.grey, width: 1))),
       cardTheme: const CardTheme(color: Color(0xff696969), elevation: 1),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Color(0xFF212121),

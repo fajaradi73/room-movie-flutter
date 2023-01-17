@@ -12,10 +12,10 @@ import 'package:get/get.dart';
 import 'package:room_movie/models/dashboard/bottom_navigation_list.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
 import 'package:room_movie/models/enum/tv_type.dart';
-import 'package:room_movie/screen/artist/bloc.dart';
-import 'package:room_movie/screen/home/bloc.dart';
-import 'package:room_movie/screen/movie/bloc.dart';
-import 'package:room_movie/screen/serial_tv/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/artist/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/movie/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/serial_tv/bloc.dart';
 import 'package:room_movie/screen/settings/bloc.dart';
 
 import '../../models/enum/search_type.dart';

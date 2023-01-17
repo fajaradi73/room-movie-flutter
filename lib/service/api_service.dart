@@ -112,4 +112,18 @@ class ApiService {
     var data = await dio.get(uri: ApiUri.searchMulti(page, value));
     return SearchResponse.fromJson(data);
   }
+
+  Future<Movie?> getDiscoverTv(int page, String sortBy, String genre,
+      String keyword, String network) async {
+    var data = await dio.get(
+        uri: ApiUri.discoverTv(page, sortBy, genre, keyword, network));
+    return Movie.fromJson(data);
+  }
+
+  Future<Movie?> getDiscoverMovie(
+      int page, String sortBy, String genre, String keyword) async {
+    var data =
+        await dio.get(uri: ApiUri.discoverMovie(page, sortBy, genre, keyword));
+    return Movie.fromJson(data);
+  }
 }

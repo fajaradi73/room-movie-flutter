@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/home/widget/item/artist_results.dart';
+import 'package:room_movie/models/artist/artist_results.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/widget/item/artist_results.dart';
+import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../../models/artist/artist_results.dart';
-import '../../widget/animated_list_builder.dart';
 import '../bloc.dart';
 
 // ignore: must_be_immutable

@@ -9,16 +9,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/artist/screen.dart';
 import 'package:room_movie/screen/dashboard/bloc.dart';
-import 'package:room_movie/screen/home/screen.dart';
-import 'package:room_movie/screen/movie/screen.dart';
-import 'package:room_movie/screen/serial_tv/screen.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/screen.dart';
+import 'package:room_movie/screen/dashboard/navigation/movie/screen.dart';
+import 'package:room_movie/screen/dashboard/navigation/serial_tv/screen.dart';
 import 'package:room_movie/screen/settings/screen.dart';
 import 'package:room_movie/screen/widget/gesture_scaffold.dart';
 
 import '../../router/app_route.dart';
-import '../artist/bloc.dart';
+import '../dashboard/navigation/artist/bloc.dart';
+import 'navigation/artist/screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   DashboardScreen({super.key});

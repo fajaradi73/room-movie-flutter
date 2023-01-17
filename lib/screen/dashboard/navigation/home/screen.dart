@@ -9,10 +9,10 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:room_movie/screen/home/bloc.dart';
-import 'package:room_movie/screen/home/widget/artist.dart';
-import 'package:room_movie/screen/home/widget/movie.dart';
-import 'package:room_movie/screen/home/widget/tv.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/widget/artist.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/widget/movie.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/widget/tv.dart';
 
 class HomeScreen extends GetView<HomeBloc> {
   const HomeScreen({super.key});

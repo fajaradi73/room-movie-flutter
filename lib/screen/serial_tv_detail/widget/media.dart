@@ -126,7 +126,8 @@ class SerialTvDetailWidgetMedia extends StatelessWidget {
                                   child: Text("${item.name}",
                                       style: const TextStyle(
                                           fontSize: 14,
-                                          overflow: TextOverflow.ellipsis),
+                                          overflow: TextOverflow.ellipsis,
+                                          color: Colors.white),
                                       maxLines: 1),
                                 )
                               ],

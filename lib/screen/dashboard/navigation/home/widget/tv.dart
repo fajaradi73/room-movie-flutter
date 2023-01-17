@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/models/enum/tv_type.dart';
-import 'package:room_movie/screen/home/bloc.dart';
+import 'package:room_movie/models/movie/Results.dart';
+import 'package:room_movie/router/app_route.dart';
+import 'package:room_movie/screen/dashboard/navigation/home/bloc.dart';
 import 'package:room_movie/screen/shimmer/shimmer_results.dart';
+import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../../models/movie/Results.dart';
-import '../../../router/app_route.dart';
-import '../../dashboard/bloc.dart';
-import '../../widget/animated_list_builder.dart';
+import '../../../bloc.dart';
 import 'item/results.dart';
 
 class HomeTvWidget extends GetView<HomeBloc> {

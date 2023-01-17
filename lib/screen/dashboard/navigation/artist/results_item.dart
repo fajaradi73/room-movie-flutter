@@ -11,10 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
-
-import '../../router/app_route.dart';
-import '../../util/util.dart';
-import '../widget/image_view.dart';
+import 'package:room_movie/router/app_route.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
+import 'package:room_movie/util/util.dart';
 
 class ArtistResultsItem extends StatelessWidget {
   const ArtistResultsItem({Key? key, required this.data}) : super(key: key);

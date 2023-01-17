@@ -3,9 +3,8 @@ import 'package:room_movie/helper/base_function.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/enum/tv_type.dart';
 import 'package:room_movie/models/movie/Results.dart';
-
-import '../../service/api_service.dart';
-import '../../util/exception.dart';
+import 'package:room_movie/service/api_service.dart';
+import 'package:room_movie/util/exception.dart';
 
 class SerialTvBloc extends GetxController {
   var mapsTv = <String, List<Results>>{

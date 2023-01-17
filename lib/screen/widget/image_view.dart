@@ -10,7 +10,6 @@ import 'package:transparent_image/transparent_image.dart';
 
 import '../../gen_theme/assets.gen.dart';
 import '../../util/constant.dart';
-import 'LoadingScreen.dart';
 
 class ImageView extends StatelessWidget {
   final String? url;
@@ -25,15 +24,15 @@ class ImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      const Center(
-          child: LoadingScreen(
-        height: 25,
-        width: 25,
-      )),
-      Container(
+      // const Center(
+      //     child: LoadingScreen(
+      //   height: 25,
+      //   width: 25,
+      // )),
+      SizedBox(
           width: double.infinity,
           height: double.infinity,
-          color: Theme.of(context).cardTheme.color,
+          // color: Theme.of(context).cardTheme.color,
           child: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,
             placeholderFit: BoxFit.contain,
@@ -42,7 +41,7 @@ class ImageView extends StatelessWidget {
                 : "${Constant.baseImage}$url",
             imageErrorBuilder: (context, error, stackTrace) {
               return Container(
-                color: Theme.of(context).cardTheme.color,
+                // color: Theme.of(context).cardTheme.color,
                 child: Assets.images.noImage.image(
                     width: width != 0.0 ? width : null,
                     height: height != 0.0 ? height : null,
@@ -68,6 +67,12 @@ class ImageView extends StatelessWidget {
           //         width: 25,
           //       ));
           //     }
+          //   },
+          //   errorBuilder: (context, error, stackTrace) {
+          //     return Assets.images.noImage.image(
+          //         width: width != 0.0 ? width : null,
+          //         height: height != 0.0 ? height : null,
+          //         color: Colors.black);
           //   },
           // ),
           )

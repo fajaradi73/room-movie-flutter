@@ -13,13 +13,13 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/models/enum/movie_type.dart';
-import 'package:room_movie/screen/movie/bloc.dart';
+import 'package:room_movie/router/app_route.dart';
+import 'package:room_movie/screen/dashboard/bloc.dart';
+import 'package:room_movie/screen/dashboard/navigation/movie/bloc.dart';
+import 'package:room_movie/screen/shimmer/shimmer_results.dart';
+import 'package:room_movie/screen/widget/animated_list_builder.dart';
 import 'package:room_movie/screen/widget/shimmer_loading.dart';
 
-import '../../router/app_route.dart';
-import '../dashboard/bloc.dart';
-import '../shimmer/shimmer_results.dart';
-import '../widget/animated_list_builder.dart';
 import 'list_item.dart';
 
 class MovieScreen extends GetView<MovieBloc> {

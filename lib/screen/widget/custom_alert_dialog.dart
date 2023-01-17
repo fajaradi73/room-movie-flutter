@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   const CustomAlertDialog(
@@ -21,7 +22,6 @@ class CustomAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       elevation: 0,
-      backgroundColor: const Color(0xffffffff),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -50,17 +50,16 @@ class CustomAlertDialog extends StatelessWidget {
             color: Colors.grey,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             height: 50,
             child: InkWell(
-              highlightColor: Colors.grey[200],
+              // highlightColor: Colors.grey[200],
               onTap: actionYes,
               child: Center(
                 child: Text(
                   yesTitle,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
-                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -72,14 +71,14 @@ class CustomAlertDialog extends StatelessWidget {
             color: Colors.grey,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width,
+            width: Get.width,
             height: 50,
             child: InkWell(
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(15.0),
                 bottomRight: Radius.circular(15.0),
               ),
-              highlightColor: Colors.grey[200],
+              // highlightColor: Colors.grey[200],
               onTap: actionNo,
               child: Center(
                 child: Text(

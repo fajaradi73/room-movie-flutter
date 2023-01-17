@@ -377,4 +377,9 @@ extension Maps on Map<String, dynamic> {
   String get title => (this)["title"];
   double get ratio => (this)["ratio"];
   SearchType get searchType => (this)["search_type"];
+  bool get isMovie => (this)['isMovie'];
+  String? get sortBy => (this)["sortBy"];
+  String get genre => (this)["genre"];
+  String get keyword => (this)["keyword"];
+  String get network => (this)["network"];
 }

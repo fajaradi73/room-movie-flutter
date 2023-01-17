@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:room_movie/gen_theme/colors.gen.dart';
 import 'package:room_movie/models/movie/detail/keyword_item.dart';
+import 'package:room_movie/router/app_route.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
 import 'package:room_movie/util/util.dart';
 
@@ -141,7 +142,15 @@ class MovieDetailWidgetInfo extends GetView<MovieDetailBloc> {
                   data.keywords?.keywords?.isNotEmpty == true)
               ? ChipsChoice.single(
                   value: "",
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    var item = controller.getKeyword(
+                        data.keywords?.keywords, val as int);
+                    Get.toNamed(Pages.discoverScreen, arguments: {
+                      "title": item.name,
+                      "keyword": item.id.toString(),
+                      "isMovie": true
+                    });
+                  },
                   wrapped: true,
                   choiceItems: C2Choice.listFrom<int, KeywordItem>(
                     source: data.keywords?.keywords ?? [],

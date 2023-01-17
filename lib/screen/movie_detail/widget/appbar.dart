@@ -51,18 +51,18 @@ class MovieDetailWidgetAppbar extends GetView<MovieDetailBloc> {
                 Container(
                   color: Theme.of(context).primaryColor.withOpacity(0.5),
                   child: Center(
-                    child: Hero(
-                      tag: "${data.id}",
-                      child: Container(
-                        height: 18.0.height(),
-                        width: 35.0.width(),
-                        margin: const EdgeInsets.only(bottom: 20.0),
-                        child: Card(
-                          semanticContainer: true,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              side: const BorderSide(color: Colors.white)),
+                    child: Container(
+                      height: 18.0.height(),
+                      width: 35.0.width(),
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      child: Card(
+                        semanticContainer: true,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            side: const BorderSide(color: Colors.white)),
+                        child: Hero(
+                          tag: "${data.id}",
                           child: ImageView(
                             url: data.posterPath,
                             fit: BoxFit.fill,

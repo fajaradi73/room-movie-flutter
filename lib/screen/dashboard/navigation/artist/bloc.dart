@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import 'package:room_movie/helper/base_function.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/artist/artist_results.dart';
-
-import '../../service/api_service.dart';
-import '../../util/exception.dart';
+import 'package:room_movie/service/api_service.dart';
+import 'package:room_movie/util/exception.dart';
 
 class ArtistBloc extends GetxController {
   var isLoading = false.obs;
