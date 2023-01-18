@@ -16,7 +16,6 @@ import 'package:room_movie/screen/widget/image_view.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../router/app_route.dart';
-import '../../util/constant.dart';
 import '../../util/util.dart';
 
 class MovieListItem extends StatelessWidget {
@@ -48,7 +47,7 @@ class MovieListItem extends StatelessWidget {
                   Hero(
                     tag: "${data.id}",
                     child: ImageView(
-                      url: "${Constant.baseImage}${data.posterPath}",
+                      url: data.posterPath,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -90,8 +89,11 @@ class MovieListItem extends StatelessWidget {
             padding: const EdgeInsets.all(3),
             child: Text(
               "${data.title}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              maxLines: 1,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
+              maxLines: 2,
             ),
           ),
           Container(
@@ -101,13 +103,14 @@ class MovieListItem extends StatelessWidget {
             child: FutureBuilder(
                 future: getGenre(data.genreIds, true),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data?.isNotEmpty == true) {
                     return Text("${snapshot.data}",
                         style: const TextStyle(
                             fontSize: 14, overflow: TextOverflow.ellipsis),
                         maxLines: 1);
                   } else {
-                    return const Text("");
+                    return const Text("-");
                   }
                 }),
           ),
@@ -116,7 +119,10 @@ class MovieListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-                "${data.releaseDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                data.releaseDate.dateFormat(
+                        currentFormat: "yyyy-MM-dd",
+                        desiredFormat: "dd MMMM yyyy") ??
+                    "Unknown",
                 style: const TextStyle(
                     fontSize: 14, overflow: TextOverflow.ellipsis),
                 maxLines: 1),

@@ -18,6 +18,7 @@ import 'package:room_movie/screen/serial_tv_list/bloc.dart';
 import 'package:room_movie/screen/serial_tv_list/list_item.dart';
 
 import '../dashboard/bloc.dart';
+import '../shimmer/shimmer_movie_list.dart';
 import '../widget/LoadingScreen.dart';
 import '../widget/animated_stagger_builder.dart';
 import '../widget/gesture_scaffold.dart';
@@ -41,44 +42,67 @@ class SerialTvListScreen extends GetView<SerialTvListBloc> {
           await controller.getData(1);
         },
         child: Obx(() {
-          return LazyLoad(
-              isLoading: controller.pageLoad.value,
-              child: AnimatedStaggerBuilder(
-                  controller: controller.scrollController,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  itemCount: (controller.pageLoad.value).either(
-                      trueV: controller.list.length + 1,
-                      falseV: controller.list.length),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return SwitcherBuilder(builder: () {
+          if (controller.list.isNotEmpty) {
+            return LazyLoad(
+                isLoading: controller.pageLoad.value,
+                child: AnimatedStaggerBuilder(
+                    controller: controller.scrollController,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    itemCount: (controller.pageLoad.value).either(
+                        trueV: controller.list.length + 1,
+                        falseV: controller.list.length),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return SwitcherBuilder(builder: () {
+                        if (controller.pageLoad.value &&
+                            index >= controller.list.length) {
+                          return const Center(child: LoadingScreen());
+                        } else {
+                          var data = controller.list[index];
+                          return ShimmerSwitch(
+                              stream: controller.isLoading.stream,
+                              child: SerialTvListItem(
+                                data: data,
+                              ));
+                        }
+                      });
+                    },
+                    staggeredTileBuilder: (index) {
                       if (controller.pageLoad.value &&
                           index >= controller.list.length) {
-                        return const Center(child: LoadingScreen());
+                        return StaggeredTile.count(
+                            2, Get.width / (Get.height / 1));
                       } else {
-                        var data = controller.list[index];
+                        return const StaggeredTile.fit(1);
+                      }
+                    }),
+                onEndOfPage: () async {
+                  await controller.getData(controller.currentPage.value);
+                });
+          } else {
+            return AnimatedStaggerBuilder(
+                controller: controller.scrollController,
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                itemCount: 8,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return SwitcherBuilder(
+                      fadeDuration: const Duration(milliseconds: 1000),
+                      sizeDuration: const Duration(milliseconds: 1000),
+                      builder: () {
                         return ShimmerSwitch(
                             stream: controller.isLoading.stream,
-                            child: SerialTvListItem(
-                              data: data,
-                            ));
-                      }
-                    });
-                  },
-                  staggeredTileBuilder: (index) {
-                    if (controller.pageLoad.value &&
-                        index >= controller.list.length) {
-                      return StaggeredTile.count(
-                          2, Get.width / (Get.height / 1));
-                    } else {
-                      return const StaggeredTile.fit(1);
-                    }
-                  }),
-              onEndOfPage: () async {
-                await controller.getData(controller.currentPage.value);
-              });
+                            child: const ShimmerMovieList());
+                      });
+                },
+                staggeredTileBuilder: (index) {
+                  return const StaggeredTile.fit(1);
+                });
+          }
         }),
       ),
       floatingActionButton: Obx(() {

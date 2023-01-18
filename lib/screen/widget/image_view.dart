@@ -6,7 +6,6 @@
  *     Copyright © 2023 Fajar Adi Prasetyo All rights reserved.
  */
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../gen_theme/assets.gen.dart';
 import '../../util/constant.dart';
@@ -33,12 +32,14 @@ class ImageView extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           // color: Theme.of(context).cardTheme.color,
-          child: FadeInImage.memoryNetwork(
-            placeholder: kTransparentImage,
+          child: FadeInImage.assetNetwork(
+            placeholder: Assets.images.transparent.path,
             placeholderFit: BoxFit.contain,
-            image: url?.contains("https") == true
-                ? "$url"
-                : "${Constant.baseImage}$url",
+            image: url != null
+                ? url?.contains("https") == true
+                    ? "$url"
+                    : "${Constant.baseImage}$url"
+                : Constant.noImage,
             imageErrorBuilder: (context, error, stackTrace) {
               return Container(
                 // color: Theme.of(context).cardTheme.color,

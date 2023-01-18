@@ -16,7 +16,6 @@ import 'package:sizer/sizer.dart';
 
 import '../../models/movie/Results.dart';
 import '../../router/app_route.dart';
-import '../../util/constant.dart';
 import '../../util/util.dart';
 
 class SerialTvListItem extends StatelessWidget {
@@ -47,7 +46,7 @@ class SerialTvListItem extends StatelessWidget {
                   Hero(
                       tag: "${data.id}",
                       child: ImageView(
-                        url: "${Constant.baseImage}${data.posterPath}",
+                        url: data.posterPath,
                         fit: BoxFit.cover,
                       )),
                   Container(
@@ -85,8 +84,11 @@ class SerialTvListItem extends StatelessWidget {
             padding: const EdgeInsets.all(3),
             child: Text(
               "${data.name}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              maxLines: 1,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
+              maxLines: 2,
             ),
           ),
           Container(
@@ -96,13 +98,14 @@ class SerialTvListItem extends StatelessWidget {
             child: FutureBuilder(
                 future: getGenre(data.genreIds, false),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data?.isNotEmpty == true) {
                     return Text("${snapshot.data}",
                         style: const TextStyle(
                             fontSize: 14, overflow: TextOverflow.ellipsis),
                         maxLines: 1);
                   } else {
-                    return const Text("");
+                    return const Text("-");
                   }
                 }),
           ),
@@ -111,7 +114,10 @@ class SerialTvListItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
             child: Text(
-                "${data.firstAirDate.dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                data.firstAirDate.dateFormat(
+                        currentFormat: "yyyy-MM-dd",
+                        desiredFormat: "dd MMMM yyyy") ??
+                    "Unknown",
                 style: const TextStyle(
                     fontSize: 14, overflow: TextOverflow.ellipsis),
                 maxLines: 1),

@@ -49,8 +49,11 @@ class SearchArtistItem extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             child: Text(
               "${data.name}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              maxLines: 1,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
+              maxLines: 2,
             ),
           ),
           Container(
@@ -60,13 +63,14 @@ class SearchArtistItem extends StatelessWidget {
             child: FutureBuilder(
                 future: getKnowFor(data.knownFor),
                 builder: (_, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data?.isNotEmpty == true) {
                     return Text("${data.knownForDepartment} • ${snapshot.data}",
                         style: const TextStyle(
                             fontSize: 13, overflow: TextOverflow.ellipsis),
                         maxLines: 1);
                   } else {
-                    return const Text("");
+                    return const Text("-");
                   }
                 }),
           )

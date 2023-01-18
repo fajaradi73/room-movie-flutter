@@ -22,7 +22,7 @@ class SerialTvListBloc extends GetxController {
   var isLoading = false.obs;
   var pageLoad = false.obs;
   var service = ApiService();
-  var list = StaticResults.load.obs;
+  var list = StaticResults.newData.obs;
   var currentPage = 1.obs;
   var scrollController = ScrollController();
   var showButton = false.obs;

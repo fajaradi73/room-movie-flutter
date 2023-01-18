@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/gallery/bloc.dart';
 import 'package:room_movie/screen/widget/animated_stagger_builder.dart';
+import 'package:room_movie/screen/widget/image_view.dart';
 
 import '../../router/app_route.dart';
 import '../../util/constant.dart';
@@ -77,12 +78,9 @@ class GalleryScreen extends GetView<GalleryBloc> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              child: CachedNetworkImage(
-                imageUrl: "${Constant.baseImage}${item.filePath}",
-                fit: BoxFit.fill,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: ImageView(
+                url: item.filePath,
+                fit: BoxFit.cover,
               ),
             ),
           ),

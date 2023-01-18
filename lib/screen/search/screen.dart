@@ -13,6 +13,7 @@ import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/search/bloc.dart';
 import 'package:room_movie/screen/search/list/artist_item.dart';
 import 'package:room_movie/screen/search/list/multi_item.dart';
+import 'package:room_movie/screen/shimmer/shimmer_movie_list.dart';
 
 import '../../models/enum/search_type.dart';
 import '../widget/LoadingScreen.dart';
@@ -92,9 +93,26 @@ class SearchScreen extends GetView<SearchBloc> {
                 });
           } else {
             if (controller.pageLoad.isTrue) {
-              return const Center(
-                child: LoadingScreen(),
-              );
+              return AnimatedStaggerBuilder(
+                  controller: controller.scrollController,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  itemCount: 8,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return SwitcherBuilder(
+                        fadeDuration: const Duration(milliseconds: 1000),
+                        sizeDuration: const Duration(milliseconds: 1000),
+                        builder: () {
+                          return ShimmerSwitch(
+                              stream: controller.isLoading.stream,
+                              child: const ShimmerMovieList());
+                        });
+                  },
+                  staggeredTileBuilder: (index) {
+                    return const StaggeredTile.fit(1);
+                  });
             } else {
               return Container();
             }

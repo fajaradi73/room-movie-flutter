@@ -33,10 +33,6 @@ class HomeArtistWidget extends GetView<HomeBloc> {
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
-                  const Spacer(),
-                  Container(
-                      margin: const EdgeInsets.all(10),
-                      child: const Icon(Icons.keyboard_arrow_right))
                 ],
               ),
             ),

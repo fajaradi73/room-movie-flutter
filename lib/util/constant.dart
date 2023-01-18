@@ -16,7 +16,8 @@ class Constant {
   static var defaultQuality = '/default.jpg';
   static var sdQuality = '/sddefault.jpg';
   static var noImage =
-      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+      // 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+      'https://www.freeiconspng.com/uploads/no-image-icon-15.png';
   static var transparentImage =
       "https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png";
 }

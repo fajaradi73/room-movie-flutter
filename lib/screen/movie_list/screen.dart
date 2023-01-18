@@ -91,8 +91,7 @@ class MovieListScreen extends GetView<MovieListBloc> {
                       });
                 },
                 staggeredTileBuilder: (index) {
-                  return StaggeredTile.count(
-                      1, Get.width / (Get.height / 0.47.height()));
+                  return const StaggeredTile.fit(1);
                 });
           }
         }),

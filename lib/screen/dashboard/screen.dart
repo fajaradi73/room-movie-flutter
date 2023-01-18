@@ -7,6 +7,8 @@
  *     Copyright © 2022 Fajar Adi Prasetyo All rights reserved.
  */
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/screen/dashboard/bloc.dart';
@@ -14,6 +16,7 @@ import 'package:room_movie/screen/dashboard/navigation/home/screen.dart';
 import 'package:room_movie/screen/dashboard/navigation/movie/screen.dart';
 import 'package:room_movie/screen/dashboard/navigation/serial_tv/screen.dart';
 import 'package:room_movie/screen/settings/screen.dart';
+import 'package:room_movie/screen/widget/custom_alert_dialog.dart';
 import 'package:room_movie/screen/widget/gesture_scaffold.dart';
 
 import '../../router/app_route.dart';
@@ -28,44 +31,47 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => GestureScaffold(
-          appBar: (logic.selectedNavBar.value == 4)
-              ? AppBar(
-                  elevation: 1,
-                  title: const Text("Pengaturan"),
-                )
-              : searchBar(context),
-          body: IndexedStack(
-            index: logic.selectedNavBar.value,
-            children: [
-              const HomeScreen(),
-              MovieScreen(),
-              SerialTvScreen(),
-              const ArtistScreen(),
-              SettingsScreen()
-            ],
+    return Obx(() => WillPopScope(
+          onWillPop: () => showExitPopup(context),
+          child: GestureScaffold(
+            appBar: (logic.selectedNavBar.value == 4)
+                ? AppBar(
+                    elevation: 1,
+                    title: const Text("Pengaturan"),
+                  )
+                : searchBar(context),
+            body: IndexedStack(
+              index: logic.selectedNavBar.value,
+              children: [
+                const HomeScreen(),
+                MovieScreen(),
+                SerialTvScreen(),
+                const ArtistScreen(),
+                SettingsScreen()
+              ],
+            ),
+            bottomNavigationBar: bottomNavigation(),
+            floatingActionButton: (logic.selectedNavBar.value == 3)
+                ? AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    //show/hide animation
+                    opacity: artistLogic.showButton.value ? 1.0 : 0.0,
+                    //set obacity to 1 on visible, or hide
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        artistLogic.scrollController.animateTo(
+                            //go to top of scroll
+                            0, //scroll offset to go
+                            duration: const Duration(milliseconds: 500),
+                            //duration of scroll
+                            curve: Curves.fastOutSlowIn //scroll type
+                            );
+                      },
+                      child: const Icon(Icons.arrow_upward),
+                    ),
+                  )
+                : null,
           ),
-          bottomNavigationBar: bottomNavigation(),
-          floatingActionButton: (logic.selectedNavBar.value == 3)
-              ? AnimatedOpacity(
-                  duration: const Duration(milliseconds: 500),
-                  //show/hide animation
-                  opacity: artistLogic.showButton.value ? 1.0 : 0.0,
-                  //set obacity to 1 on visible, or hide
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      artistLogic.scrollController.animateTo(
-                          //go to top of scroll
-                          0, //scroll offset to go
-                          duration: const Duration(milliseconds: 500),
-                          //duration of scroll
-                          curve: Curves.fastOutSlowIn //scroll type
-                          );
-                    },
-                    child: const Icon(Icons.arrow_upward),
-                  ),
-                )
-              : null,
         ));
   }
 
@@ -110,5 +116,20 @@ class DashboardScreen extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  showExitPopup(context) async {
+    return await Get.dialog(CustomAlertDialog(
+      title: "Room Movie",
+      description: "Apakah anda ingin keluar?",
+      yesTitle: "Iya",
+      noTitle: "Tidak",
+      actionYes: () {
+        exit(0);
+      },
+      actionNo: () {
+        Get.back();
+      },
+    ));
   }
 }

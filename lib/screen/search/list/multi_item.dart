@@ -13,7 +13,6 @@ import 'package:room_movie/screen/search/bloc.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../util/constant.dart';
 import '../../../util/util.dart';
 
 class SearchMultiItem extends GetView<SearchBloc> {
@@ -53,8 +52,10 @@ class SearchMultiItem extends GetView<SearchBloc> {
                   child: Text(
                     "${data.name}",
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                    maxLines: 1,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
+                    maxLines: 2,
                   ),
                 ),
                 Container(
@@ -64,7 +65,8 @@ class SearchMultiItem extends GetView<SearchBloc> {
                   child: FutureBuilder(
                       future: getKnowFor(data.knownFor),
                       builder: (_, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.connectionState == ConnectionState.done &&
+                            snapshot.data?.isNotEmpty == true) {
                           return Text(
                               "${data.knownForDepartment} • ${snapshot.data}",
                               style: const TextStyle(
@@ -95,7 +97,7 @@ class SearchMultiItem extends GetView<SearchBloc> {
                       alignment: Alignment.topRight,
                       children: [
                         ImageView(
-                          url: "${Constant.baseImage}${data.posterPath}",
+                          url: data.posterPath,
                           fit: BoxFit.cover,
                         ),
                         Container(
@@ -138,8 +140,10 @@ class SearchMultiItem extends GetView<SearchBloc> {
                   child: Text(
                     "${data.title ?? data.name}",
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                    maxLines: 1,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
+                    maxLines: 2,
                   ),
                 ),
                 Container(
@@ -167,7 +171,10 @@ class SearchMultiItem extends GetView<SearchBloc> {
                   margin: const EdgeInsets.all(3),
                   padding: const EdgeInsets.all(3),
                   child: Text(
-                      "${(data.releaseDate ?? data.firstAirDate).dateFormat(currentFormat: "yyyy-MM-dd", desiredFormat: "dd MMMM yyyy")}",
+                      (data.releaseDate ?? data.firstAirDate).dateFormat(
+                              currentFormat: "yyyy-MM-dd",
+                              desiredFormat: "dd MMMM yyyy") ??
+                          "Unknown",
                       style: const TextStyle(
                           fontSize: 14, overflow: TextOverflow.ellipsis),
                       maxLines: 1),

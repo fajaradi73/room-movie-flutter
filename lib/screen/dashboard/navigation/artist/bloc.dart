@@ -15,7 +15,7 @@ class ArtistBloc extends GetxController {
 
   var scrollController = ScrollController();
   var showButton = false.obs;
-  final listArtist = StaticArtistResults.load.obs;
+  final listArtist = StaticArtistResults.newData.obs;
 
   void openScreen() {
     (this).getArtist(1);
