@@ -22,7 +22,7 @@ class DiscoverBloc extends GetxController {
   var currentPage = 1.obs;
   var showButton = false.obs;
 
-  var isMovie = true;
+  var isMovie = true.obs;
   var title = "".obs;
   var sortBy = "popularity.desc".obs;
   var genre = "".obs;
@@ -33,13 +33,17 @@ class DiscoverBloc extends GetxController {
   var list = StaticResults.newData.obs;
 
   var typeItems = ['Film', 'Serial TV'];
+  var populartyItems = ['Populer', 'Tidak Populer'];
+  var rattingItems = ['Tertinggi', 'Terendah'];
+  var dateItems = ['Terbaru', 'Terlama'];
   var dropDownValue = "Film".obs;
+  var isDisable = false.obs;
 
   @override
   void onReady() {
     addScrollListener();
     argument.addAll(Get.arguments);
-    isMovie = argument.isMovie;
+    isMovie.value = argument.isMovie;
     title.value = argument.title;
     sortBy.value = argument.sortBy ?? "popularity.desc";
     genre.value = argument.genre;
@@ -47,6 +51,11 @@ class DiscoverBloc extends GetxController {
     network.value = argument.network;
     (this).getDiscover(currentPage.value, sortBy.value, genre.value,
         keyword.value, network.value);
+
+    dropDownValue.value = (isMovie.value) ? "Film" : "Serial TV";
+    if (network.isNotEmpty) {
+      isDisable.value = true;
+    }
   }
 
   addScrollListener() {
@@ -89,7 +98,7 @@ class DiscoverBloc extends GetxController {
 
   fetchApi(
       int page, String sortBy, String genre, String keyword, String network) {
-    if (isMovie) {
+    if (isMovie.value) {
       return service.getDiscoverMovie(page, sortBy, genre, keyword);
     } else {
       return service.getDiscoverTv(page, sortBy, genre, keyword, network);

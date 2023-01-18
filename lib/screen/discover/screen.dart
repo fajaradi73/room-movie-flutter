@@ -75,10 +75,24 @@ class DiscoverScreen extends GetView<DiscoverBloc> {
                                   ))
                               .toList(),
                           value: controller.dropDownValue.value,
-                          onChanged: (value) {
-                            //Do something when changing the item if you want.
-                            controller.dropDownValue.value = value.toString();
-                          },
+                          onChanged: (controller.isDisable.value)
+                              ? null
+                              : (value) {
+                                  //Do something when changing the item if you want.
+                                  controller.dropDownValue.value =
+                                      value.toString();
+                                  controller.isMovie.value =
+                                      (value.toString().equal("Film"))
+                                          ? true
+                                          : false;
+                                  controller.list.clear();
+                                  controller.getDiscover(
+                                      1,
+                                      controller.sortBy.value,
+                                      controller.genre.value,
+                                      controller.keyword.value,
+                                      controller.network.value);
+                                },
                         ),
                       ),
                     ),
@@ -93,7 +107,9 @@ class DiscoverScreen extends GetView<DiscoverBloc> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              settingModalBottomSheet(context);
+                            },
                             child: Container(
                                 width: Get.width,
                                 height: 50,
@@ -146,7 +162,8 @@ class DiscoverScreen extends GetView<DiscoverBloc> {
                                 } else {
                                   var data = controller.list[index];
                                   return DiscoverListItem(
-                                      data: data, isMovie: controller.isMovie);
+                                      data: data,
+                                      isMovie: controller.isMovie.value);
                                 }
                               });
                             },
@@ -168,8 +185,10 @@ class DiscoverScreen extends GetView<DiscoverBloc> {
                               controller.network.value);
                         }),
                   )
-                : const Center(
-                    child: LoadingScreen(),
+                : const Expanded(
+                    child: Center(
+                      child: LoadingScreen(),
+                    ),
                   )
           ],
         );
@@ -195,5 +214,196 @@ class DiscoverScreen extends GetView<DiscoverBloc> {
         );
       }),
     );
+  }
+
+  void settingModalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        builder: (BuildContext ctx) {
+          return Expanded(
+            child: Wrap(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 20, right: 20, top: 30, bottom: 10),
+                  child: const Text(
+                    "Urutkan",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: DropdownButtonFormField2(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    isExpanded: true,
+                    icon: const Icon(
+                      Icons.arrow_drop_down_rounded,
+                    ),
+                    iconSize: 40,
+                    buttonHeight: 50,
+                    buttonPadding: const EdgeInsets.only(left: 5, right: 5),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    items: controller.populartyItems
+                        .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    hint: const Text(
+                      "Popularity",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      Get.back();
+                      controller.list.clear();
+                      controller.sortBy.value =
+                          (value.toString().equal("Populer"))
+                              ? "popularity.desc"
+                              : "popularity.asc";
+                      controller.getDiscover(
+                          1,
+                          controller.sortBy.value,
+                          controller.genre.value,
+                          controller.keyword.value,
+                          controller.network.value);
+                    },
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: DropdownButtonFormField2(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    isExpanded: true,
+                    icon: const Icon(
+                      Icons.arrow_drop_down_rounded,
+                    ),
+                    iconSize: 40,
+                    buttonHeight: 50,
+                    buttonPadding: const EdgeInsets.only(left: 5, right: 5),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    items: controller.rattingItems
+                        .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    hint: const Text(
+                      "Ratting",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      Get.back();
+                      controller.list.clear();
+                      controller.sortBy.value =
+                          (value.toString().equal("Terendah"))
+                              ? "vote_average.asc"
+                              : "vote_average.desc";
+                      controller.getDiscover(
+                          1,
+                          controller.sortBy.value,
+                          controller.genre.value,
+                          controller.keyword.value,
+                          controller.network.value);
+                    },
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: DropdownButtonFormField2(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    isExpanded: true,
+                    icon: const Icon(
+                      Icons.arrow_drop_down_rounded,
+                    ),
+                    iconSize: 40,
+                    buttonHeight: 50,
+                    buttonPadding: const EdgeInsets.only(left: 5, right: 5),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    items: controller.dateItems
+                        .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    hint: const Text(
+                      "Tanggal Rilis",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      Get.back();
+                      var date = (controller.isMovie.value)
+                          ? "release_date"
+                          : "first_air_date";
+                      controller.list.clear();
+                      controller.sortBy.value =
+                          (value.toString().equal("Terlama"))
+                              ? "$date.asc"
+                              : "$date.desc";
+                      controller.getDiscover(
+                          1,
+                          controller.sortBy.value,
+                          controller.genre.value,
+                          controller.keyword.value,
+                          controller.network.value);
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                )
+              ],
+            ),
+          );
+        });
   }
 }
