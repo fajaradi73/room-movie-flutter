@@ -43,7 +43,6 @@ class AppBlocObserver extends BlocObserver {
 }
 
 class App extends StatelessWidget {
-  /// {@macro app}
   const App({Key? key}) : super(key: key);
 
   @override
@@ -56,7 +55,6 @@ class App extends StatelessWidget {
 }
 
 class AppView extends StatelessWidget {
-  /// {@macro app_view}
   const AppView({Key? key}) : super(key: key);
 
   @override

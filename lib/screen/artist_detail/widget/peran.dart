@@ -35,66 +35,68 @@ class ArtistDetailWidgetPeran extends GetView<ArtistDetailBloc> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
-              constraints:
-                  BoxConstraints(minHeight: 200, maxHeight: 32.0.height()),
-              child: (list != null && list?.isNotEmpty == true)
-                  ? AnimatedListBuilder(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: list?.length.isGreaterThan(10) == true
-                          ? 10
-                          : list?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var item = list![index];
-                        return InkWell(
-                          onTap: () {
-                            Get.toNamed(
-                                (item.mediaType == "movie")
-                                    ? Pages.movieDetailScreen
-                                    : Pages.serialTvDetailScreen,
-                                arguments: {"idResults": item.id});
-                          },
-                          child: Container(
-                            width: 45.0.width(),
-                            margin: const EdgeInsets.all(5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                SizedBox(
-                                  height: 26.0.height(),
-                                  width: 75.0.width(),
-                                  child: Card(
-                                    semanticContainer: true,
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                    ),
-                                    child: ImageView(
-                                      url: item.posterPath,
-                                      fit: BoxFit.cover,
+            (list != null && list?.isNotEmpty == true)
+                ? Container(
+                    constraints: BoxConstraints(
+                        minHeight: 200, maxHeight: 32.0.height()),
+                    child: AnimatedListBuilder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: list?.length.isGreaterThan(10) == true
+                            ? 10
+                            : list?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var item = list![index];
+                          return InkWell(
+                            onTap: () {
+                              Get.toNamed(
+                                  (item.mediaType == "movie")
+                                      ? Pages.movieDetailScreen
+                                      : Pages.serialTvDetailScreen,
+                                  arguments: {"idResults": item.id});
+                            },
+                            child: Container(
+                              width: 45.0.width(),
+                              margin: const EdgeInsets.all(5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  SizedBox(
+                                    height: 26.0.height(),
+                                    width: 75.0.width(),
+                                    child: Card(
+                                      semanticContainer: true,
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      child: ImageView(
+                                        url: item.posterPath,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  width: Get.width,
-                                  margin: const EdgeInsets.all(2),
-                                  padding: const EdgeInsets.all(2),
-                                  child: Text("${item.title ?? item.name}",
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          overflow: TextOverflow.ellipsis),
-                                      maxLines: 1),
-                                ),
-                              ],
+                                  Container(
+                                    width: Get.width,
+                                    margin: const EdgeInsets.all(2),
+                                    padding: const EdgeInsets.all(2),
+                                    child: Text("${item.title ?? item.name}",
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            overflow: TextOverflow.ellipsis),
+                                        maxLines: 1),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      })
-                  : const Center(),
-            ),
+                          );
+                        }))
+                : const Center(
+                    child: Text("No Data"),
+                  ),
           ],
         ));
   }

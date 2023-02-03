@@ -102,21 +102,24 @@ class SettingsScreen extends GetView<SettingsBloc> {
   }
 
   cacheWidget() {
-    return InkWell(
-      onTap: () {
-        openDialog();
-      },
-      child: Container(
-        height: 30,
-        margin: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            const Text("Bersihkan cache"),
-            const Spacer(),
-            Obx(() {
-              return Text("${controller.sizeCache}");
-            })
-          ],
+    return Visibility(
+      visible: GetPlatform.isAndroid,
+      child: InkWell(
+        onTap: () {
+          openDialog();
+        },
+        child: Container(
+          height: 30,
+          margin: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              const Text("Bersihkan cache"),
+              const Spacer(),
+              Obx(() {
+                return Text("${controller.sizeCache}");
+              })
+            ],
+          ),
         ),
       ),
     );

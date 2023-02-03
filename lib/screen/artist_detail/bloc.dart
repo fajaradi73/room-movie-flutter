@@ -110,7 +110,7 @@ class ArtistDetailBloc extends GetxController {
     var list = <CreditsItem>[];
     if (data != null) {
       for (var item in data) {
-        if (item.knownForDepartment == department) {
+        if (item.department == department) {
           list.add(item);
         }
       }
@@ -145,17 +145,15 @@ class ArtistDetailBloc extends GetxController {
     final propertyB = (b.releaseDate ?? b.firstAirDate)
         .toDate("yyyy-MM-dd")
         ?.millisecondsSinceEpoch;
-    if (propertyA != null && propertyB != null) {
-      if (propertyA < propertyB) {
-        return 1;
-      } else if (propertyA > propertyB) {
-        return -1;
-      } else {
-        return 0;
-      }
+    int result;
+    if (propertyA == null) {
+      result = -1;
+    } else if (propertyB == null) {
+      result = 1;
     } else {
-      return 0;
+      result = propertyB.compareTo(propertyA);
     }
+    return result;
   }
 
   Future<void> getExternalIds(ExternalIds? item) async {

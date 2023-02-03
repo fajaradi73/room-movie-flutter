@@ -11,6 +11,8 @@
 import 'package:get/get.dart';
 import 'package:room_movie/screen/artist_detail/bloc.dart';
 import 'package:room_movie/screen/artist_detail/screen.dart';
+import 'package:room_movie/screen/credits/bloc.dart';
+import 'package:room_movie/screen/credits/screen.dart';
 import 'package:room_movie/screen/dashboard/binding.dart';
 import 'package:room_movie/screen/dashboard/screen.dart';
 import 'package:room_movie/screen/discover/bloc.dart';
@@ -96,6 +98,12 @@ class AppRoute {
         binding: BindingsBuilder(() {
           Get.put(DiscoverBloc());
         })),
+    GetPage(
+        name: Pages.creditsScreen,
+        page: () => const CreditsScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(CreditsBloc());
+        })),
   ];
 }
 
@@ -111,4 +119,5 @@ class Pages {
   static const searchScreen = "/search_screen";
   static const artistDetailScreen = "/artist_detail_screen";
   static const discoverScreen = "/discover_screen";
+  static const creditsScreen = "/credits_screen";
 }

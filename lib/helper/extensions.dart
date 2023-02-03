@@ -12,6 +12,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:room_movie/models/movie/detail/credits.dart';
 import 'package:room_movie/models/movie/detail/videos.dart';
 import 'package:sizer/sizer.dart';
 
@@ -382,4 +383,5 @@ extension Maps on Map<String, dynamic> {
   String get genre => (this)["genre"];
   String get keyword => (this)["keyword"];
   String get network => (this)["network"];
+  Credits get credits => (this)["credits"];
 }

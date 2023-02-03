@@ -10,6 +10,7 @@ class GlobalHeader extends StatelessWidget implements PreferredSizeWidget {
   final double? height;
   final Widget? titleWidget;
   final List<Widget> action;
+  final PreferredSizeWidget? bottomWidget;
 
   const GlobalHeader({
     super.key,
@@ -18,6 +19,7 @@ class GlobalHeader extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.height,
     this.titleWidget,
+    this.bottomWidget,
     this.action = const [],
   });
 
@@ -69,6 +71,7 @@ class GlobalHeader extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
+      bottom: bottomWidget,
     );
   }
 }

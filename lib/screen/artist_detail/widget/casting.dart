@@ -54,7 +54,8 @@ class ArtistDetailWidgetCasting extends GetView<ArtistDetailBloc> {
                                 (item.mediaType == "movie")
                                     ? Pages.movieDetailScreen
                                     : Pages.serialTvDetailScreen,
-                                arguments: {"idResults": item.id});
+                                arguments: {"idResults": item.id},
+                                preventDuplicates: false);
                           },
                           child: Container(
                             margin: const EdgeInsets.all(5),

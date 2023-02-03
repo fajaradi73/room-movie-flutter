@@ -17,9 +17,11 @@ import 'package:room_movie/screen/widget/image_view.dart';
 import '../../../router/app_route.dart';
 
 class SerialTvDetailWidgetActor extends GetView<MovieDetailBloc> {
-  const SerialTvDetailWidgetActor({Key? key, required this.data})
+  const SerialTvDetailWidgetActor(
+      {Key? key, required this.title, required this.data})
       : super(key: key);
   final Credits? data;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +103,16 @@ class SerialTvDetailWidgetActor extends GetView<MovieDetailBloc> {
                         ),
                       );
                     })
-                : const Center(),
+                : const Center(
+                    child: Text("No Data"),
+                  ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Pages.creditsScreen,
+                  arguments: {"title": title, "credits": data},
+                  preventDuplicates: false);
+            },
             child: Container(
               width: Get.width,
               margin: const EdgeInsets.all(3),
