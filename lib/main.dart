@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:room_movie/screen/screen_manager/screen.dart';
 import 'package:room_movie/theme/theme_cubit.dart';
 import 'package:room_movie/util/dev_tree.dart';
@@ -27,6 +28,7 @@ void main() {
   Bloc.observer = AppBlocObserver();
   Fimber.plantTree(DevTree());
   runApp(const App());
+  initializeDateFormatting(Get.deviceLocale?.toLanguageTag() ?? "id_ID", '');
 }
 
 /// Custom [BlocObserver] that observes all bloc and cubit state changes.

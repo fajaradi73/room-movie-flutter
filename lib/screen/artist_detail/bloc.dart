@@ -123,7 +123,7 @@ class ArtistDetailBloc extends GetxController {
     if (data != null && data?.isNotEmpty == true) {
       list.addAll(data!);
       list.sort(
-        (a, b) => sortYear(a, b),
+        (a, b) => sortYearCredits(a, b),
       );
     }
     return list;
@@ -138,7 +138,7 @@ class ArtistDetailBloc extends GetxController {
     return list;
   }
 
-  int sortYear(CreditsItem a, CreditsItem b) {
+  int sortYearCredits(CreditsItem a, CreditsItem b) {
     final propertyA = (a.releaseDate ?? a.firstAirDate)
         .toDate("yyyy-MM-dd")
         ?.millisecondsSinceEpoch;

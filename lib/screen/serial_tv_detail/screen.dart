@@ -59,6 +59,7 @@ class SerialTvDetailScreen extends GetView<SerialTvDetailBloc> {
                       const Padding(padding: EdgeInsets.all(2)),
                       SerialTvDetailWidgetSeason(
                         item: data.seasons?.last,
+                        list: controller.listSeason(data.seasons),
                         title: data.name,
                       ),
                       const Padding(padding: EdgeInsets.all(2)),

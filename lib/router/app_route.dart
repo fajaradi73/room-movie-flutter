@@ -26,11 +26,13 @@ import 'package:room_movie/screen/movie_list/bloc.dart';
 import 'package:room_movie/screen/movie_list/screen.dart';
 import 'package:room_movie/screen/search/bloc.dart';
 import 'package:room_movie/screen/search/screen.dart';
+import 'package:room_movie/screen/season/bloc.dart';
 import 'package:room_movie/screen/serial_tv_detail/bloc.dart';
 import 'package:room_movie/screen/serial_tv_detail/screen.dart';
 import 'package:room_movie/screen/serial_tv_list/screen.dart';
 
 import '../screen/gallery/screen.dart';
+import '../screen/season/screen.dart';
 import '../screen/serial_tv_list/bloc.dart';
 import '../screen/splash_screen/screen.dart';
 
@@ -104,6 +106,12 @@ class AppRoute {
         binding: BindingsBuilder(() {
           Get.put(CreditsBloc());
         })),
+    GetPage(
+        name: Pages.seasonScreen,
+        page: () => const SeasonScreen(),
+        binding: BindingsBuilder(() {
+          Get.put(SeasonBloc());
+        })),
   ];
 }
 
@@ -120,4 +128,5 @@ class Pages {
   static const artistDetailScreen = "/artist_detail_screen";
   static const discoverScreen = "/discover_screen";
   static const creditsScreen = "/credits_screen";
+  static const seasonScreen = "/season_screen";
 }

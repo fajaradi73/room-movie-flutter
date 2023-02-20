@@ -54,7 +54,10 @@ class MovieDetailScreen extends GetView<MovieDetailBloc> {
                         data: data,
                       ),
                       const Padding(padding: EdgeInsets.all(2)),
-                      MovieDetailWidgetActor(data: data.credits),
+                      MovieDetailWidgetActor(
+                        data: data.credits,
+                        title: data.title,
+                      ),
                       const Padding(padding: EdgeInsets.all(2)),
                       MovieDetailWidgetMedia(
                         videos: data.videos!,

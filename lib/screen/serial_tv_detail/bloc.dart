@@ -17,6 +17,7 @@ import '../../gen_theme/assets.gen.dart';
 import '../../models/movie/Results.dart';
 import '../../models/movie/detail/external_ids.dart';
 import '../../models/movie/detail/genres.dart';
+import '../../models/movie/detail/season_item.dart';
 import '../../models/movie/detail/spoken_languages.dart';
 import '../../service/api_service.dart';
 import '../../util/exception.dart';
@@ -164,5 +165,30 @@ class SerialTvDetailBloc extends GetxController {
       }
     }
     return item;
+  }
+
+  List<SeasonItem>? listSeason(data) {
+    var list = <SeasonItem>[];
+    if (data != null && data?.isNotEmpty == true) {
+      list.addAll(data!);
+      list.sort(
+        (a, b) => sortYearSeason(a, b),
+      );
+    }
+    return list;
+  }
+
+  int sortYearSeason(SeasonItem a, SeasonItem b) {
+    final propertyA = (a.airDate).toDate("yyyy-MM-dd")?.millisecondsSinceEpoch;
+    final propertyB = (b.airDate).toDate("yyyy-MM-dd")?.millisecondsSinceEpoch;
+    int result;
+    if (propertyA == null) {
+      result = -1;
+    } else if (propertyB == null) {
+      result = 1;
+    } else {
+      result = propertyB.compareTo(propertyA);
+    }
+    return result;
   }
 }

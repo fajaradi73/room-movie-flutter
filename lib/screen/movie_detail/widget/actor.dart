@@ -13,16 +13,17 @@ import 'package:room_movie/gen_theme/colors.gen.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/models/movie/detail/credits.dart';
 import 'package:room_movie/screen/movie_detail/bloc.dart';
-import 'package:room_movie/screen/shimmer/shimmer_results.dart';
 import 'package:room_movie/screen/widget/animated_list_builder.dart';
 
 import '../../../router/app_route.dart';
 import '../../widget/image_view.dart';
 
 class MovieDetailWidgetActor extends GetView<MovieDetailBloc> {
-  const MovieDetailWidgetActor({Key? key, required this.data})
+  const MovieDetailWidgetActor(
+      {Key? key, required this.title, required this.data})
       : super(key: key);
   final Credits? data;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +109,9 @@ class MovieDetailWidgetActor extends GetView<MovieDetailBloc> {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => const ShimmerResults());
+              Get.toNamed(Pages.creditsScreen,
+                  arguments: {"title": title, "credits": data},
+                  preventDuplicates: false);
             },
             child: Container(
               width: Get.width,

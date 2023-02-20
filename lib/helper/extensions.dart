@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:room_movie/models/movie/detail/credits.dart';
+import 'package:room_movie/models/movie/detail/season_item.dart';
 import 'package:room_movie/models/movie/detail/videos.dart';
 import 'package:sizer/sizer.dart';
 
@@ -171,13 +172,16 @@ extension ExString on String? {
     required String currentFormat,
     required String desiredFormat,
   }) {
+    // initializeDateFormatting(Get.deviceLocale?.toLanguageTag() ?? "id_ID", '');
     if ((this) != null) {
       try {
+        var tag = Get.deviceLocale?.languageCode;
         String formattedDate = "";
         DateTime dateTime = DateFormat(currentFormat).parse((this!), true);
-        formattedDate = DateFormat(desiredFormat).format(dateTime);
+        formattedDate = DateFormat(desiredFormat, tag).format(dateTime);
         return formattedDate.toString();
       } catch (e) {
+        print(e);
         return null;
       }
     } else {
@@ -371,17 +375,32 @@ extension IntegerExt on int {
 
 extension Maps on Map<String, dynamic> {
   int get idResults => (this)['idResults'];
+
   List<ImagesItem> get listImage => (this)["listImage"];
+
   int get currentIndex => (this)['currentIndex'];
+
   bool get isDetail => (this)['isDetail'];
+
   List<VideosItem> get listVideo => (this)["listVideo"];
+
   String get title => (this)["title"];
+
   double get ratio => (this)["ratio"];
+
   SearchType get searchType => (this)["search_type"];
+
   bool get isMovie => (this)['isMovie'];
+
   String? get sortBy => (this)["sortBy"];
+
   String get genre => (this)["genre"];
+
   String get keyword => (this)["keyword"];
+
   String get network => (this)["network"];
+
   Credits get credits => (this)["credits"];
+
+  List<SeasonItem> get listSeason => (this)["season"];
 }

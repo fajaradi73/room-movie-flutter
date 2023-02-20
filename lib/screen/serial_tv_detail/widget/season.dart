@@ -12,12 +12,14 @@ import 'package:room_movie/models/movie/detail/season_item.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
 
 import '../../../gen_theme/colors.gen.dart';
+import '../../../router/app_route.dart';
 
 class SerialTvDetailWidgetSeason extends StatelessWidget {
   const SerialTvDetailWidgetSeason(
-      {Key? key, required this.item, required this.title})
+      {Key? key, required this.item, required this.title, required this.list})
       : super(key: key);
   final SeasonItem? item;
+  final List<SeasonItem>? list;
   final String? title;
 
   @override
@@ -40,7 +42,7 @@ class SerialTvDetailWidgetSeason extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 21.0.height(),
+                height: 20.0.height(),
                 width: Get.width * 0.35,
                 child: Card(
                     semanticContainer: true,
@@ -97,7 +99,10 @@ class SerialTvDetailWidgetSeason extends StatelessWidget {
             color: Theme.of(context).dividerColor,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Pages.seasonScreen,
+                  arguments: {"title": title, "season": list});
+            },
             child: Container(
               width: Get.width,
               margin: const EdgeInsets.all(3),
