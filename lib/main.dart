@@ -27,6 +27,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
   Fimber.plantTree(DevTree());
+  // ChuckerFlutter.showOnRelease = true;
+
   runApp(const App());
   initializeDateFormatting(Get.deviceLocale?.toLanguageTag() ?? "id_ID", '');
 }
@@ -73,6 +75,7 @@ class AppView extends StatelessWidget {
                 navigatorKey: Get.key,
                 initialRoute: Pages.splashScreen,
                 getPages: AppRoute.routes,
+                // navigatorObservers: [ChuckerFlutter.navigatorObserver],
                 initialBinding: InitialBinding(),
                 theme: theme,
                 builder: (context, child) {

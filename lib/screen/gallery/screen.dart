@@ -11,6 +11,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:room_movie/helper/extensions.dart';
 import 'package:room_movie/screen/gallery/bloc.dart';
+import 'package:room_movie/screen/video_player/screen.dart';
 import 'package:room_movie/screen/widget/animated_stagger_builder.dart';
 import 'package:room_movie/screen/widget/image_view.dart';
 
@@ -103,7 +104,11 @@ class GalleryScreen extends GetView<GalleryBloc> {
         itemBuilder: (BuildContext context, int index) {
           var item = controller.listVideo[index];
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => VideoScreen(
+                    items: item,
+                  ));
+            },
             child: Container(
               height: 30.0.height(),
               width: Get.width,
@@ -138,6 +143,7 @@ class GalleryScreen extends GetView<GalleryBloc> {
                           child: Text("${item.name}",
                               style: const TextStyle(
                                   fontSize: 14,
+                                  color: Colors.white,
                                   overflow: TextOverflow.ellipsis),
                               maxLines: 1),
                         ));

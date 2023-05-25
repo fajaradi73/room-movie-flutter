@@ -18,7 +18,7 @@ import 'package:room_movie/screen/widget/custom_alert_dialog.dart';
 import 'package:room_movie/theme/theme_cubit.dart';
 
 class SettingsScreen extends GetView<SettingsBloc> {
-  SettingsScreen({super.key});
+  SettingsScreen({Key? key}) : super(key: key);
 
   var isNightMode = false;
 

@@ -44,8 +44,8 @@ class ThemeCubit extends Cubit<ThemeData> {
       primaryColor: ColorName.colorPrimary,
       brightness: Brightness.light,
       backgroundColor: const Color(0xFFF6F6F6),
-      accentColor: Colors.black,
-      accentIconTheme: const IconThemeData(color: Colors.white),
+      // accentColor: Colors.black,
+      // accentIconTheme: const IconThemeData(color: Colors.white),
       dividerColor: Colors.black12,
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.grey,
@@ -86,8 +86,8 @@ class ThemeCubit extends Cubit<ThemeData> {
       primaryColor: const Color(0xFF212121),
       brightness: Brightness.dark,
       backgroundColor: const Color(0xFF313131),
-      accentColor: Colors.white,
-      accentIconTheme: const IconThemeData(color: Colors.black),
+      // accentColor: Colors.white,
+      // accentIconTheme: const IconThemeData(color: Colors.black),
       dividerColor: Colors.white54,
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.grey,

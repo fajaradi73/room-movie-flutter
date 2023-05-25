@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:room_movie/util/constant.dart';
 import 'package:room_movie/util/exception.dart';
+
+import 'interceptors.dart';
 
 class DioUtil {
   final _dio = Dio();
@@ -15,7 +18,8 @@ class DioUtil {
     _dio.options.baseUrl = Constant.baseUrl;
     _dio.options.connectTimeout = 90000;
     _dio.options.receiveTimeout = 50000;
-    // _dio.interceptors.add(LoggerInterceptor());
+    _dio.interceptors.add(LoggerInterceptor());
+    _dio.interceptors.add(ChuckerDioInterceptor());
     _dio.options.headers = {
       "Content-Type": "application/json",
       "Accept": "*/*",
@@ -104,12 +108,12 @@ class DioUtil {
   dynamic _handleError(DioError res) {
     if (res.error is SocketException) {
       throw FetchDataException(
-        message: res.message,
+        message: res.message.toString(),
         statusCode: 600,
       );
     } else if (res.error is TimeoutException) {
       throw FetchDataException(
-        message: res.message,
+        message: res.message.toString(),
         statusCode: 408,
       );
     }
